@@ -1,10 +1,10 @@
-﻿namespace myplacesbox.Data.Repositories
+﻿namespace MyPlacesBox.Data.Repositories
 {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using myplacesbox.Data.Common.Repositories;
+    using MyPlacesBox.Data.Common.Repositories;
 
     using Microsoft.EntityFrameworkCore;
 

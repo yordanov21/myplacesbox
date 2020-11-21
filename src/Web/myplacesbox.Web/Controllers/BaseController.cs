@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Web.Controllers
+﻿namespace MyPlacesBox.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
 

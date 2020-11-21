@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Data.Seeding
+﻿namespace MyPlacesBox.Data.Seeding
 {
     using System;
     using System.Threading.Tasks;

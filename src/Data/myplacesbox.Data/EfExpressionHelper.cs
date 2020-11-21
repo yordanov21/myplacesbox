@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Data
+﻿namespace MyPlacesBox.Data
 {
     using System;
     using System.Collections.Generic;

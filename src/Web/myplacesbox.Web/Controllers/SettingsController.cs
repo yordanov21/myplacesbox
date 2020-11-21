@@ -1,12 +1,12 @@
-﻿namespace myplacesbox.Web.Controllers
+﻿namespace MyPlacesBox.Web.Controllers
 {
     using System;
     using System.Threading.Tasks;
 
-    using myplacesbox.Data.Common.Repositories;
-    using myplacesbox.Data.Models;
-    using myplacesbox.Services.Data;
-    using myplacesbox.Web.ViewModels.Settings;
+    using MyPlacesBox.Data.Common.Repositories;
+    using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Services.Data;
+    using MyPlacesBox.Web.ViewModels.Settings;
 
     using Microsoft.AspNetCore.Mvc;
 

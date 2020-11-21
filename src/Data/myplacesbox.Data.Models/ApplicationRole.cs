@@ -1,9 +1,9 @@
 ﻿// ReSharper disable VirtualMemberCallInConstructor
-namespace myplacesbox.Data.Models
+namespace MyPlacesBox.Data.Models
 {
     using System;
 
-    using myplacesbox.Data.Common.Models;
+    using MyPlacesBox.Data.Common.Models;
 
     using Microsoft.AspNetCore.Identity;
 

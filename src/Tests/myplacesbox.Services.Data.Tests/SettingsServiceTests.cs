@@ -1,13 +1,13 @@
-﻿namespace myplacesbox.Services.Data.Tests
+﻿namespace MyPlacesBox.Services.Data.Tests
 {
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using myplacesbox.Data;
-    using myplacesbox.Data.Common.Repositories;
-    using myplacesbox.Data.Models;
-    using myplacesbox.Data.Repositories;
+    using MyPlacesBox.Data;
+    using MyPlacesBox.Data.Common.Repositories;
+    using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Data.Repositories;
 
     using Microsoft.EntityFrameworkCore;
 

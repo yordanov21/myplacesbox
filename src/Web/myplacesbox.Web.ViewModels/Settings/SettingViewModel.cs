@@ -1,7 +1,7 @@
-﻿namespace myplacesbox.Web.ViewModels.Settings
+﻿namespace MyPlacesBox.Web.ViewModels.Settings
 {
-    using myplacesbox.Data.Models;
-    using myplacesbox.Services.Mapping;
+    using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Services.Mapping;
 
     using AutoMapper;
 

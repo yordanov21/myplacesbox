@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Data.Common.Repositories
+﻿namespace MyPlacesBox.Data.Common.Repositories
 {
     using System;
     using System.Linq;

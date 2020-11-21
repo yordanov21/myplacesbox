@@ -33,14 +33,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\myplacesbox.Common\myplacesbox.Common.csproj" />
-    <ProjectReference Include="..\..\Data\myplacesbox.Data.Common\myplacesbox.Data.Common.csproj" />
-    <ProjectReference Include="..\..\Data\myplacesbox.Data.Models\myplacesbox.Data.Models.csproj" />
-    <ProjectReference Include="..\..\Data\myplacesbox.Data\myplacesbox.Data.csproj" />
-    <ProjectReference Include="..\..\Services\myplacesbox.Services.Data\myplacesbox.Services.Data.csproj" />
-    <ProjectReference Include="..\..\Services\myplacesbox.Services.Mapping\myplacesbox.Services.Mapping.csproj" />
-    <ProjectReference Include="..\..\Services\myplacesbox.Services.Messaging\myplacesbox.Services.Messaging.csproj" />
-    <ProjectReference Include="..\..\Services\myplacesbox.Services\myplacesbox.Services.csproj" />
+    <ProjectReference Include="..\..\MyPlacesBox.Common\MyPlacesBox.Common.csproj" />
+    <ProjectReference Include="..\..\Data\MyPlacesBox.Data.Common\MyPlacesBox.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\MyPlacesBox.Data.Models\MyPlacesBox.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Data\MyPlacesBox.Data\MyPlacesBox.Data.csproj" />
+    <ProjectReference Include="..\..\Services\MyPlacesBox.Services.Data\MyPlacesBox.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Services\MyPlacesBox.Services.Mapping\MyPlacesBox.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\MyPlacesBox.Services.Messaging\MyPlacesBox.Services.Messaging.csproj" />
+    <ProjectReference Include="..\..\Services\MyPlacesBox.Services\MyPlacesBox.Services.csproj" />
   </ItemGroup>
 
 </Project>

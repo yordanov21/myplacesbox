@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Data.Common
+﻿namespace MyPlacesBox.Data.Common
 {
     using System;
     using System.Threading.Tasks;

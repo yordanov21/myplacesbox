@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Data.Migrations
+﻿namespace MyPlacesBox.Data.Migrations
 {
     using System;
 

@@ -5,14 +5,14 @@
     using System.IO;
     using System.Threading.Tasks;
 
-    using myplacesbox.Data;
-    using myplacesbox.Data.Common;
-    using myplacesbox.Data.Common.Repositories;
-    using myplacesbox.Data.Models;
-    using myplacesbox.Data.Repositories;
-    using myplacesbox.Data.Seeding;
-    using myplacesbox.Services.Data;
-    using myplacesbox.Services.Messaging;
+    using MyPlacesBox.Data;
+    using MyPlacesBox.Data.Common;
+    using MyPlacesBox.Data.Common.Repositories;
+    using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Data.Repositories;
+    using MyPlacesBox.Data.Seeding;
+    using MyPlacesBox.Services.Data;
+    using MyPlacesBox.Services.Messaging;
 
     using CommandLine;
 

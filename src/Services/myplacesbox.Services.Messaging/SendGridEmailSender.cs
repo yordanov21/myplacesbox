@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Services.Messaging
+﻿namespace MyPlacesBox.Services.Messaging
 {
     using System;
     using System.Collections.Generic;

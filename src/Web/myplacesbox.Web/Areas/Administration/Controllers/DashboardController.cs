@@ -1,7 +1,7 @@
-﻿namespace myplacesbox.Web.Areas.Administration.Controllers
+﻿namespace MyPlacesBox.Web.Areas.Administration.Controllers
 {
-    using myplacesbox.Services.Data;
-    using myplacesbox.Web.ViewModels.Administration.Dashboard;
+    using MyPlacesBox.Services.Data;
+    using MyPlacesBox.Web.ViewModels.Administration.Dashboard;
 
     using Microsoft.AspNetCore.Mvc;
 

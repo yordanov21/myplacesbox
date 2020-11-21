@@ -19,9 +19,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\myplacesbox.Data.Common\myplacesbox.Data.Common.csproj" />
-    <ProjectReference Include="..\..\Data\myplacesbox.Data.Models\myplacesbox.Data.Models.csproj" />
-    <ProjectReference Include="..\myplacesbox.Services.Mapping\myplacesbox.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Data\MyPlacesBox.Data.Common\MyPlacesBox.Data.Common.csproj" />
+    <ProjectReference Include="..\..\Data\MyPlacesBox.Data.Models\MyPlacesBox.Data.Models.csproj" />
+    <ProjectReference Include="..\MyPlacesBox.Services.Mapping\MyPlacesBox.Services.Mapping.csproj" />
   </ItemGroup>
 
 </Project>

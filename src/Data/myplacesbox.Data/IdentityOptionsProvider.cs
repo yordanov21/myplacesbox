@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Data
+﻿namespace MyPlacesBox.Data
 {
     using Microsoft.AspNetCore.Identity;
 

@@ -1,7 +1,7 @@
-﻿namespace myplacesbox.Web.Areas.Administration.Controllers
+﻿namespace MyPlacesBox.Web.Areas.Administration.Controllers
 {
-    using myplacesbox.Common;
-    using myplacesbox.Web.Controllers;
+    using MyPlacesBox.Common;
+    using MyPlacesBox.Web.Controllers;
 
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;

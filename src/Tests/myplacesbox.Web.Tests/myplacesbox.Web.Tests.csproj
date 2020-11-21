@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Web\myplacesbox.Web\myplacesbox.Web.csproj" />
+    <ProjectReference Include="..\..\Web\MyPlacesBox.Web\MyPlacesBox.Web.csproj" />
   </ItemGroup>
 
 </Project>

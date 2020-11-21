@@ -1,9 +1,9 @@
-﻿namespace myplacesbox.Data.Common.Repositories
+﻿namespace MyPlacesBox.Data.Common.Repositories
 {
     using System.Linq;
     using System.Threading.Tasks;
 
-    using myplacesbox.Data.Common.Models;
+    using MyPlacesBox.Data.Common.Models;
 
     public interface IDeletableEntityRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IDeletableEntity

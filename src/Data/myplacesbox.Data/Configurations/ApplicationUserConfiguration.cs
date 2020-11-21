@@ -1,6 +1,6 @@
-﻿namespace myplacesbox.Data.Configurations
+﻿namespace MyPlacesBox.Data.Configurations
 {
-    using myplacesbox.Data.Models;
+    using MyPlacesBox.Data.Models;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

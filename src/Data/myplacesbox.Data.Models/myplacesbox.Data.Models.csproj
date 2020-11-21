@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\myplacesbox.Data.Common\myplacesbox.Data.Common.csproj" />
+    <ProjectReference Include="..\MyPlacesBox.Data.Common\MyPlacesBox.Data.Common.csproj" />
   </ItemGroup>
   
 </Project>

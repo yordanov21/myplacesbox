@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Web.ViewModels
+﻿namespace MyPlacesBox.Web.ViewModels
 {
     public class ErrorViewModel
     {

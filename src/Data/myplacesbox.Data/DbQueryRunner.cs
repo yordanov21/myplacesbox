@@ -1,9 +1,9 @@
-﻿namespace myplacesbox.Data
+﻿namespace MyPlacesBox.Data
 {
     using System;
     using System.Threading.Tasks;
 
-    using myplacesbox.Data.Common;
+    using MyPlacesBox.Data.Common;
 
     using Microsoft.EntityFrameworkCore;
 

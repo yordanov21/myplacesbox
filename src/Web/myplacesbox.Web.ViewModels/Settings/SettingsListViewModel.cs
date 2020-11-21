@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Web.ViewModels.Settings
+﻿namespace MyPlacesBox.Web.ViewModels.Settings
 {
     using System.Collections.Generic;
 

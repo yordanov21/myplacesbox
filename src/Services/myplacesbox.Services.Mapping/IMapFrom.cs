@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Services.Mapping
+﻿namespace MyPlacesBox.Services.Mapping
 {
     // ReSharper disable once UnusedTypeParameter
     public interface IMapFrom<T>

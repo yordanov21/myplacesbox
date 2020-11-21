@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Web
+﻿namespace MyPlacesBox.Web
 {
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;

@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Data.Common.Models
+﻿namespace MyPlacesBox.Data.Common.Models
 {
     using System;
 

@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Web.Tests
+﻿namespace MyPlacesBox.Web.Tests
 {
     using System.Net;
     using System.Threading.Tasks;

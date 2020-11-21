@@ -1,8 +1,8 @@
-﻿namespace myplacesbox.Data
+﻿namespace MyPlacesBox.Data
 {
     using System.Linq;
 
-    using myplacesbox.Data.Common.Models;
+    using MyPlacesBox.Data.Common.Models;
 
     using Microsoft.EntityFrameworkCore;
 

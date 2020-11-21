@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Web.ViewModels.Administration.Dashboard
+﻿namespace MyPlacesBox.Web.ViewModels.Administration.Dashboard
 {
     public class IndexViewModel
     {

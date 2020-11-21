@@ -1,11 +1,11 @@
-﻿namespace myplacesbox.Data.Seeding
+﻿namespace MyPlacesBox.Data.Seeding
 {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using myplacesbox.Common;
-    using myplacesbox.Data.Models;
+    using MyPlacesBox.Common;
+    using MyPlacesBox.Data.Models;
 
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;

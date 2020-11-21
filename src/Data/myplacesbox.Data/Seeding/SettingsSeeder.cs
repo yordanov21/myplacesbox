@@ -1,10 +1,10 @@
-﻿namespace myplacesbox.Data.Seeding
+﻿namespace MyPlacesBox.Data.Seeding
 {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using myplacesbox.Data.Models;
+    using MyPlacesBox.Data.Models;
 
     internal class SettingsSeeder : ISeeder
     {

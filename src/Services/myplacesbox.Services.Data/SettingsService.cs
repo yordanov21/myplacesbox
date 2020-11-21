@@ -1,11 +1,11 @@
-﻿namespace myplacesbox.Services.Data
+﻿namespace MyPlacesBox.Services.Data
 {
     using System.Collections.Generic;
     using System.Linq;
 
-    using myplacesbox.Data.Common.Repositories;
-    using myplacesbox.Data.Models;
-    using myplacesbox.Services.Mapping;
+    using MyPlacesBox.Data.Common.Repositories;
+    using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Services.Mapping;
 
     public class SettingsService : ISettingsService
     {

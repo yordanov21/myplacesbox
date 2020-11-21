@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Data
+﻿namespace MyPlacesBox.Data
 {
     using System;
     using System.Linq;
@@ -6,8 +6,8 @@
     using System.Threading;
     using System.Threading.Tasks;
 
-    using myplacesbox.Data.Common.Models;
-    using myplacesbox.Data.Models;
+    using MyPlacesBox.Data.Common.Models;
+    using MyPlacesBox.Data.Models;
 
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;

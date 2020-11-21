@@ -1,4 +1,4 @@
-﻿namespace myplacesbox.Services.Mapping
+﻿namespace MyPlacesBox.Services.Mapping
 {
     using System;
     using System.Collections.Generic;

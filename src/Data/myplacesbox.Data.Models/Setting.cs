@@ -1,6 +1,6 @@
-﻿namespace myplacesbox.Data.Models
+﻿namespace MyPlacesBox.Data.Models
 {
-    using myplacesbox.Data.Common.Models;
+    using MyPlacesBox.Data.Common.Models;
 
     public class Setting : BaseDeletableModel<int>
     {

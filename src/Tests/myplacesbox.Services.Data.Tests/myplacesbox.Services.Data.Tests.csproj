@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Data\myplacesbox.Data\myplacesbox.Data.csproj" />
-    <ProjectReference Include="..\..\Services\myplacesbox.Services.Data\myplacesbox.Services.Data.csproj" />
+    <ProjectReference Include="..\..\Data\MyPlacesBox.Data\MyPlacesBox.Data.csproj" />
+    <ProjectReference Include="..\..\Services\MyPlacesBox.Services.Data\MyPlacesBox.Services.Data.csproj" />
   </ItemGroup>
 
 </Project>

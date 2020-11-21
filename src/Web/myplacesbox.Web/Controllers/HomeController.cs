@@ -1,8 +1,8 @@
-﻿namespace myplacesbox.Web.Controllers
+﻿namespace MyPlacesBox.Web.Controllers
 {
     using System.Diagnostics;
 
-    using myplacesbox.Web.ViewModels;
+    using MyPlacesBox.Web.ViewModels;
 
     using Microsoft.AspNetCore.Mvc;
 
