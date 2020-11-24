@@ -7,14 +7,16 @@
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <p>We have:</p>
-    <ul>
-        <li>Landmarks: @Model.LandmarksCount</li>
-        <li>Hikes: @Model.HikesCount</li>
-        <li>Categories: @Model.CategoriesCount</li>
-        <li>Images: @Model.ImagesCount</li>
-        <li>Regions: @Model.RegionsCount</li>
-        <li>Towns: @Model.TownsCount</li>
-        <li>Mountains: @Model.MountainsCount</li>
-    </ul>
+    <div class="col-md-4 offset-4">
+        <p>We have:</p>
+        <ul class="list-group">
+            <li class="list-group-item bg-info">Landmarks: @Model.LandmarksCount</li>
+            <li class="list-group-item bg-info">Hikes: @Model.HikesCount</li>
+            <li class="list-group-item bg-info">Categories: @Model.CategoriesCount</li>
+            <li class="list-group-item bg-info">Images: @Model.ImagesCount</li>
+            <li class="list-group-item bg-info">Regions: @Model.RegionsCount</li>
+            <li class="list-group-item bg-info">Towns: @Model.TownsCount</li>
+            <li class="list-group-item bg-info">Mountains: @Model.MountainsCount</li>
+        </ul>
+    </div>
 </div>
