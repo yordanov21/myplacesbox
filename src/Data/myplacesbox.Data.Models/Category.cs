@@ -9,11 +9,15 @@
         public Category()
         {
             this.Landmarks = new HashSet<Landmark>();
+            this.Hikes = new HashSet<Hike>();
         }
 
         public string Name { get; set; }
 
+        public string Type { get; set; }
+
         public ICollection<Landmark> Landmarks { get; set; }
 
+        public ICollection<Hike> Hikes { get; set; }
     }
 }

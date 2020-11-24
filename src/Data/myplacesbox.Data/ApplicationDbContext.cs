@@ -26,6 +26,20 @@
 
         public DbSet<Setting> Settings { get; set; }
 
+        public DbSet<Landmark> Landmarks { get; set; }
+
+        public DbSet<Hike> Hikes { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Image> Images { get; set; }
+
+        public DbSet<Mountain> Mountains { get; set; }
+
+        public DbSet<Region> Regions { get; set; }
+
+        public DbSet<Town> Towns { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
