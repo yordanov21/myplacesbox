@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\MyPlacesBox.Data.Common\MyPlacesBox.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\MyPlacesBox.Data.Models\MyPlacesBox.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\MyPlacesBox.Web.ViewModels\MyPlacesBox.Web.ViewModels.csproj" />
     <ProjectReference Include="..\MyPlacesBox.Services.Mapping\MyPlacesBox.Services.Mapping.csproj" />
   </ItemGroup>
 

@@ -2,31 +2,41 @@
 {
     using System.Diagnostics;
     using System.Linq;
+    using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using MyPlacesBox.Data;
+    using MyPlacesBox.Data.Common.Repositories;
+    using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Services.Data;
     using MyPlacesBox.Web.ViewModels;
     using MyPlacesBox.Web.ViewModels.Home;
 
+    // 1.with ApplicationDbContext
+    // 1.with Repository
     public class HomeController : BaseController
     {
-        private readonly ApplicationDbContext db;
+        private readonly IGetCountsService countsService;
+        // private readonly IMapper mapper;
 
-        public HomeController(ApplicationDbContext db)
+        public HomeController(IGetCountsService countsService)
         {
-            this.db = db;
+            this.countsService = countsService;
+            // this.mapper = mapper;
         }
 
         public IActionResult Index()
         {
+            var countsDto = this.countsService.GetCounts();
+            //// var viewModel = this.mapper.Map<IndexViewModel>(counts);
             var viewModel = new IndexViewModel
             {
-                LandmarksCount = this.db.Landmarks.Count(),
-                HikesCount = this.db.Hikes.Count(),
-                CategoriesCount = this.db.Categories.Count(),
-                RegionsCount = this.db.Regions.Count(),
-                TownsCount = this.db.Towns.Count(),
-                MountainsCount = this.db.Mountains.Count(),
-                ImagesCount = this.db.Images.Count(),
+                LandmarksCount = countsDto.LandmarksCount,
+                HikesCount = countsDto.HikesCount,
+                CategoriesCount = countsDto.CategoriesCount,
+                RegionsCount = countsDto.RegionsCount,
+                TownsCount = countsDto.TownsCount,
+                MountainsCount = countsDto.MountainsCount,
+                ImagesCount = countsDto.ImagesCount,
             };
 
             return this.View(viewModel);

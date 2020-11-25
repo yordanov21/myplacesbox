@@ -17,7 +17,7 @@
             }
 
             await dbContext.Categories.AddAsync(new Category { Name = "Ecotrails", Type = "Hike" });
-            await dbContext.Categories.AddAsync(new Category { Name = "Вalking routes", Type = "Hike" });
+            await dbContext.Categories.AddAsync(new Category { Name = "Wallking routes", Type = "Hike" });
             await dbContext.Categories.AddAsync(new Category { Name = "Bike routes", Type = "Hike" });
 
             await dbContext.Categories.AddAsync(new Category { Name = "Natural", Type = "Landmark" });

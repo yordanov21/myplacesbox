@@ -1,0 +1,20 @@
+﻿@model MyPlacesBox.Web.ViewModels.Landmarks.CreateLandmarkInputModel
+@{ 
+    this.ViewData["Title"] = "Add new Landmark";
+}
+<h1>@this.ViewData["Title"]</h1>
+
+<form action="/" method="post" class="col-md-6 offset-3">
+    <div asp-validation-summary="All"></div>
+    <div class=" form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <input type="submit" class="btn btn-primary"/>
+</form>
