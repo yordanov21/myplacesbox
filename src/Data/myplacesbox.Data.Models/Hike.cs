@@ -1,40 +1,44 @@
 ﻿namespace MyPlacesBox.Data.Models
 {
-    using MyPlacesBox.Data.Common.Models;
     using System;
+    using System.Collections.Generic;
+
+    using MyPlacesBox.Data.Common.Models;
 
     public class Hike : BaseDeletableModel<int>
     {
         public Hike()
         {
-
+            this.Images = new HashSet<Image>();
         }
 
         public string Name { get; set; }
 
-        public string StartingPoint { get; set; }
+        public double Length { get; set; }
 
-        public string EndPoint { get; set; }
-
-        public string Location { get; set; }
-
-        public string Denivelation { get; set; }
-
-        public string Length { get; set; }
+        public int Denivelation { get; set; }
 
         public TimeSpan Duration { get; set; }
 
-        public int Marking { get; set; }
+        public int? Marking { get; set; }
 
         public int Difficulty { get; set; }
 
         public string Description { get; set; }
 
-        public int? Stars { get; set; }
+        public int Stars { get; set; }
 
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
+
+        public int HikeStartPointId { get; set; }
+
+        public virtual HikeStartPoint HikeStartPoint { get; set; }
+
+        public int HikeEndPointId { get; set; }
+
+        public virtual HikeEndPoint HikeEndPoint { get; set; }
 
         public int CategoryId { get; set; }
 
@@ -52,6 +56,6 @@
 
         public virtual Mountain Mountain { get; set; }
 
-
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

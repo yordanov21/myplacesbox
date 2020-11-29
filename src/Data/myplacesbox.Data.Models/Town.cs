@@ -14,6 +14,8 @@
 
         public string Name { get; set; }
 
+        public bool IsTown { get; set; }
+
         public ICollection<Landmark> Landmarks { get; set; }
 
         public ICollection<Hike> Hikes { get; set; }

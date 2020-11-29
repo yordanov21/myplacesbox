@@ -30,6 +30,10 @@
 
         public DbSet<Hike> Hikes { get; set; }
 
+        public DbSet<HikeStartPoint> HikeStartPoints { get; set; }
+
+        public DbSet<HikeEndPoint> HikeEndPoints { get; set; }
+
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Image> Images { get; set; }

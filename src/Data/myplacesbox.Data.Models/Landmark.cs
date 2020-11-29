@@ -13,8 +13,10 @@
 
         public string Name { get; set; }
 
-        // google link or cordinate
-        public string Location { get; set; }
+        // Global cordinates (location)
+        public double? Latitude { get; set; }
+
+        public double? Longitute { get; set; }
 
         public string Websate { get; set; }
 
@@ -24,11 +26,11 @@
 
         public string DayOff { get; set; }
 
-        public double EntranceFee { get; set; }
+        public double? EntranceFee { get; set; }
 
         public string Description { get; set; }
 
-        public int? Stars { get; set; }
+        public int Stars { get; set; }
 
         public int Difficulty { get; set; }
 

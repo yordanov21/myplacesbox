@@ -5,7 +5,7 @@
 }
 <h1>@this.ViewData["Title"]</h1>
 
-<form  method="post" class="col-md-6 offset-3">
+<form method="post" class="col-md-6 offset-3">
     <div asp-validation-summary="All"></div>
     <div class=" form-group">
         <label asp-for="Name"></label>
@@ -18,19 +18,44 @@
         <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
     <div class=" form-group">
+        <label asp-for="Region.Name">Region</label>
+        <input asp-for="Region.Name" class="form-control" />
+        <span asp-validation-for="Region.Name" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="Town.Name">Town</label>
+        <input asp-for="Town.Name" class="form-control" />
+        <span asp-validation-for="Town.Name" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="Mountain.Name">Mountain</label>
+        <input asp-for="Mountain.Name" class="form-control" />
+        <span asp-validation-for="Mountain.Name" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
         <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control" rows="10"></textarea>
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class=" form-group">
-        <label asp-for="StartingPoint"></label>
-        <input asp-for="StartingPoint" class="form-control" />
-        <span asp-validation-for="StartingPoint" class="text-danger"></span>
+        <label asp-for="HikeStartPoint.Name">Start Point</label>
+        <input asp-for="HikeStartPoint.Name" class="form-control" />
+        <span asp-validation-for="HikeStartPoint.Name" class="text-danger"></span>
     </div>
     <div class=" form-group">
-        <label asp-for="EndPoint"></label>
-        <input asp-for="EndPoint" class="form-control" />
-        <span asp-validation-for="EndPoint" class="text-danger"></span>
+        <label asp-for="HikeStartPoint.StatrtPointAltitude">Altitute</label>
+        <input asp-for="HikeStartPoint.StatrtPointAltitude" class="form-control" />
+        <span asp-validation-for="HikeStartPoint.StatrtPointAltitude" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="HikeEndPoint.Name">End Point</label>
+        <input asp-for="HikeEndPoint.Name" class="form-control" />
+        <span asp-validation-for="HikeEndPoint.Name" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="HikeEndPoint.StatrtPointAltitude">Altitute</label>
+        <input asp-for="HikeEndPoint.StatrtPointAltitude" class="form-control" />
+        <span asp-validation-for="HikeEndPoint.StatrtPointAltitude" class="text-danger"></span>
     </div>
     <div class=" form-group">
         <label asp-for="Length"></label>
@@ -42,11 +67,7 @@
         <input asp-for="Duration" class="form-control" />
         <span asp-validation-for="Duration" class="text-danger"></span>
     </div>
-    <div class=" form-group">
-        <label asp-for="Denivelation"></label>
-        <input asp-for="Denivelation" class="form-control" />
-        <span asp-validation-for="Denivelation" class="text-danger"></span>
-    </div>
+
     <div class=" form-group">
         <label asp-for="Marking"></label>
         <input asp-for="Marking" class="form-control" />

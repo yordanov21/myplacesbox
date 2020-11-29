@@ -11,10 +11,14 @@ namespace MyPlacesBox.Web.Controllers
     public class HikesController : Controller
     {
         private readonly ICategoriesService categoriesService;
+        private readonly IHikesService hikesService;
 
-        public HikesController(ICategoriesService categoriesService)
+        public HikesController(
+            ICategoriesService categoriesService,
+            IHikesService hikesService)
         {
             this.categoriesService = categoriesService;
+            this.hikesService = hikesService;
         }
 
         public IActionResult Create()
@@ -25,7 +29,7 @@ namespace MyPlacesBox.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(CreateHikeInputModel input)
+        public async Task<IActionResult> Create(CreateHikeInputModel input)
         {
             if (!this.ModelState.IsValid)
             {
@@ -33,7 +37,7 @@ namespace MyPlacesBox.Web.Controllers
                 return this.View(input);
             }
 
-            return this.Json(input);
+            await this.hikesService.CreateAsync(input);    
 
             return this.Redirect("/");
         }
