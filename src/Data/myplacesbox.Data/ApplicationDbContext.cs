@@ -38,6 +38,10 @@
 
         public DbSet<Image> Images { get; set; }
 
+        public DbSet<LandmarkImage> LandmarkImages { get; set; }
+
+        public DbSet<HikeImage> HikeImages { get; set; }
+
         public DbSet<Mountain> Mountains { get; set; }
 
         public DbSet<Region> Regions { get; set; }

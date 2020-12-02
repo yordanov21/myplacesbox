@@ -21,7 +21,7 @@
         private readonly IDeletableEntityRepository<Region> regionRepository;
         private readonly IDeletableEntityRepository<Town> townRepositiry;
         private readonly IDeletableEntityRepository<Mountain> mountainRepositiry;
-        private readonly IRepository<Image> imagesRepository;
+        private readonly IRepository<LandmarkImage> imagesRepository;
         private readonly IDeletableEntityRepository<Landmark> landmarksRepository;
 
         public LandmarksScraperService(
@@ -29,7 +29,7 @@
             IDeletableEntityRepository<Region> regionRepository,
             IDeletableEntityRepository<Town> townRepositiry,
             IDeletableEntityRepository<Mountain> mountainRepositiry,
-            IRepository<Image> imagesRepository,
+            IRepository<LandmarkImage> imagesRepository,
             IDeletableEntityRepository<Landmark> landmarksRepository)
         {
             this.categoryRepository = categoryRepository;
@@ -80,7 +80,7 @@
                    // Console.WriteLine("Landmarks counter: " + landMarksCounter);
                 }
             }
-
+            
             foreach (var landmark in concurentBag)
             {
                 var categoryId = await this.GetOrCreateCategoryAsync(landmark.CategoryName);
@@ -117,39 +117,35 @@
                     Difficulty = landmark.Difficulty,
                     Description = landmark.Description,
                     Stars = stars,
-                    Images = images,
+                    LandmarkImages = images,
 
                 };
 
+                await this.landmarksRepository.AddAsync(newLandmark);
+                await this.landmarksRepository.SaveChangesAsync();
             }
-
-            await this.categoryRepository.SaveChangesAsync();
-            await this.regionRepository.SaveChangesAsync();
-            await this.townRepositiry.SaveChangesAsync();
-            await this.mountainRepositiry.SaveChangesAsync();
-            await this.imagesRepository.SaveChangesAsync();
-            await this.landmarksRepository.SaveChangesAsync();
+            
         }
 
-        private async Task<ICollection<Image>> GetOrCreateImageAsync(ICollection<Image> images)
+        private async Task<ICollection<LandmarkImage>> GetOrCreateImageAsync(ICollection<LandmarkImage> images)
         {
-            var imagesCollection = new List<Image>();
+            var imagesCollection = new List<LandmarkImage>();
 
             foreach (var image in images)
             {
                 var imageUrl = this.imagesRepository
                     .AllAsNoTracking()
-                    .FirstOrDefault(x => x.Extension == image.Extension);
-                   
+                    .FirstOrDefault(x => x.UrlPath == image.UrlPath);
+
                 if (imageUrl == null)
                 {
-                    imageUrl = new Image
+                    imageUrl = new LandmarkImage
                     {
-                        Extension = imageUrl.Extension,
-                        LandmarkId = imageUrl.LandmarkId
+                        UrlPath = image.UrlPath,            
                     };
 
                     await this.imagesRepository.AddAsync(imageUrl);
+                    await this.imagesRepository.SaveChangesAsync();
                     imagesCollection.Add(imageUrl);
                 }
             }
@@ -159,42 +155,89 @@
 
         private async Task<int> GetOrCreateMountainAsync(string mountainName)
         {
-            var mountain = this.mountainRepositiry
+            if (mountainName == "—")
+            {
+                var mountain = this.mountainRepositiry
                 .AllAsNoTracking()
                 .FirstOrDefault(x => x.Name == mountainName);
 
-            if (mountain == null)
-            {
-                mountain = new Mountain()
+                if (mountain == null)
                 {
-                    Name = mountainName,
-                };
+                    mountain = new Mountain()
+                    {
+                        Name = "none",
+                    };
 
-                await this.mountainRepositiry.AddAsync(mountain);
+                    await this.mountainRepositiry.AddAsync(mountain);
+                    await this.mountainRepositiry.SaveChangesAsync();
+                }
+
+                return mountain.Id;
             }
+            else
+            {
+                 var mountain = this.mountainRepositiry
+                 .AllAsNoTracking()
+                 .FirstOrDefault(x => x.Name == mountainName);
 
-            return mountain.Id;
+                 if (mountain == null)
+                 {
+                    mountain = new Mountain()
+                    {
+                        Name = mountainName,
+                    };
+
+                    await this.mountainRepositiry.AddAsync(mountain);
+                    await this.mountainRepositiry.SaveChangesAsync();
+                }
+
+                 return mountain.Id;
+            }
         }
 
         private async Task<int> GetOrCreateTownAsync(string townName)
         {
-            var extractedTownName = townName.Split('.');
-            var town = this.townRepositiry
-                 .AllAsNoTracking()
-                 .FirstOrDefault(x => x.Name == extractedTownName[1]);
-
-            if (town == null)
+            if (townName == "—")
             {
-                town = new Town()
+                var town = this.townRepositiry
+                     .AllAsNoTracking()
+                     .FirstOrDefault(x => x.Name == townName);
+
+                if (town == null)
                 {
-                    Name = extractedTownName[1],
-                    IsTown = extractedTownName[0] == "гр" ? true : false,
-                };
+                    town = new Town()
+                    {
+                        Name = "none",
+                        IsTown = false,
+                    };
 
-                await this.townRepositiry.AddAsync(town);
+                    await this.townRepositiry.AddAsync(town);
+                    await this.townRepositiry.SaveChangesAsync();
+                }
+
+                return town.Id;
             }
+            else
+            {
+                var extractedTownName = townName.Split('.');
+                var town = this.townRepositiry
+                     .AllAsNoTracking()
+                     .FirstOrDefault(x => x.Name == extractedTownName[1]);
 
-            return town.Id;
+                if (town == null)
+                {
+                    town = new Town()
+                    {
+                        Name = extractedTownName[1],
+                        IsTown = extractedTownName[0] == "гр" ? true : false,
+                    };
+
+                    await this.townRepositiry.AddAsync(town);
+                    await this.townRepositiry.SaveChangesAsync();
+                }
+
+                return town.Id;
+            }
         }
 
         private async Task<int> GetOrCreateRegionAsync(string regionName)
@@ -211,6 +254,7 @@
                 };
 
                 await this.regionRepository.AddAsync(region);
+                await this.regionRepository.SaveChangesAsync();
             }
 
             return region.Id;
@@ -231,6 +275,7 @@
                 };
 
                 await this.categoryRepository.AddAsync(category);
+                await this.regionRepository.SaveChangesAsync();
             }
 
             return category.Id;
@@ -339,8 +384,8 @@
                 var curentImageContent = imageUrl.GetAttribute("style");
                 var curentImageUrl = curentImageContent.Split("url(")[1];
                 curentImageUrl = curentImageUrl.TrimEnd(')');
-                Image image = new Image();
-                image.Extension = curentImageUrl;
+                LandmarkImage image = new LandmarkImage();
+                image.UrlPath = curentImageUrl;
                 landmark.Images.Add(image);
               //  Console.WriteLine("Image url: " + curentImageUrl);
             }

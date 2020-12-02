@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyPlacesBox.Data.Migrations
 {
-    public partial class InitialEditAndCreate : Migration
+    public partial class NewInitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -424,6 +424,36 @@ namespace MyPlacesBox.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "HikeImages",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    HikeId = table.Column<int>(nullable: false),
+                    UrlPath = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HikeImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HikeImages_Hikes_HikeId",
+                        column: x => x.HikeId,
+                        principalTable: "Hikes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_HikeImages_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Images",
                 columns: table => new
                 {
@@ -454,6 +484,37 @@ namespace MyPlacesBox.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Images_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LandmarkImages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    ModifiedOn = table.Column<DateTime>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    LandmarkId = table.Column<int>(nullable: true),
+                    UrlPath = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LandmarkImages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LandmarkImages_Landmarks_LandmarkId",
+                        column: x => x.LandmarkId,
+                        principalTable: "Landmarks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_LandmarkImages_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -520,6 +581,21 @@ namespace MyPlacesBox.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
+                name: "IX_HikeImages_HikeId",
+                table: "HikeImages",
+                column: "HikeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HikeImages_IsDeleted",
+                table: "HikeImages",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HikeImages_UserId",
+                table: "HikeImages",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Hikes_CategoryId",
                 table: "Hikes",
                 column: "CategoryId");
@@ -582,6 +658,21 @@ namespace MyPlacesBox.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Images_UserId",
                 table: "Images",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LandmarkImages_IsDeleted",
+                table: "LandmarkImages",
+                column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LandmarkImages_LandmarkId",
+                table: "LandmarkImages",
+                column: "LandmarkId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LandmarkImages_UserId",
+                table: "LandmarkImages",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -653,7 +744,13 @@ namespace MyPlacesBox.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "HikeImages");
+
+            migrationBuilder.DropTable(
                 name: "Images");
+
+            migrationBuilder.DropTable(
+                name: "LandmarkImages");
 
             migrationBuilder.DropTable(
                 name: "Settings");

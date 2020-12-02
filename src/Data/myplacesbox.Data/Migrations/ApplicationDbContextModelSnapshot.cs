@@ -398,6 +398,43 @@ namespace MyPlacesBox.Data.Migrations
                     b.ToTable("HikeEndPoints");
                 });
 
+            modelBuilder.Entity("MyPlacesBox.Data.Models.HikeImage", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HikeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UrlPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HikeId");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("HikeImages");
+                });
+
             modelBuilder.Entity("MyPlacesBox.Data.Models.HikeStartPoint", b =>
                 {
                     b.Property<int>("Id")
@@ -560,6 +597,45 @@ namespace MyPlacesBox.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Landmarks");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.LandmarkImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("LandmarkId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UrlPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
+
+                    b.HasIndex("LandmarkId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LandmarkImages");
                 });
 
             modelBuilder.Entity("MyPlacesBox.Data.Models.Mountain", b =>
@@ -778,6 +854,19 @@ namespace MyPlacesBox.Data.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("MyPlacesBox.Data.Models.HikeImage", b =>
+                {
+                    b.HasOne("MyPlacesBox.Data.Models.Hike", "Hike")
+                        .WithMany()
+                        .HasForeignKey("HikeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("MyPlacesBox.Data.Models.Image", b =>
                 {
                     b.HasOne("MyPlacesBox.Data.Models.Hike", "Hike")
@@ -787,7 +876,7 @@ namespace MyPlacesBox.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("MyPlacesBox.Data.Models.Landmark", "Landmark")
-                        .WithMany("Images")
+                        .WithMany()
                         .HasForeignKey("LandmarkId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -822,6 +911,17 @@ namespace MyPlacesBox.Data.Migrations
                         .HasForeignKey("TownId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.LandmarkImage", b =>
+                {
+                    b.HasOne("MyPlacesBox.Data.Models.Landmark", "Landmark")
+                        .WithMany("LandmarkImages")
+                        .HasForeignKey("LandmarkId");
 
                     b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
                         .WithMany()

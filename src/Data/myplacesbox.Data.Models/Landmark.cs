@@ -1,14 +1,14 @@
 ﻿namespace MyPlacesBox.Data.Models
 {
-    using System;
     using System.Collections.Generic;
+
     using MyPlacesBox.Data.Common.Models;
 
     public class Landmark : BaseDeletableModel<int>
     {
         public Landmark()
         {
-            this.Images = new HashSet<Image>();
+            this.LandmarkImages = new HashSet<LandmarkImage>();
         }
 
         public string Name { get; set; }
@@ -54,6 +54,6 @@
 
         public virtual Mountain Mountain { get; set; }
 
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual ICollection<LandmarkImage> LandmarkImages { get; set; }
     }
 }

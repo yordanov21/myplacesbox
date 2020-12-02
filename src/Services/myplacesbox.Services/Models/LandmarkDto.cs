@@ -9,7 +9,7 @@ namespace MyPlacesBox.Services.Models
     {
         public LandmarkDto()
         {
-            this.Images = new List<Image>();
+            this.Images = new List<LandmarkImage>();
         }
         public string Name { get; set; }
 
@@ -43,7 +43,6 @@ namespace MyPlacesBox.Services.Models
 
         public string MountainName { get; set; }
 
-
-        public virtual ICollection<Image> Images { get; set; }
+        public virtual ICollection<LandmarkImage> Images { get; set; }
     }
 }

@@ -16,6 +16,7 @@
     using MyPlacesBox.Data.Models;
     using MyPlacesBox.Data.Repositories;
     using MyPlacesBox.Data.Seeding;
+    using MyPlacesBox.Services;
     using MyPlacesBox.Services.Data;
     using MyPlacesBox.Services.Mapping;
     using MyPlacesBox.Services.Messaging;
@@ -66,6 +67,7 @@
             services.AddTransient<IGetCountsService, GetCountsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IHikesService, HikesService>();
+            services.AddTransient<ILandmarksScraperService, LandmarksScraperService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

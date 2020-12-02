@@ -7,8 +7,6 @@
 
     public interface ILandmarksScraperService
     {
-        public void PopulateDbWithLandmarksAsync()
-        {
-        }
+         Task PopulateDbWithLandmarksAsync();
     }
 }
