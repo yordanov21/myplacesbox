@@ -1,16 +1,16 @@
-﻿using MyPlacesBox.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyPlacesBox.Services.Models
+﻿namespace MyPlacesBox.Services.Models
 {
+    using System.Collections.Generic;
+
+    using MyPlacesBox.Data.Models;
+
     public class LandmarkDto
     {
         public LandmarkDto()
         {
             this.Images = new List<LandmarkImage>();
         }
+
         public string Name { get; set; }
 
         // Global cordinates (location)
@@ -19,6 +19,7 @@ namespace MyPlacesBox.Services.Models
         public double? Longitute { get; set; }
 
         public string Websate { get; set; }
+
         public string Address { get; set; }
 
         public string PhoneNumber { get; set; }

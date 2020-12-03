@@ -68,6 +68,7 @@
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IHikesService, HikesService>();
             services.AddTransient<ILandmarksScraperService, LandmarksScraperService>();
+            services.AddTransient<IHikeScraperService, HikeScraperService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -30,7 +30,19 @@ namespace MyPlacesBox.Services.Models
 
         public string HikeStartPointName { get; set; }
 
+        public int HikeStartPointAltitude { get; set; }
+
+        public double HikeStartPointLatitude { get; set; }
+
+        public double HikeStartPointLongitude { get; set; }
+
         public string HikeEndPointName { get; set; }
+
+        public int HikeEndPointAltitude { get; set; }
+
+        public double HikeEndPointLatitude { get; set; }
+
+        public double HikeEndPointLongitude { get; set; }
 
         public string CategoryName { get; set; }
 
