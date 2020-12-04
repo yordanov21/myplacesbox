@@ -1,14 +1,13 @@
-﻿using MyPlacesBox.Data.Common.Repositories;
-using MyPlacesBox.Data.Models;
-using MyPlacesBox.Web.ViewModels.Hikes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyPlacesBox.Services.Data
+﻿namespace MyPlacesBox.Services.Data
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using MyPlacesBox.Data.Common.Repositories;
+    using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Web.ViewModels.Hikes;
+
     public class HikesService : IHikesService
     {
         private readonly IDeletableEntityRepository<Hike> hikesRepository;
@@ -36,7 +35,6 @@ namespace MyPlacesBox.Services.Data
 
         public async Task CreateAsync(CreateHikeInputModel input)
         {
-           
             var startPoint = this.hikeStartPointsRepository.All().FirstOrDefault(x => x.Name == input.HikeStartPoint.Name);
             // TODO sled kato opravq v bazata danni za nadmoskatat visochina i koordinatite da go opravq tuk
             if (startPoint == null)
@@ -66,11 +64,11 @@ namespace MyPlacesBox.Services.Data
             }
 
             var region = this.regionsRepository.All().FirstOrDefault(x => x.Name == input.Region.Name);
-            if( region == null)
+            if (region == null)
             {
                 region = new Region
                 {
-                    Name = input.Region.Name
+                    Name = input.Region.Name,
                 };
 
                 await this.regionsRepository.AddAsync(region);
@@ -82,7 +80,7 @@ namespace MyPlacesBox.Services.Data
             {
                 town = new Town
                 {
-                    Name = input.Town.Name
+                    Name = input.Town.Name,
                 };
 
                 await this.townsRepository.AddAsync(town);
@@ -94,7 +92,7 @@ namespace MyPlacesBox.Services.Data
             {
                 mountain = new Mountain
                 {
-                    Name = input.Mountain.Name
+                    Name = input.Mountain.Name,
                 };
 
                 await this.mountainsRepository.AddAsync(mountain);
@@ -112,17 +110,14 @@ namespace MyPlacesBox.Services.Data
                 Stars = input.Stars,
                 CategoryId = input.CategoryId,
                 RegionId = region.Id,
-                TownId = town.Id,
                 MountainId = mountain.Id,
                 HikeStartPointId = startPoint.Id,
                 HikeEndPointId = endPoint.Id,
-                Denivelation = startPoint.StatrtPointAltitude - endPoint.StatrtPointAltitude,              
+                Denivelation = startPoint.StatrtPointAltitude - endPoint.StatrtPointAltitude,
             };
 
-       
             await this.hikesRepository.AddAsync(hike);
             await this.hikesRepository.SaveChangesAsync();
-
         }
     }
 }

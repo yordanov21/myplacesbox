@@ -10,7 +10,7 @@ using MyPlacesBox.Data;
 namespace MyPlacesBox.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201202180731_NewInitialCreate")]
+    [Migration("20201204184257_NewInitialCreate")]
     partial class NewInitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -335,7 +335,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Stars")
                         .HasColumnType("int");
 
-                    b.Property<int>("TownId")
+                    b.Property<int?>("TownId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
@@ -402,8 +402,10 @@ namespace MyPlacesBox.Data.Migrations
 
             modelBuilder.Entity("MyPlacesBox.Data.Models.HikeImage", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -411,7 +413,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("HikeId")
+                    b.Property<int?>("HikeId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -845,11 +847,9 @@ namespace MyPlacesBox.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MyPlacesBox.Data.Models.Town", "Town")
+                    b.HasOne("MyPlacesBox.Data.Models.Town", null)
                         .WithMany("Hikes")
-                        .HasForeignKey("TownId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("TownId");
 
                     b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
                         .WithMany()
@@ -859,10 +859,8 @@ namespace MyPlacesBox.Data.Migrations
             modelBuilder.Entity("MyPlacesBox.Data.Models.HikeImage", b =>
                 {
                     b.HasOne("MyPlacesBox.Data.Models.Hike", "Hike")
-                        .WithMany()
-                        .HasForeignKey("HikeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .WithMany("HikeImages")
+                        .HasForeignKey("HikeId");
 
                     b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
                         .WithMany()
@@ -872,7 +870,7 @@ namespace MyPlacesBox.Data.Migrations
             modelBuilder.Entity("MyPlacesBox.Data.Models.Image", b =>
                 {
                     b.HasOne("MyPlacesBox.Data.Models.Hike", "Hike")
-                        .WithMany("Images")
+                        .WithMany()
                         .HasForeignKey("HikeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

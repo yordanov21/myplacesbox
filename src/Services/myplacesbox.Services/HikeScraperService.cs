@@ -1,16 +1,17 @@
-﻿using AngleSharp;
-using MyPlacesBox.Data.Common.Repositories;
-using MyPlacesBox.Data.Models;
-using MyPlacesBox.Services.Models;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyPlacesBox.Services
+﻿namespace MyPlacesBox.Services
 {
+    using System;
+    using System.Collections.Concurrent;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using AngleSharp;
+    using MyPlacesBox.Data.Common.Repositories;
+    using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Services.Models;
+
     public class HikeScraperService : IHikeScraperService
     {
         private readonly IConfiguration config;
@@ -56,20 +57,13 @@ namespace MyPlacesBox.Services
             {
                 var url = new Url($"https://tripsjournal.com/marshruti/page/{i}");
 
-                //Use the default configuration for AngleSharp
-                // var config = Configuration.Default.WithDefaultLoader();
-                // var context = BrowsingContext.New(config);
-
-                var hikeDocument = context.OpenAsync(url).GetAwaiter().GetResult();
+                var hikeDocument = this.context.OpenAsync(url).GetAwaiter().GetResult();
 
                 var allHikes = hikeDocument.QuerySelectorAll("div.list-item");
-                //Console.WriteLine("index = " + i);
-                int count = 0;
+
                 foreach (var hike in allHikes)
                 {
-                    //Console.WriteLine("counter for landmark: " + ++count);
                     var hikeUrl = hike.QuerySelector("a").GetAttribute("href");
-                    //   Console.WriteLine(hikeUrl);
 
                     try
                     {
@@ -86,14 +80,12 @@ namespace MyPlacesBox.Services
             {
                 var categoryId = await this.GetOrCreateCategoryAsync(hike.CategoryName);
                 var regionId = await this.GetOrCreateRegionAsync(hike.RegionName);
-                var townId = await this.GetOrCreateTownAsync(hike.TownName);
                 var mountainId = await this.GetOrCreateMountainAsync(hike.MountainName);
                 var startPointId = await this.GetOrCreateStartPointAsync(
                     hike.HikeStartPointName,
                     hike.HikeStartPointAltitude,
                     hike.HikeStartPointLatitude,
                     hike.HikeStartPointLongitude);
-
                 var endPointId = await this.GetOrCreateEndPointAsync(
                     hike.HikeEndPointName,
                     hike.HikeEndPointAltitude,
@@ -110,13 +102,12 @@ namespace MyPlacesBox.Services
                 }
 
                 Random rnd = new Random();
-                int stars = rnd.Next(1, 7);  // creates a number between 1 and 6
-                var newLandmark = new Hike()
+                int stars = rnd.Next(1, 7);  // creates a number star between 1 and 6
+                var newHike = new Hike()
                 {
                     Name = hike.Name,
                     CategoryId = categoryId,
                     RegionId = regionId,
-                    TownId = townId,
                     MountainId = mountainId,
                     HikeStartPointId = startPointId,
                     HikeEndPointId = endPointId,
@@ -130,7 +121,7 @@ namespace MyPlacesBox.Services
                     HikeImages = images,
                 };
 
-                await this.hikesRepository.AddAsync(newLandmark);
+                await this.hikesRepository.AddAsync(newHike);
                 await this.hikesRepository.SaveChangesAsync();
             }
         }
@@ -139,9 +130,8 @@ namespace MyPlacesBox.Services
             string hikeStartPointName,
             int hikeStartPointAltitude,
             double hikeStartPointLatitude,
-            double HikeStartPointLongitude)
+            double hikeStartPointLongitude)
         {
-   
             var startPoint = this.hikeStartPointRepository
                 .AllAsNoTracking()
                 .FirstOrDefault(x => x.Name == hikeStartPointName);
@@ -153,7 +143,7 @@ namespace MyPlacesBox.Services
                     Name = hikeStartPointName,
                     StatrtPointAltitude = hikeStartPointAltitude,
                     StartPointLatitude = hikeStartPointLatitude,
-                    StartPointLongitute = HikeStartPointLongitude
+                    StartPointLongitute = hikeStartPointLongitude,
                 };
 
                 await this.hikeStartPointRepository.AddAsync(startPoint);
@@ -167,9 +157,8 @@ namespace MyPlacesBox.Services
              string hikeEndPointName,
              int hikeEndPointAltitude,
              double hikeEndPointLatitude,
-             double HikeEndPointLongitude)
+             double hikeEndPointLongitude)
         {
-
             var endPoint = this.hikeEndPointRepository
                 .AllAsNoTracking()
                 .FirstOrDefault(x => x.Name == hikeEndPointName);
@@ -181,7 +170,7 @@ namespace MyPlacesBox.Services
                     Name = hikeEndPointName,
                     StatrtPointAltitude = hikeEndPointAltitude,
                     StartPointLatitude = hikeEndPointLatitude,
-                    StartPointLongitute = HikeEndPointLongitude
+                    StartPointLongitute = hikeEndPointLongitude,
                 };
 
                 await this.hikeEndPointRepository.AddAsync(endPoint);
@@ -347,9 +336,7 @@ namespace MyPlacesBox.Services
 
         private HikeDto GetHike(string url)
         {
-
             var document = this.context.OpenAsync(url).GetAwaiter().GetResult();
-            // Get Landmarks elements 
 
             if (document.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
@@ -359,118 +346,80 @@ namespace MyPlacesBox.Services
 
             var hike = new HikeDto();
 
-            // get name
+            // Get name
             var hikeNames = document.QuerySelectorAll(".title > h1");
             foreach (var item in hikeNames)
             {
                 var hikeName = item.TextContent;
                 hike.Name = hikeName;
-                // Console.WriteLine("Name: " + item.TextContent);
             }
 
-            // get landmark model elements
+            // Get landmark model elements
             var hikeModelElements = document.QuerySelectorAll(".list-table > ul > li > span");
 
             var categoryName = hikeModelElements[0].TextContent;
             hike.CategoryName = categoryName;
-            //Console.WriteLine("Category: " + categoryName);
-
-            //  var seasonName = document.QuerySelector(".list-table > ul > li > span.seasons").GetAttribute("title");
-            // Console.WriteLine("Season: " + seasonName);
 
             var regionName = hikeModelElements[2].TextContent;
             hike.RegionName = regionName;
-            // Console.WriteLine("Region: " + regionName);
 
             var mountainName = hikeModelElements[3].TextContent;
             hike.MountainName = mountainName;
-            // Console.WriteLine("Mountain: " + mountainName);
 
-            var startPointName = hikeModelElements[4].TextContent;
-            hike.HikeStartPointName = startPointName;
-            // Console.WriteLine("StartPoint: " + startPointName);
+            var startPointName = hikeModelElements[4].TextContent.Split("( ");
+            hike.HikeStartPointName = startPointName[0];
 
-            var PointCoordinates = document.QuerySelectorAll(".list-table > ul > li > span > small > em");
-            var latitudeStartPoint = PointCoordinates[0].TextContent;
-            var longitudeStartPoint = PointCoordinates[1].TextContent;
+            var pointCoordinates = document.QuerySelectorAll(".list-table > ul > li > span > small > em");
+            var latitudeStartPoint = pointCoordinates[0].TextContent;
+            var longitudeStartPoint = pointCoordinates[1].TextContent;
             hike.HikeStartPointLatitude = double.Parse(latitudeStartPoint);
             hike.HikeStartPointLongitude = double.Parse(longitudeStartPoint);
-          //  Console.WriteLine("latitudeStartPoint: " + latitudeStartPoint);
-           // Console.WriteLine("longitudeStartPoint: " + longitudeStartPoint);
 
-            var endPointName = hikeModelElements[5].TextContent;
-            hike.HikeEndPointName = endPointName;
-            //  Console.WriteLine("EndPoint: " + endPointName);
+            var endPointName = hikeModelElements[5].TextContent.Split("( ");
+            hike.HikeEndPointName = endPointName[0];
 
-            var latitudeEndPoint = PointCoordinates[2].TextContent;
-            var longitudeEndPoint = PointCoordinates[3].TextContent;
+            var latitudeEndPoint = pointCoordinates[2].TextContent;
+            var longitudeEndPoint = pointCoordinates[3].TextContent;
             hike.HikeEndPointLatitude = double.Parse(latitudeEndPoint);
             hike.HikeEndPointLongitude = double.Parse(longitudeEndPoint);
-         //   Console.WriteLine("latitudeStartPoint: " + latitudeEndPoint);
-          //  Console.WriteLine("longitudeStartPoint: " + longitudeEndPoint);
 
             var fullDenivelationInfo = hikeModelElements[6].TextContent;
             var denivelationAsString = fullDenivelationInfo.Split(" м");
             int denivelationHike = int.Parse(denivelationAsString[0]);
             hike.Denivelation = denivelationHike;
 
-            var denivelationPoints = denivelationAsString[1].Split(" - ");
-            for (int i = 0; i < denivelationPoints.Length; i++)
-            {
-                denivelationPoints[i] = denivelationPoints[i].TrimEnd('м');
-                denivelationPoints[i] = denivelationPoints[i].TrimEnd();
-            }
-        
-            int denivelationStartpoint = int.Parse(denivelationPoints[0]);
-            int denivelationEndPoint = int.Parse(denivelationPoints[1]);
+            int denivelationStartpoint = int.Parse(denivelationAsString[1]);
+            var endPointDenivelation = denivelationAsString[2].Split('-');
+            int denivelationEndPoint = int.Parse(endPointDenivelation[1].TrimStart());
 
             hike.HikeStartPointAltitude = denivelationStartpoint;
             hike.HikeEndPointAltitude = denivelationEndPoint;
 
-            //TODO go to start end edd point!!!!!!!!!!!!!!!!!!
-            //  Console.WriteLine("Denivelation: " + fullDenivelationInfo);
-            var denivelationsStartAndPoints = document.QuerySelector(".list-table > ul > li:nth-child(7) > span > small");
-            //  Console.WriteLine("denivelationsStartAndPoints: " + denivelationsStartAndPoints);
-
-
             var lenght = hikeModelElements[7].TextContent.Split();
             hike.Length = double.Parse(lenght[0]);
-            //  Console.WriteLine("lenght: " + lenght);
 
             var time = hikeModelElements[8].TextContent.Split();
             var duration = time[0].Split(":");
-            int timeInMinutes = int.Parse(duration[0]) * 60 + int.Parse(duration[1]);
+            int timeInMinutes = (int.Parse(duration[0]) * 60) + int.Parse(duration[1]);
             hike.Duration = TimeSpan.FromMinutes(timeInMinutes);
-        
-          //  Console.WriteLine("time: " + time);
 
             var markingAndDificulty = document.QuerySelectorAll(".list-table > ul > li > span > em.rating");
             hike.Marking = int.Parse(markingAndDificulty[0].GetAttribute("data-score"));
             hike.Difficulty = int.Parse(markingAndDificulty[1].GetAttribute("data-score"));
-            //foreach (var item in markingAndDificulty)
-            //{
-            //    hike.Marking = int.Parse(item.TextContent);
-            //    //Console.WriteLine("item: " + item.GetAttribute("data-score"));
-            //}
 
-            // get description
+            // Get description
             var hikeDescription = document.QuerySelectorAll(".post > .entry > p");
 
-            StringBuilder sb = new StringBuilder();           
+            StringBuilder sb = new StringBuilder();
             foreach (var item in hikeDescription)
             {
                 sb.AppendLine(item.TextContent);
-                //  Console.WriteLine(item.TextContent);
-               
             }
 
             var allDescription = sb.ToString().TrimEnd();
             hike.Description = allDescription;
-          //  Console.WriteLine("Description paragraph count: " + countDescrioptionParagraf);
 
-
-            // get image 
-            //TODO make it for all images (now is only for one)
+            // Get image
             var imagesUrl = document.QuerySelectorAll(".gallery-small > div.gallery-small-images > a > img");
             foreach (var imageUrl in imagesUrl)
             {
@@ -478,7 +427,6 @@ namespace MyPlacesBox.Services
                 HikeImage image = new HikeImage();
                 image.UrlPath = curentImageUrl;
                 hike.HikeImages.Add(image);
-              //  Console.WriteLine("curentImageUrl url: " + curentImageUrl);
             }
 
             return hike;

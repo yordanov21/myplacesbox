@@ -5,14 +5,16 @@ using System.Text;
 
 namespace MyPlacesBox.Data.Models
 {
-    public class HikeImage : BaseDeletableModel<string>
+    public class HikeImage : BaseDeletableModel<int>
     {
-        public HikeImage()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
+        //public HikeImage()
+        //{
+        //    this.Id = Guid.NewGuid().ToString();
+        //}
 
-        public int HikeId { get; set; }
+        //public int HikeId { get; set; }
+
+        //public int HikeId { get; set; }
 
         public virtual Hike Hike { get; set; }
 

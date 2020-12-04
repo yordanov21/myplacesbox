@@ -51,36 +51,26 @@
             {
                 var url = new Url($"https://tripsjournal.com/zabelejitelnosti/page/{i}");
 
-                // Use the default configuration for AngleSharp
-              //  var config = Configuration.Default.WithDefaultLoader();
-              //  var context = BrowsingContext.New(config);
-
                 var landmarkDocument = this.context.OpenAsync(url).GetAwaiter().GetResult();
 
                 var allLandmarks = landmarkDocument.QuerySelectorAll("div.list-item");
 
-                // Console.WriteLine("index = " + i);
-                int count = 0;
                 foreach (var landmark in allLandmarks)
                 {
-                    //Console.WriteLine("counter for landmark: " + ++count);
                     var landmarkUrl = landmark.QuerySelector("a").GetAttribute("href");
                     Console.WriteLine(landmarkUrl);
 
                     try
                     {
-                      var landmarkDto = this.GetLandmark(landmarkUrl);
+                        var landmarkDto = this.GetLandmark(landmarkUrl);
                         concurentBag.Add(landmarkDto);
                     }
                     catch (Exception)
                     {
                     }
-
-                   // landMarksCounter++;
-                   // Console.WriteLine("Landmarks counter: " + landMarksCounter);
                 }
             }
-            
+
             foreach (var landmark in concurentBag)
             {
                 var categoryId = await this.GetOrCreateCategoryAsync(landmark.CategoryName);
@@ -92,13 +82,13 @@
 
                 var landmarkExists = this.landmarksRepository.AllAsNoTracking().Any(x => x.Name == landmark.Name);
 
-                if( landmarkExists)
+                if (landmarkExists)
                 {
                     continue;
                 }
 
                 Random rnd = new Random();
-                int stars = rnd.Next(1, 7);  // creates a number between 1 and 6
+                int stars = rnd.Next(1, 7);  // creates a number star between 1 and 6
                 var newLandmark = new Landmark()
                 {
                     Name = landmark.Name,
@@ -118,13 +108,11 @@
                     Description = landmark.Description,
                     Stars = stars,
                     LandmarkImages = images,
-
                 };
 
                 await this.landmarksRepository.AddAsync(newLandmark);
                 await this.landmarksRepository.SaveChangesAsync();
             }
-            
         }
 
         private async Task<ICollection<LandmarkImage>> GetOrCreateImageAsync(ICollection<LandmarkImage> images)
@@ -141,7 +129,7 @@
                 {
                     imageUrl = new LandmarkImage
                     {
-                        UrlPath = image.UrlPath,            
+                        UrlPath = image.UrlPath,
                     };
 
                     await this.imagesRepository.AddAsync(imageUrl);
@@ -299,8 +287,6 @@
             {
                 var landmarkName = item.TextContent;
                 landmark.Name = landmarkName;
-
-                // Console.WriteLine("Name: " + landmarkName);
             }
 
             // Get landmark model elements
@@ -308,76 +294,62 @@
 
             var categoryName = ladmarkModelElements[0].TextContent;
             landmark.CategoryName = categoryName;
-            // Console.WriteLine("Category: " + categoryName);
 
             var regionName = ladmarkModelElements[1].TextContent;
             landmark.RegionName = regionName;
-            // Console.WriteLine("Region: " + regionName);
 
             var townName = ladmarkModelElements[2].TextContent;
             landmark.TownName = townName;
-            // Console.WriteLine("Town: " + townName);
 
             var mountainName = ladmarkModelElements[3].TextContent;
             landmark.MountainName = mountainName;
-            // Console.WriteLine("Mountain: " + mountainName);
 
             var coordinates = ladmarkModelElements[4].TextContent.Split(", ");
             double latitude = double.Parse(coordinates[0]);
             double longitude = double.Parse(coordinates[1]);
             landmark.Latitude = latitude;
             landmark.Longitute = longitude;
-           // Console.WriteLine("Coordinates: " + coordinates);
 
             var website = ladmarkModelElements[5].TextContent;
             landmark.Websate = website;
-           // Console.WriteLine("Website: " + website);
 
             var address = ladmarkModelElements[6].TextContent;
             landmark.Address = address;
-            // Console.WriteLine("Address: " + address);
 
             var phone = ladmarkModelElements[7].TextContent;
             landmark.PhoneNumber = phone;
-          //  Console.WriteLine("Phone: " + phone);
 
             var workTime = ladmarkModelElements[8].TextContent;
             landmark.WorkTime = workTime;
-          //  Console.WriteLine("Worktime: " + workTime);
 
             var daysOff = ladmarkModelElements[9].TextContent;
             landmark.DayOff = daysOff;
-            // Console.WriteLine("DaysOff: " + daysOff);
 
             var entranceFeeAsString = ladmarkModelElements[10].TextContent.Split(' ');
             double entranceFee = 0;
             bool isThereFee = double.TryParse(entranceFeeAsString[0], out entranceFee);
             landmark.EntranceFee = isThereFee ? entranceFee : 0;
-            //  Console.WriteLine("EntranceFee: " + entranceFeeAsString);
 
             var accessibility = document.QuerySelectorAll(".list-table > ul > li > span > em.rating");
             foreach (var item in accessibility)
             {
                 var currentAccessibility = int.Parse(item.GetAttribute("data-score"));
-                landmark.Difficulty = (6 - currentAccessibility);
-              //  Console.WriteLine("Accessibility: " + currentAccessibility);
+                landmark.Difficulty = 6 - currentAccessibility;
             }
 
-            // get description
+            // Get description
             var landmarkDescription = document.QuerySelectorAll(".post > .entry > p");
 
             StringBuilder sb = new StringBuilder();
             foreach (var item in landmarkDescription)
             {
                 sb.AppendLine(item.TextContent);
-                // Console.WriteLine(item.TextContent); 
             }
 
             var allDescripition = sb.ToString().TrimEnd();
             landmark.Description = allDescripition;
 
-            // get images
-           
+            // Get images
             var imagesUrl = document.QuerySelectorAll(".gallery-slides div.gallery-slide");
             foreach (var imageUrl in imagesUrl)
             {
@@ -387,7 +359,6 @@
                 LandmarkImage image = new LandmarkImage();
                 image.UrlPath = curentImageUrl;
                 landmark.Images.Add(image);
-              //  Console.WriteLine("Image url: " + curentImageUrl);
             }
 
             return landmark;

@@ -48,10 +48,6 @@
 
         public virtual Region Region { get; set; }
 
-        public int TownId { get; set; }
-
-        public virtual Town Town { get; set; }
-
         public int MountainId { get; set; }
 
         public virtual Mountain Mountain { get; set; }

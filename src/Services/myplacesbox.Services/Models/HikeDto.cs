@@ -1,10 +1,11 @@
-﻿using MyPlacesBox.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyPlacesBox.Services.Models
+﻿namespace MyPlacesBox.Services.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using MyPlacesBox.Data.Models;
+
     public class HikeDto
     {
         public HikeDto()
@@ -47,8 +48,6 @@ namespace MyPlacesBox.Services.Models
         public string CategoryName { get; set; }
 
         public string RegionName { get; set; }
-
-        public string TownName { get; set; }
 
         public string MountainName { get; set; }
 

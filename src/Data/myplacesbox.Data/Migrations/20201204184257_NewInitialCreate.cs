@@ -311,8 +311,8 @@ namespace MyPlacesBox.Data.Migrations
                     HikeEndPointId = table.Column<int>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
                     RegionId = table.Column<int>(nullable: false),
-                    TownId = table.Column<int>(nullable: false),
-                    MountainId = table.Column<int>(nullable: false)
+                    MountainId = table.Column<int>(nullable: false),
+                    TownId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -427,12 +427,13 @@ namespace MyPlacesBox.Data.Migrations
                 name: "HikeImages",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedOn = table.Column<DateTime>(nullable: false),
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    HikeId = table.Column<int>(nullable: false),
+                    HikeId = table.Column<int>(nullable: true),
                     UrlPath = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },

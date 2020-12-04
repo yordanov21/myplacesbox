@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MyPlacesBox.Services.Data;
-using MyPlacesBox.Web.ViewModels.Hikes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MyPlacesBox.Web.Controllers
+﻿namespace MyPlacesBox.Web.Controllers
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using MyPlacesBox.Services.Data;
+    using MyPlacesBox.Web.ViewModels.Hikes;
+
     public class HikesController : Controller
     {
         private readonly ICategoriesService categoriesService;
@@ -37,8 +34,7 @@ namespace MyPlacesBox.Web.Controllers
                 return this.View(input);
             }
 
-            await this.hikesService.CreateAsync(input);    
-
+            await this.hikesService.CreateAsync(input);
             return this.Redirect("/");
         }
     }
