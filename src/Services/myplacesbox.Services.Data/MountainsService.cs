@@ -6,19 +6,18 @@
     using MyPlacesBox.Data.Common.Repositories;
     using MyPlacesBox.Data.Models;
 
-    public class CategoriesService : ICategoriesService
+    public class MountainsService : IMountainsService
     {
-        private readonly IDeletableEntityRepository<Category> categoriesRepository;
+        private readonly IDeletableEntityRepository<Mountain> mountainsRepository;
 
-        public CategoriesService(IDeletableEntityRepository<Category> categoriesRepository)
+        public MountainsService(IDeletableEntityRepository<Mountain> mountainsRepository)
         {
-            this.categoriesRepository = categoriesRepository;
+            this.mountainsRepository = mountainsRepository;
         }
 
         public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
         {
-           return this.categoriesRepository.AllAsNoTracking()  //is better from All() pestime malko panmet, kogato durpame danni e po dobre da e s AllAsNoTraking
-                .Where(c => c.Type == "Hike")
+            return this.mountainsRepository.AllAsNoTracking()
                 .Select(x => new
                 {
                     x.Id,

@@ -15,7 +15,8 @@
         private readonly IDeletableEntityRepository<Region> regionsRepository;
         private readonly IDeletableEntityRepository<Town> townsRepository;
         private readonly IDeletableEntityRepository<Mountain> mountainsRepository;
-        private readonly IDeletableEntityRepository<Image> imagesRepository;
+        private readonly IDeletableEntityRepository<LandmarkImage> landmarkImagesRepository;
+        private readonly IDeletableEntityRepository<HikeImage> hikeImagesRepository;
 
         public GetCountsService(
             IDeletableEntityRepository<Landmark> landmarksRepository,
@@ -24,7 +25,8 @@
             IDeletableEntityRepository<Region> regionsRepository,
             IDeletableEntityRepository<Town> townsRepository,
             IDeletableEntityRepository<Mountain> mountainsRepository,
-            IDeletableEntityRepository<Image> imagesRepository)
+            IDeletableEntityRepository<LandmarkImage> landmarkImagesRepository,
+            IDeletableEntityRepository<HikeImage> hikeImagesRepository)
         {
             this.landmarksRepository = landmarksRepository;
             this.hikesRepository = hikesRepository;
@@ -32,7 +34,8 @@
             this.regionsRepository = regionsRepository;
             this.townsRepository = townsRepository;
             this.mountainsRepository = mountainsRepository;
-            this.imagesRepository = imagesRepository;
+            this.landmarkImagesRepository = landmarkImagesRepository;
+            this.hikeImagesRepository = hikeImagesRepository;
         }
 
         public CountsDto GetCounts()
@@ -40,12 +43,13 @@
             var data = new CountsDto
             {
                 LandmarksCount = this.landmarksRepository.All().Count(),
+                LandmarkImagesCount = this.landmarkImagesRepository.All().Count(),
                 HikesCount = this.hikesRepository.All().Count(),
+                HikeImagesCount = this.hikeImagesRepository.All().Count(),
                 CategoriesCount = this.categoriesRepository.All().Count(),
                 RegionsCount = this.regionsRepository.All().Count(),
                 TownsCount = this.townsRepository.All().Count(),
                 MountainsCount = this.mountainsRepository.All().Count(),
-                ImagesCount = this.imagesRepository.All().Count(),
             };
 
             return data;

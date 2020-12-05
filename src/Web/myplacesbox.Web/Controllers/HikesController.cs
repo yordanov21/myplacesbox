@@ -8,20 +8,34 @@
     public class HikesController : Controller
     {
         private readonly ICategoriesService categoriesService;
+        private readonly IRegionsService regionsService;
+        private readonly IMountainsService mountainsService;
         private readonly IHikesService hikesService;
+        private readonly IHikeStartPointsService hikeStartPointsService;
 
         public HikesController(
             ICategoriesService categoriesService,
-            IHikesService hikesService)
+            IRegionsService regionsService,
+            IMountainsService mountainsService,
+            IHikesService hikesService,
+            IHikeStartPointsService hikeStartPointsService)
         {
             this.categoriesService = categoriesService;
+            this.regionsService = regionsService;
+            this.mountainsService = mountainsService;
             this.hikesService = hikesService;
+            this.hikeStartPointsService = hikeStartPointsService;
         }
 
         public IActionResult Create()
         {
-            var viewModel = new CreateHikeInputModel();
-            viewModel.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+            var viewModel = new CreateHikeInputModel
+            {
+                CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs(),
+                RegionsItems = this.regionsService.GetAllAsKeyValuePairs(),
+                MountainsItems = this.mountainsService.GetAllAsKeyValuePairs(),
+                //HikeStartPoint = new HikeStartPointsService,
+            };
             return this.View(viewModel);
         }
 
@@ -31,6 +45,8 @@
             if (!this.ModelState.IsValid)
             {
                 input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+                input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
+                input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
                 return this.View(input);
             }
 

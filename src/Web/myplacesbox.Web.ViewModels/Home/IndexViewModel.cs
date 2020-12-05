@@ -4,11 +4,13 @@
     {
         public int LandmarksCount { get; set; }
 
+        public int LandmarkImagesCount { get; set; }
+
         public int HikesCount { get; set; }
 
-        public int CategoriesCount {get; set; }
+        public int HikeImagesCount { get; set; }
 
-        public int ImagesCount { get; set; }
+        public int CategoriesCount {get; set; }
 
         public int RegionsCount { get; set; }
 

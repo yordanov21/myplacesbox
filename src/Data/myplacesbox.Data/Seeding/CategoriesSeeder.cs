@@ -1,13 +1,12 @@
 ﻿namespace MyPlacesBox.Data.Seeding
 {
-    using MyPlacesBox.Data.Models;
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
-    class CategoriesSeeder : ISeeder
+    using MyPlacesBox.Data.Models;
+
+    internal class CategoriesSeeder : ISeeder
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {

@@ -1,8 +1,8 @@
 ﻿namespace MyPlacesBox.Data.Models
 {
-    using MyPlacesBox.Data.Common.Models;
-    using System;
     using System.Collections.Generic;
+
+    using MyPlacesBox.Data.Common.Models;
 
     public class Town : BaseDeletableModel<int>
     {

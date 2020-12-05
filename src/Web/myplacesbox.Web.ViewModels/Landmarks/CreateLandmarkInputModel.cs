@@ -11,8 +11,10 @@ namespace MyPlacesBox.Web.ViewModels.Landmarks
         [MinLength(3)]
         public string Name { get; set; }
 
-        // google link or cordinate
-        public string Location { get; set; }
+        // Global cordinates
+        public double? Latitude { get; set; }
+
+        public double? Longitute { get; set; }
 
         [MinLength(5)]
         public string Websate { get; set; }
@@ -20,8 +22,10 @@ namespace MyPlacesBox.Web.ViewModels.Landmarks
         [MinLength(7)]
         public string PhoneNumber { get; set; }
 
+        [MinLength(4)]
         public string WorkTime { get; set; }
 
+        [MinLength(4)]
         public string DayOff { get; set; }
 
         public double EntranceFee { get; set; }
@@ -30,7 +34,7 @@ namespace MyPlacesBox.Web.ViewModels.Landmarks
         [MinLength(100)]
         public string Description { get; set; }
 
-        [Range(1, 5)]
+        [Range(1, 6)]
         public int Stars { get; set; }
 
         [Range(1, 6)]

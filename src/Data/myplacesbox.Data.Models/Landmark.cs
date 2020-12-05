@@ -26,7 +26,7 @@
 
         public string DayOff { get; set; }
 
-        public double? EntranceFee { get; set; }
+        public double EntranceFee { get; set; }
 
         public string Description { get; set; }
 

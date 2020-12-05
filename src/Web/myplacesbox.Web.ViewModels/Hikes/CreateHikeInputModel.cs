@@ -1,10 +1,10 @@
 ﻿namespace MyPlacesBox.Web.ViewModels.Hikes
 {
-    using MyPlacesBox.Data.Models;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
+
+    using MyPlacesBox.Data.Models;
 
     public class CreateHikeInputModel
     {
@@ -12,6 +12,8 @@
         [MinLength(5)]
         public string Name { get; set; }
 
+        [Range(0, 10000)]
+        [Display(Name = "Length (in kilometers)")]
         public double Length { get; set; }
 
         [Range(0, 24 * 60 * 30)]
@@ -46,15 +48,11 @@
 
         public int RegionId { get; set; }
 
-        public virtual Region Region { get; set; }
-
-        public int TownId { get; set; }
-
-        public virtual Town Town { get; set; }
+    //    public virtual Region Region { get; set; }
 
         public int MountainId { get; set; }
 
-        public virtual Mountain Mountain { get; set; }
+      //  public virtual Mountain Mountain { get; set; }
 
         //   public virtual ICollection<Image> Images { get; set; }
 
@@ -62,5 +60,9 @@
         //  public IEnumerable<IFormFile> Images { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> RegionsItems { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> MountainsItems { get; set; }
     }
 }

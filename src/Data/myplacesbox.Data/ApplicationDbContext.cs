@@ -35,8 +35,6 @@
 
         public DbSet<Category> Categories { get; set; }
 
-        public DbSet<Image> Images { get; set; }
-
         public DbSet<LandmarkImage> LandmarkImages { get; set; }
 
         public DbSet<HikeImage> HikeImages { get; set; }

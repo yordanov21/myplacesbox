@@ -141,9 +141,9 @@
                 startPoint = new HikeStartPoint()
                 {
                     Name = hikeStartPointName,
-                    StatrtPointAltitude = hikeStartPointAltitude,
-                    StartPointLatitude = hikeStartPointLatitude,
-                    StartPointLongitute = hikeStartPointLongitude,
+                    Altitude = hikeStartPointAltitude,
+                    Latitude = hikeStartPointLatitude,
+                    Longitute = hikeStartPointLongitude,
                 };
 
                 await this.hikeStartPointRepository.AddAsync(startPoint);
@@ -168,9 +168,9 @@
                 endPoint = new HikeEndPoint()
                 {
                     Name = hikeEndPointName,
-                    StatrtPointAltitude = hikeEndPointAltitude,
-                    StartPointLatitude = hikeEndPointLatitude,
-                    StartPointLongitute = hikeEndPointLongitude,
+                    Altitude = hikeEndPointAltitude,
+                    Latitude = hikeEndPointLatitude,
+                    Longitute = hikeEndPointLongitude,
                 };
 
                 await this.hikeEndPointRepository.AddAsync(endPoint);

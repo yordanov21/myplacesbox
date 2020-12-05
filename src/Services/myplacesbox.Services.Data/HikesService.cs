@@ -13,36 +13,38 @@
         private readonly IDeletableEntityRepository<Hike> hikesRepository;
         private readonly IDeletableEntityRepository<HikeStartPoint> hikeStartPointsRepository;
         private readonly IDeletableEntityRepository<HikeEndPoint> hikeEndPointsRepository;
-        private readonly IDeletableEntityRepository<Region> regionsRepository;
-        private readonly IDeletableEntityRepository<Town> townsRepository;
-        private readonly IDeletableEntityRepository<Mountain> mountainsRepository;
+     //   private readonly IDeletableEntityRepository<Region> regionsRepository;
+    //    private readonly IDeletableEntityRepository<Mountain> mountainsRepository;
+     //   private readonly IDeletableEntityRepository<HikeImage> imagesRepository;
+
 
         public HikesService(
             IDeletableEntityRepository<Hike> hikesRepository,
             IDeletableEntityRepository<HikeStartPoint> hikeStartPointsRepository,
             IDeletableEntityRepository<HikeEndPoint> hikeEndPointsRepository,
-            IDeletableEntityRepository<Region> regionsRepository,
-            IDeletableEntityRepository<Town> townsRepository,
-            IDeletableEntityRepository<Mountain> mountainsRepository)
+        //    IDeletableEntityRepository<Region> regionsRepository,
+        //    IDeletableEntityRepository<Mountain> mountainsRepository,
+            IDeletableEntityRepository<HikeImage> imagesRepository)
         {
             this.hikesRepository = hikesRepository;
             this.hikeStartPointsRepository = hikeStartPointsRepository;
             this.hikeEndPointsRepository = hikeEndPointsRepository;
-            this.regionsRepository = regionsRepository;
-            this.townsRepository = townsRepository;
-            this.mountainsRepository = mountainsRepository;
+       //     this.regionsRepository = regionsRepository;
+       //     this.mountainsRepository = mountainsRepository;
+       //     this.imagesRepository = imagesRepository;
         }
 
         public async Task CreateAsync(CreateHikeInputModel input)
         {
-            var startPoint = this.hikeStartPointsRepository.All().FirstOrDefault(x => x.Name == input.HikeStartPoint.Name);
+            var startPoint = this.hikeStartPointsRepository.All()
+                .FirstOrDefault(x => x.Name == input.HikeStartPoint.Name);
             // TODO sled kato opravq v bazata danni za nadmoskatat visochina i koordinatite da go opravq tuk
             if (startPoint == null)
             {
                 startPoint = new HikeStartPoint
                 {
                     Name = input.HikeStartPoint.Name,
-                    StatrtPointAltitude = 100,
+                    Altitude = input.HikeStartPoint.Altitude,
                 };
 
                 await this.hikeStartPointsRepository.AddAsync(startPoint);
@@ -56,48 +58,36 @@
                 endPoint = new HikeEndPoint
                 {
                     Name = input.HikeStartPoint.Name,
-                    StatrtPointAltitude = 20,
+                    Altitude = 20,
                 };
 
                 await this.hikeEndPointsRepository.AddAsync(endPoint);
                 await this.hikeEndPointsRepository.SaveChangesAsync();
             }
 
-            var region = this.regionsRepository.All().FirstOrDefault(x => x.Name == input.Region.Name);
-            if (region == null)
-            {
-                region = new Region
-                {
-                    Name = input.Region.Name,
-                };
+            //var region = this.regionsRepository.All().FirstOrDefault(x => x.Name == input.Region.Name);
+            //if (region == null)
+            //{
+            //    region = new Region
+            //    {
+            //        Name = input.Region.Name,
+            //    };
 
-                await this.regionsRepository.AddAsync(region);
-                await this.regionsRepository.SaveChangesAsync();
-            }
+            //    await this.regionsRepository.AddAsync(region);
+            //    await this.regionsRepository.SaveChangesAsync();
+            //}
 
-            var town = this.townsRepository.All().FirstOrDefault(x => x.Name == input.Town.Name);
-            if (town == null)
-            {
-                town = new Town
-                {
-                    Name = input.Town.Name,
-                };
+            //var mountain = this.mountainsRepository.All().FirstOrDefault(x => x.Name == input.Region.Name);
+            //if (mountain == null)
+            //{
+            //    mountain = new Mountain
+            //    {
+            //        Name = input.Mountain.Name,
+            //    };
 
-                await this.townsRepository.AddAsync(town);
-                await this.townsRepository.SaveChangesAsync();
-            }
-
-            var mountain = this.mountainsRepository.All().FirstOrDefault(x => x.Name == input.Region.Name);
-            if (mountain == null)
-            {
-                mountain = new Mountain
-                {
-                    Name = input.Mountain.Name,
-                };
-
-                await this.mountainsRepository.AddAsync(mountain);
-                await this.mountainsRepository.SaveChangesAsync();
-            }
+            //    await this.mountainsRepository.AddAsync(mountain);
+            //    await this.mountainsRepository.SaveChangesAsync();
+            //}
 
             var hike = new Hike
             {
@@ -109,11 +99,11 @@
                 Difficulty = input.Difficulty,
                 Stars = input.Stars,
                 CategoryId = input.CategoryId,
-                RegionId = region.Id,
-                MountainId = mountain.Id,
+                RegionId = input.RegionId,
+                MountainId = input.RegionId,
                 HikeStartPointId = startPoint.Id,
                 HikeEndPointId = endPoint.Id,
-                Denivelation = startPoint.StatrtPointAltitude - endPoint.StatrtPointAltitude,
+                Denivelation = startPoint.Altitude - endPoint.Altitude,
             };
 
             await this.hikesRepository.AddAsync(hike);

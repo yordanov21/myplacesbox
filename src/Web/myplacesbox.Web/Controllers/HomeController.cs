@@ -31,12 +31,14 @@
             var viewModel = new IndexViewModel
             {
                 LandmarksCount = countsDto.LandmarksCount,
+                LandmarkImagesCount = countsDto.LandmarkImagesCount,
                 HikesCount = countsDto.HikesCount,
+                HikeImagesCount = countsDto.HikeImagesCount,
                 CategoriesCount = countsDto.CategoriesCount,
                 RegionsCount = countsDto.RegionsCount,
                 TownsCount = countsDto.TownsCount,
                 MountainsCount = countsDto.MountainsCount,
-                ImagesCount = countsDto.ImagesCount,
+               
             };
 
             return this.View(viewModel);

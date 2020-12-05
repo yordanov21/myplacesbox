@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MyPlacesBox.Services.Data
 {
-    public interface ICategoriesService : IPlaceDetailsService
+    public interface IMountainsService : IPlaceDetailsService
     {
     }
 }

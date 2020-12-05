@@ -10,8 +10,8 @@ using MyPlacesBox.Data;
 namespace MyPlacesBox.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201204184257_NewInitialCreate")]
-    partial class NewInitialCreate
+    [Migration("20201205213336_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -369,6 +369,9 @@ namespace MyPlacesBox.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Altitude")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -378,20 +381,17 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<double?>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Longitute")
+                        .HasColumnType("float");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<double?>("StartPointLatitude")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("StartPointLongitute")
-                        .HasColumnType("float");
-
-                    b.Property<int>("StatrtPointAltitude")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -446,6 +446,9 @@ namespace MyPlacesBox.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Altitude")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
@@ -454,6 +457,12 @@ namespace MyPlacesBox.Data.Migrations
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
+
+                    b.Property<double?>("Latitude")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("Longitute")
+                        .HasColumnType("float");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -461,62 +470,11 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double?>("StartPointLatitude")
-                        .HasColumnType("float");
-
-                    b.Property<double?>("StartPointLongitute")
-                        .HasColumnType("float");
-
-                    b.Property<int>("StatrtPointAltitude")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("HikeStartPoints");
-                });
-
-            modelBuilder.Entity("MyPlacesBox.Data.Models.Image", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Extension")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("HikeId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("LandmarkId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HikeId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("LandmarkId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("MyPlacesBox.Data.Models.Landmark", b =>
@@ -544,7 +502,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Difficulty")
                         .HasColumnType("int");
 
-                    b.Property<double?>("EntranceFee")
+                    b.Property<double>("EntranceFee")
                         .HasColumnType("float");
 
                     b.Property<bool>("IsDeleted")
@@ -861,25 +819,6 @@ namespace MyPlacesBox.Data.Migrations
                     b.HasOne("MyPlacesBox.Data.Models.Hike", "Hike")
                         .WithMany("HikeImages")
                         .HasForeignKey("HikeId");
-
-                    b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("MyPlacesBox.Data.Models.Image", b =>
-                {
-                    b.HasOne("MyPlacesBox.Data.Models.Hike", "Hike")
-                        .WithMany()
-                        .HasForeignKey("HikeId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("MyPlacesBox.Data.Models.Landmark", "Landmark")
-                        .WithMany()
-                        .HasForeignKey("LandmarkId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
 
                     b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
                         .WithMany()

@@ -12,6 +12,7 @@
         public string Name { get; set; }
 
         // Level High
+        [Range(0, 8881)]
         public int StatrtPointAltitude { get; set; }
 
         // Global coordinates
