@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyPlacesBox.Web.ViewModels.Images;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -47,6 +48,13 @@ namespace MyPlacesBox.Web.ViewModels.Landmarks
         public int TownId { get; set; }
 
         public int MountainId { get; set; }
+
+        public virtual IEnumerable<LandmarkImageInputModel> LandmarkImages { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
+        public IEnumerable<KeyValuePair<string, string>> RegionsItems { get; set; }
+        public IEnumerable<KeyValuePair<string, string>> TownsItems { get; set; }
+        public IEnumerable<KeyValuePair<string, string>> MountainsItems { get; set; }
 
     }
 }

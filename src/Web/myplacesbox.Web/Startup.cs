@@ -67,10 +67,12 @@
             services.AddTransient<IGetCountsService, GetCountsService>();
             services.AddTransient<ICategoriesService, CategoriesService>();
             services.AddTransient<IRegionsService, RegionsService>();
+            services.AddTransient<ITownsService, TownsService>();
             services.AddTransient<IMountainsService, MountainsService>();
             services.AddTransient<IHikeStartPointsService, HikeStartPointsService>();
             services.AddTransient<IHikeEndPointsService, HikeEndPointsService>();
             services.AddTransient<IHikesService, HikesService>();
+            services.AddTransient<ILandmarksService, LandmarksService>();
             services.AddTransient<ILandmarksScraperService, LandmarksScraperService>();
             services.AddTransient<IHikeScraperService, HikeScraperService>();
         }

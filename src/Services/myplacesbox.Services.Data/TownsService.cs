@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MyPlacesBox.Services.Data
 {
-    class TownsService : ITownsService
+    public class TownsService : ITownsService
     {
         private readonly IDeletableEntityRepository<Town> townsRepository;
 

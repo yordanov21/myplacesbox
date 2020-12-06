@@ -1,10 +1,14 @@
 ﻿@model MyPlacesBox.Web.ViewModels.Landmarks.CreateLandmarkInputModel
-@{ 
+@{
     this.ViewData["Title"] = "Add new Landmark";
+    var categoryItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var mountainItems = this.Model.MountainsItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var regionItems = this.Model.RegionsItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var townItems = this.Model.TownsItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
 <h1>@this.ViewData["Title"]</h1>
 
-<form action="/" method="post" class="col-md-6 offset-3">
+<form method="post" class="col-md-6 offset-3">
     <div asp-validation-summary="All"></div>
     <div class=" form-group">
         <label asp-for="Name"></label>
@@ -12,9 +16,90 @@
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class=" form-group">
+        <label asp-for="CategoryId"></label>
+        <select asp-for="CategoryId" class="form-control" asp-items="categoryItems"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="RegionId">Region</label>
+        <select asp-for="RegionId" class="form-control" asp-items="regionItems"></select>
+        <span asp-validation-for="RegionId" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="TownId">Town</label>
+        <select asp-for="TownId" class="form-control" asp-items="townItems"></select>
+        <span asp-validation-for="TownId" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="MountainId">Mountain</label>
+        <select asp-for="MountainId" class="form-control" asp-items="mountainItems"></select>
+        <span asp-validation-for="MountainId" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
         <label asp-for="Description"></label>
         <textarea asp-for="Description" class="form-control" rows="10"></textarea>
         <span asp-validation-for="Name" class="text-danger"></span>
     </div>
-    <input type="submit" class="btn btn-primary"/>
+    <div class=" form-group">
+        <label asp-for="Latitude">Latitude</label>
+        <input asp-for="Latitude" class="form-control" />
+        <span asp-validation-for="Latitude" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="Longitute">Longitute</label>
+        <input asp-for="Longitute" class="form-control" />
+        <span asp-validation-for="Longitute" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="Websate"></label>
+        <input asp-for="Websate" class="form-control" />
+        <span asp-validation-for="Websate" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="WorkTime"></label>
+        <input asp-for="WorkTime" class="form-control" />
+        <span asp-validation-for="WorkTime" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="DayOff"></label>
+        <input asp-for="DayOff" class="form-control" />
+        <span asp-validation-for="DayOff" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="EntranceFee"></label>
+        <input asp-for="EntranceFee" class="form-control" />
+        <span asp-validation-for="EntranceFee" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="Difficulty"></label>
+        <input asp-for="Difficulty" class="form-control" />
+        <span asp-validation-for="Difficulty" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="Stars"></label>
+        <input asp-for="Stars" class="form-control" />
+        <span asp-validation-for="Stars" class="text-danger"></span>
+    </div>
+    <div id="ImagesContaniner">
+        <label asp-for="LandmarkImages"></label>
+        <a class="btn btn-success" onclick="AddMoreImages()">+</a>
+    </div>
+    <input type="submit" class="btn btn-primary" />
 </form>
+
+@section Scripts{
+    <script>
+        //UrlPath
+        var imageIndex = 0;
+        function AddMoreImages() {
+            $("#ImagesContaniner")
+                .append("<div class='form-control'>Image url <input type='text' name='LandmarkImages["+imageIndex+"].UrlPath'/></div>");
+            imageIndex++;
+        }
+    </script>
+}

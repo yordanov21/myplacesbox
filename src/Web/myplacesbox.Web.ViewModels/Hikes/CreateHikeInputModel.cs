@@ -51,17 +51,9 @@
 
         public int RegionId { get; set; }
 
-    //    public virtual Region Region { get; set; }
-
         public int MountainId { get; set; }
 
-      //  public virtual Mountain Mountain { get; set; }
-
-      //  public virtual ICollection<HikeImage> HikeImages { get; set; }
         public virtual IEnumerable<HikeImageInputModel> HikeImages { get; set; }
-
-
-        //  public IEnumerable<IFormFile> Images { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
 
