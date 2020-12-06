@@ -12,13 +12,13 @@
         public string Name { get; set; }
 
         // Level High
-        [Range(0, 8881)]
-        public int StatrtPointAltitude { get; set; }
+        [Range(0, 8848)]
+        public int Altitude { get; set; }
 
         // Global coordinates
-        public double? StartPointLatitude { get; set; }
+        public double? Latitude { get; set; }
 
-        public double? StartPointLongitute { get; set; }
+        public double? Longitute { get; set; }
 
     }
 }

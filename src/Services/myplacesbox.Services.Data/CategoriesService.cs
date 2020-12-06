@@ -17,7 +17,7 @@
 
         public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
         {
-           return this.categoriesRepository.AllAsNoTracking()  //is better from All() pestime malko panmet, kogato durpame danni e po dobre da e s AllAsNoTraking
+           return this.categoriesRepository.AllAsNoTracking() //is better from All() pestime malko panmet, kogato durpame danni e po dobre da e s AllAsNoTraking
                 .Where(c => c.Type == "Hike")
                 .Select(x => new
                 {

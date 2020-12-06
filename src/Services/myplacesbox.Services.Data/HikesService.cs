@@ -13,25 +13,18 @@
         private readonly IDeletableEntityRepository<Hike> hikesRepository;
         private readonly IDeletableEntityRepository<HikeStartPoint> hikeStartPointsRepository;
         private readonly IDeletableEntityRepository<HikeEndPoint> hikeEndPointsRepository;
-     //   private readonly IDeletableEntityRepository<Region> regionsRepository;
-    //    private readonly IDeletableEntityRepository<Mountain> mountainsRepository;
-     //   private readonly IDeletableEntityRepository<HikeImage> imagesRepository;
-
+        private readonly IDeletableEntityRepository<HikeImage> imagesRepository;
 
         public HikesService(
             IDeletableEntityRepository<Hike> hikesRepository,
             IDeletableEntityRepository<HikeStartPoint> hikeStartPointsRepository,
             IDeletableEntityRepository<HikeEndPoint> hikeEndPointsRepository,
-        //    IDeletableEntityRepository<Region> regionsRepository,
-        //    IDeletableEntityRepository<Mountain> mountainsRepository,
             IDeletableEntityRepository<HikeImage> imagesRepository)
         {
             this.hikesRepository = hikesRepository;
             this.hikeStartPointsRepository = hikeStartPointsRepository;
             this.hikeEndPointsRepository = hikeEndPointsRepository;
-       //     this.regionsRepository = regionsRepository;
-       //     this.mountainsRepository = mountainsRepository;
-       //     this.imagesRepository = imagesRepository;
+            this.imagesRepository = imagesRepository;
         }
 
         public async Task CreateAsync(CreateHikeInputModel input)
@@ -45,49 +38,30 @@
                 {
                     Name = input.HikeStartPoint.Name,
                     Altitude = input.HikeStartPoint.Altitude,
+                    Latitude = input.HikeStartPoint.Longitute,
+                    Longitute = input.HikeStartPoint.Longitute,
                 };
 
                 await this.hikeStartPointsRepository.AddAsync(startPoint);
                 await this.hikeStartPointsRepository.SaveChangesAsync();
             }
 
-            var endPoint = this.hikeEndPointsRepository.All().FirstOrDefault(x => x.Name == input.HikeEndPoint.Name);
+            var endPoint = this.hikeEndPointsRepository.All()
+                .FirstOrDefault(x => x.Name == input.HikeEndPoint.Name);
 
             if (endPoint == null)
             {
                 endPoint = new HikeEndPoint
                 {
-                    Name = input.HikeStartPoint.Name,
-                    Altitude = 20,
+                    Name = input.HikeEndPoint.Name,
+                    Altitude = input.HikeEndPoint.Altitude,
+                    Latitude = input.HikeEndPoint.Latitude,
+                    Longitute = input.HikeEndPoint.Longitute,
                 };
 
                 await this.hikeEndPointsRepository.AddAsync(endPoint);
                 await this.hikeEndPointsRepository.SaveChangesAsync();
             }
-
-            //var region = this.regionsRepository.All().FirstOrDefault(x => x.Name == input.Region.Name);
-            //if (region == null)
-            //{
-            //    region = new Region
-            //    {
-            //        Name = input.Region.Name,
-            //    };
-
-            //    await this.regionsRepository.AddAsync(region);
-            //    await this.regionsRepository.SaveChangesAsync();
-            //}
-
-            //var mountain = this.mountainsRepository.All().FirstOrDefault(x => x.Name == input.Region.Name);
-            //if (mountain == null)
-            //{
-            //    mountain = new Mountain
-            //    {
-            //        Name = input.Mountain.Name,
-            //    };
-
-            //    await this.mountainsRepository.AddAsync(mountain);
-            //    await this.mountainsRepository.SaveChangesAsync();
-            //}
 
             var hike = new Hike
             {
@@ -105,6 +79,18 @@
                 HikeEndPointId = endPoint.Id,
                 Denivelation = startPoint.Altitude - endPoint.Altitude,
             };
+
+            foreach (var item in input.HikeImages)
+            {
+                var image = this.imagesRepository.All().FirstOrDefault(x => x.UrlPath == item.UrlPath);
+
+                if (image == null)
+                {
+                    image = new HikeImage { UrlPath = item.UrlPath };
+                }
+
+                hike.HikeImages.Add(image);
+            }
 
             await this.hikesRepository.AddAsync(hike);
             await this.hikesRepository.SaveChangesAsync();

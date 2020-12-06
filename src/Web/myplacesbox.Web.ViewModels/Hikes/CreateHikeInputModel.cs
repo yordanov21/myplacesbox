@@ -5,6 +5,9 @@
     using System.ComponentModel.DataAnnotations;
 
     using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Web.ViewModels.HikeEndPoints;
+    using MyPlacesBox.Web.ViewModels.HikeStartPoints;
+    using MyPlacesBox.Web.ViewModels.Images;
 
     public class CreateHikeInputModel
     {
@@ -35,11 +38,11 @@
 
         public int HikeStartPointId { get; set; }
 
-        public virtual HikeStartPoint HikeStartPoint { get; set; }
+        public virtual CreateHikeStartPointInputModel HikeStartPoint { get; set; }
 
         public int HikeEndPointId { get; set; }
 
-        public virtual HikeEndPoint HikeEndPoint { get; set; }
+        public virtual CreateHikeEndPointInputModel HikeEndPoint { get; set; }
 
         public string UserId { get; set; }
 
@@ -54,7 +57,8 @@
 
       //  public virtual Mountain Mountain { get; set; }
 
-        //   public virtual ICollection<Image> Images { get; set; }
+      //  public virtual ICollection<HikeImage> HikeImages { get; set; }
+        public virtual IEnumerable<HikeImageInputModel> HikeImages { get; set; }
 
 
         //  public IEnumerable<IFormFile> Images { get; set; }

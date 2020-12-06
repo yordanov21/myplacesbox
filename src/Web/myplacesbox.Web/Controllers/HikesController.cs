@@ -12,19 +12,23 @@
         private readonly IMountainsService mountainsService;
         private readonly IHikesService hikesService;
         private readonly IHikeStartPointsService hikeStartPointsService;
+        private readonly IHikeEndPointsService hikeEndPointsService;
 
         public HikesController(
             ICategoriesService categoriesService,
             IRegionsService regionsService,
             IMountainsService mountainsService,
             IHikesService hikesService,
-            IHikeStartPointsService hikeStartPointsService)
+            IHikeStartPointsService hikeStartPointsService,
+            IHikeEndPointsService hikeEndPointsService
+           )
         {
             this.categoriesService = categoriesService;
             this.regionsService = regionsService;
             this.mountainsService = mountainsService;
             this.hikesService = hikesService;
             this.hikeStartPointsService = hikeStartPointsService;
+            this.hikeEndPointsService = hikeEndPointsService;
         }
 
         public IActionResult Create()
