@@ -27,14 +27,20 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Landmarks" asp-action="All">All Landmarks</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Landmarks" asp-action="Create">Create Landmarks</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Hikes" asp-action="All">All Hikes</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Hikes" asp-action="Create">Create Hikes</a>
-                        </li>
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Landmarks" asp-action="Create">Create Landmarks</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hikes" asp-action="Create">Create Hikes</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

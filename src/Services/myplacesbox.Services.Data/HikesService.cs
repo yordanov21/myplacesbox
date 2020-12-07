@@ -27,7 +27,7 @@
             this.imagesRepository = imagesRepository;
         }
 
-        public async Task CreateAsync(CreateHikeInputModel input)
+        public async Task CreateAsync(CreateHikeInputModel input, string userId)
         {
             var startPoint = this.hikeStartPointsRepository.All()
                 .FirstOrDefault(x => x.Name == input.HikeStartPoint.Name);
@@ -78,6 +78,7 @@
                 HikeStartPointId = startPoint.Id,
                 HikeEndPointId = endPoint.Id,
                 Denivelation = startPoint.Altitude - endPoint.Altitude,
+                UserId = userId,
             };
 
             foreach (var item in input.HikeImages)

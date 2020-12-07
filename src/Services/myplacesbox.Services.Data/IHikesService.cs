@@ -9,6 +9,6 @@ namespace MyPlacesBox.Services.Data
     public interface IHikesService
     {
         // with input model
-        Task CreateAsync(CreateHikeInputModel input);
+        Task CreateAsync(CreateHikeInputModel input, string userId);
     }
 }

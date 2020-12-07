@@ -1,0 +1,45 @@
+﻿@model MyPlacesBox.Web.ViewModels.Landmarks.LandmarksListInputModel
+@{
+    this.ViewData["Title"] = "todo";
+}
+
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+@foreach(var landmark in this.Model.Landmarks)
+{
+    <div class="media">
+        <img src="@landmark.ImageUrl" width="150" class="mr-3 img-responsive" alt="...">
+        <div class="media-body">
+            <h5 class="mt-0">@landmark.Name</h5>
+            <p>@(landmark.Description.Length<400? landmark.Description:landmark.Description.Substring(0, 400))...</p>
+            <ul class="list-item-meta">
+                <li>@landmark.CategoryName</li>
+                <li>
+                    <small class="glyphicon glyphicon-star" aria-hidden="true">@landmark.RegionName</small>
+                </li>
+                <li><small class="glyphicon glyphicon-star" aria-hidden="true">@landmark.Stars</small> </li>
+            </ul>
+        </div>
+    </div>
+}
+
+<div>
+    <hr />
+    <nav class="mx-auto" aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

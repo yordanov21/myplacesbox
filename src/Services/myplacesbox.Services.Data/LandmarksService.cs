@@ -2,6 +2,7 @@
 {
     using MyPlacesBox.Data.Common.Repositories;
     using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Services.Mapping;
     using MyPlacesBox.Web.ViewModels.Landmarks;
     using System;
     using System.Collections.Generic;
@@ -23,7 +24,7 @@
             this.landmarkImagesRepository = landmarkImagesRepository;
         }
 
-        public async Task CreateAsync(CreateLandmarkInputModel input)
+        public async Task CreateAsync(CreateLandmarkInputModel input, string userId)
         {
             var landmark = new Landmark
             {
@@ -43,6 +44,7 @@
                 EntranceFee = input.EntranceFee,
                 Difficulty = input.Difficulty,
                 Stars = input.Stars,
+                UserId = userId,
             };
 
          //   landmark.Town.IsTown = true;
@@ -60,6 +62,19 @@
 
             await this.landmarksRepository.AddAsync(landmark);
             await this.landmarksRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<T> GetAll<T>(int page, int itemsPage = 10)
+        {
+            var landmarks = this.landmarksRepository
+                .AllAsNoTracking()
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPage)
+                .Take(itemsPage)
+                .To<T>() // From automapper
+                .ToList();
+
+            return landmarks;
         }
     }
 }

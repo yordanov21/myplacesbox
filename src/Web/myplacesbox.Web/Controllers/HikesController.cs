@@ -1,7 +1,10 @@
 ﻿namespace MyPlacesBox.Web.Controllers
 {
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using MyPlacesBox.Data.Models;
     using MyPlacesBox.Services.Data;
     using MyPlacesBox.Web.ViewModels.Hikes;
 
@@ -13,6 +16,7 @@
         private readonly IHikesService hikesService;
         private readonly IHikeStartPointsService hikeStartPointsService;
         private readonly IHikeEndPointsService hikeEndPointsService;
+        private readonly UserManager<ApplicationUser> userManager;
 
         public HikesController(
             ICategoriesService categoriesService,
@@ -20,8 +24,8 @@
             IMountainsService mountainsService,
             IHikesService hikesService,
             IHikeStartPointsService hikeStartPointsService,
-            IHikeEndPointsService hikeEndPointsService
-           )
+            IHikeEndPointsService hikeEndPointsService,
+            UserManager<ApplicationUser> userManager)
         {
             this.categoriesService = categoriesService;
             this.regionsService = regionsService;
@@ -29,8 +33,10 @@
             this.hikesService = hikesService;
             this.hikeStartPointsService = hikeStartPointsService;
             this.hikeEndPointsService = hikeEndPointsService;
+            this.userManager = userManager;
         }
 
+        [Authorize]
         public IActionResult Create()
         {
             var viewModel = new CreateHikeInputModel
@@ -44,6 +50,7 @@
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(CreateHikeInputModel input)
         {
             if (!this.ModelState.IsValid)
@@ -54,7 +61,8 @@
                 return this.View(input);
             }
 
-            await this.hikesService.CreateAsync(input);
+            var user = await this.userManager.GetUserAsync(this.User);
+            await this.hikesService.CreateAsync(input, user.Id);
             return this.Redirect("/");
         }
     }
