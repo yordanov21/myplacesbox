@@ -12,5 +12,7 @@
         Task CreateAsync(CreateLandmarkInputModel input, string userId);
 
         IEnumerable<T> GetAll<T>(int page, int itemsPage = 10);
+
+        int GetCount();
     }
 }

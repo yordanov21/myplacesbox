@@ -4,10 +4,9 @@ using System.Text;
 
 namespace MyPlacesBox.Web.ViewModels.Landmarks
 {
-    public class LandmarksListInputModel
+    public class LandmarksListInputModel : PagingViewModel
     {
         public IEnumerable<LandmarkInListInputModel> Landmarks { get; set; }
 
-        public int PageNumber { get; set; }
     }
 }

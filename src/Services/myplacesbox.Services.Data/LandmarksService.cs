@@ -76,5 +76,10 @@
 
             return landmarks;
         }
+
+        public int GetCount()
+        {
+          return this.landmarksRepository.All().Count();
+        }
     }
 }

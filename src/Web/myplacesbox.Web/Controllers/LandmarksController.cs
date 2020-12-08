@@ -73,12 +73,15 @@
             return this.Redirect("/");
         }
 
-        public IActionResult All(int id)
+        public IActionResult All(int id = 1)
         {
+            const int ItemsPerPage = 10;
             var viewModel = new LandmarksListInputModel
             {
                 PageNumber = id,
-                Landmarks = this.landmarksService.GetAll<LandmarkInListInputModel>(id, 10),
+                LandmarksCount = this.landmarksService.GetCount(),
+                Landmarks = this.landmarksService.GetAll<LandmarkInListInputModel>(id, ItemsPerPage),
+                ItemsPerPage = ItemsPerPage,
             };
 
             return this.View(viewModel);

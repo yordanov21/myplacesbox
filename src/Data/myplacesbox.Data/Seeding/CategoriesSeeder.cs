@@ -10,6 +10,7 @@
     {
         public async Task SeedAsync(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
         {
+            // Check if there is categories in DB, don't add categories in DB
             if (dbContext.Categories.Any())
             {
                 return;
