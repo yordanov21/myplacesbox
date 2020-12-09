@@ -30,9 +30,10 @@
         {
             configuration.CreateMap<Landmark, LandmarkInListInputModel>()
                 .ForMember(x => x.ImageUrl, opt =>
-                    opt.MapFrom(l => l.LandmarkImages
-                    .FirstOrDefault()
-                    .UrlPath ?? "images/landmarks/" + l.LandmarkImages.FirstOrDefault().Id));
+                    opt.MapFrom(x => 
+                    x.LandmarkImages.FirstOrDefault().RemoteImageUrl != null ?
+                    x.LandmarkImages.FirstOrDefault().RemoteImageUrl :
+                    "/images/landmarks/" + x.LandmarkImages.FirstOrDefault().Id + "." + x.LandmarkImages.FirstOrDefault().Extension));
         }
     }
 }

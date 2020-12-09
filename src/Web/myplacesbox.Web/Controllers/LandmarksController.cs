@@ -1,16 +1,18 @@
 ﻿namespace MyPlacesBox.Web.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Mvc;
-    using MyPlacesBox.Data.Models;
-    using MyPlacesBox.Services.Data;
-    using MyPlacesBox.Web.ViewModels.Landmarks;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Services.Data;
+    using MyPlacesBox.Web.ViewModels.Landmarks;
 
     public class LandmarksController : Controller
     {
@@ -20,6 +22,7 @@
         private readonly IMountainsService mountainsService;
         private readonly ILandmarksService landmarksService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IWebHostEnvironment hostEnvironment;
 
         public LandmarksController(
             ICategoriesService categoriesService,
@@ -27,7 +30,8 @@
             ITownsService townsService,
             IMountainsService mountainsService,
             ILandmarksService landmarksService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IWebHostEnvironment hostEnvironment)
         {
             this.categoriesService = categoriesService;
             this.regionsService = regionsService;
@@ -35,6 +39,7 @@
             this.mountainsService = mountainsService;
             this.landmarksService = landmarksService;
             this.userManager = userManager;
+            this.hostEnvironment = hostEnvironment;
         }
 
         [Authorize]
@@ -69,7 +74,22 @@
 
             // Get userId by UserManager
             var user = await this.userManager.GetUserAsync(this.User);
-            await this.landmarksService.CreateAsync(input, user.Id);
+
+            try
+            {
+                await this.landmarksService.CreateAsync(input, user.Id, $"{this.hostEnvironment.WebRootPath}/images");
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+
+                this.categoriesService.GetAllAsKeyValuePairs();
+                this.regionsService.GetAllAsKeyValuePairs();
+                this.townsService.GetAllAsKeyValuePairs();
+                this.mountainsService.GetAllAsKeyValuePairs();
+                return this.View(input);
+            }
+           
             return this.Redirect("/");
         }
 

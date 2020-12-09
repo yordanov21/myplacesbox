@@ -9,7 +9,7 @@
     public interface ILandmarksService
     {
         // with input model
-        Task CreateAsync(CreateLandmarkInputModel input, string userId);
+        Task CreateAsync(CreateLandmarkInputModel input, string userId, string imagePath);
 
         IEnumerable<T> GetAll<T>(int page, int itemsPage = 10);
 

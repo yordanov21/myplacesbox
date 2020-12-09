@@ -15,7 +15,7 @@
         private readonly IDeletableEntityRepository<Region> regionsRepository;
         private readonly IDeletableEntityRepository<Town> townsRepository;
         private readonly IDeletableEntityRepository<Mountain> mountainsRepository;
-        private readonly IDeletableEntityRepository<LandmarkImage> landmarkImagesRepository;
+        private readonly IRepository<LandmarkImage> landmarkImagesRepository;
         private readonly IDeletableEntityRepository<HikeImage> hikeImagesRepository;
 
         public GetCountsService(
@@ -25,7 +25,7 @@
             IDeletableEntityRepository<Region> regionsRepository,
             IDeletableEntityRepository<Town> townsRepository,
             IDeletableEntityRepository<Mountain> mountainsRepository,
-            IDeletableEntityRepository<LandmarkImage> landmarkImagesRepository,
+            IRepository<LandmarkImage> landmarkImagesRepository,
             IDeletableEntityRepository<HikeImage> hikeImagesRepository)
         {
             this.landmarksRepository = landmarksRepository;

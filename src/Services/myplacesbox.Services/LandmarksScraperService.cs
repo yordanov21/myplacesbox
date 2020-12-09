@@ -77,9 +77,7 @@
                 var regionId = await this.GetOrCreateRegionAsync(landmark.RegionName);
                 var townId = await this.GetOrCreateTownAsync(landmark.TownName);
                 var mountainId = await this.GetOrCreateMountainAsync(landmark.MountainName);
-
-                var images = await this.GetOrCreateImageAsync(landmark.Images);
-
+               // var images = await this.GetOrCreateImageAsync(landmark.Images);
                 var landmarkExists = this.landmarksRepository.AllAsNoTracking().Any(x => x.Name == landmark.Name);
 
                 if (landmarkExists)
@@ -107,8 +105,33 @@
                     Difficulty = landmark.Difficulty,
                     Description = landmark.Description,
                     Stars = stars,
-                    LandmarkImages = images,
+                 //   LandmarkImages = images,
                 };
+
+                var imagesCollection = new List<LandmarkImage>();
+
+                foreach (var image in landmark.Images)
+                {
+                    var imageUrl = this.imagesRepository
+                        .AllAsNoTracking()
+                        .FirstOrDefault(x => x.RemoteImageUrl == image.RemoteImageUrl);
+
+                    if (imageUrl == null)
+                    {
+                        imageUrl = new LandmarkImage
+                        {
+                            RemoteImageUrl = image.RemoteImageUrl,
+                            Extension = image.RemoteImageUrl.Split('.').Last(),
+                            Landmark = newLandmark,
+                        };
+
+                        await this.imagesRepository.AddAsync(imageUrl);
+                      //  await this.imagesRepository.SaveChangesAsync();
+                        imagesCollection.Add(imageUrl);
+                    }
+                }
+
+                newLandmark.LandmarkImages = imagesCollection;
 
                 await this.landmarksRepository.AddAsync(newLandmark);
                 await this.landmarksRepository.SaveChangesAsync();
@@ -123,13 +146,14 @@
             {
                 var imageUrl = this.imagesRepository
                     .AllAsNoTracking()
-                    .FirstOrDefault(x => x.UrlPath == image.UrlPath);
+                    .FirstOrDefault(x => x.RemoteImageUrl == image.RemoteImageUrl);
 
                 if (imageUrl == null)
                 {
                     imageUrl = new LandmarkImage
                     {
-                        UrlPath = image.UrlPath,
+                        RemoteImageUrl = image.RemoteImageUrl,
+                        Extension = image.RemoteImageUrl.Split('.')[1],
                     };
 
                     await this.imagesRepository.AddAsync(imageUrl);
@@ -356,8 +380,10 @@
                 var curentImageContent = imageUrl.GetAttribute("style");
                 var curentImageUrl = curentImageContent.Split("url(")[1];
                 curentImageUrl = curentImageUrl.TrimEnd(')');
-                LandmarkImage image = new LandmarkImage();
-                image.UrlPath = curentImageUrl;
+                LandmarkImage image = new LandmarkImage
+                {
+                    RemoteImageUrl = curentImageUrl,
+                };
                 landmark.Images.Add(image);
             }
 

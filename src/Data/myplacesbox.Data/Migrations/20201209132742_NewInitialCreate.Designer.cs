@@ -10,23 +10,23 @@ using MyPlacesBox.Data;
 namespace MyPlacesBox.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201205213336_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201209132742_NewInitialCreate")]
+    partial class NewInitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.9")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.1");
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -50,7 +50,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
@@ -147,12 +147,12 @@ namespace MyPlacesBox.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
@@ -160,7 +160,7 @@ namespace MyPlacesBox.Data.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
+                        .HasDatabaseName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
@@ -185,8 +185,8 @@ namespace MyPlacesBox.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
@@ -204,12 +204,12 @@ namespace MyPlacesBox.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -227,19 +227,19 @@ namespace MyPlacesBox.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+                        .HasDatabaseName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
+                        .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
@@ -250,7 +250,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -282,7 +282,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -367,7 +367,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("Altitude")
                         .HasColumnType("int");
@@ -405,7 +405,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -444,7 +444,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("Altitude")
                         .HasColumnType("int");
@@ -482,7 +482,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -563,35 +563,28 @@ namespace MyPlacesBox.Data.Migrations
 
             modelBuilder.Entity("MyPlacesBox.Data.Models.LandmarkImage", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("LandmarkId")
+                    b.Property<int>("LandmarkId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UrlPath")
+                    b.Property<string>("RemoteImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("LandmarkId");
 
@@ -605,7 +598,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -634,7 +627,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -663,7 +656,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -695,7 +688,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -812,6 +805,18 @@ namespace MyPlacesBox.Data.Migrations
                     b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("HikeEndPoint");
+
+                    b.Navigation("HikeStartPoint");
+
+                    b.Navigation("Mountain");
+
+                    b.Navigation("Region");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyPlacesBox.Data.Models.HikeImage", b =>
@@ -823,6 +828,10 @@ namespace MyPlacesBox.Data.Migrations
                     b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Hike");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyPlacesBox.Data.Models.Landmark", b =>
@@ -854,17 +863,90 @@ namespace MyPlacesBox.Data.Migrations
                     b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Mountain");
+
+                    b.Navigation("Region");
+
+                    b.Navigation("Town");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MyPlacesBox.Data.Models.LandmarkImage", b =>
                 {
                     b.HasOne("MyPlacesBox.Data.Models.Landmark", "Landmark")
                         .WithMany("LandmarkImages")
-                        .HasForeignKey("LandmarkId");
+                        .HasForeignKey("LandmarkId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("Landmark");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("Claims");
+
+                    b.Navigation("Logins");
+
+                    b.Navigation("Roles");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.Category", b =>
+                {
+                    b.Navigation("Hikes");
+
+                    b.Navigation("Landmarks");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.Hike", b =>
+                {
+                    b.Navigation("HikeImages");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.HikeEndPoint", b =>
+                {
+                    b.Navigation("Hikes");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.HikeStartPoint", b =>
+                {
+                    b.Navigation("Hikes");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.Landmark", b =>
+                {
+                    b.Navigation("LandmarkImages");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.Mountain", b =>
+                {
+                    b.Navigation("Hikes");
+
+                    b.Navigation("Landmarks");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.Region", b =>
+                {
+                    b.Navigation("Hikes");
+
+                    b.Navigation("Landmarks");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.Town", b =>
+                {
+                    b.Navigation("Hikes");
+
+                    b.Navigation("Landmarks");
                 });
 #pragma warning restore 612, 618
         }
