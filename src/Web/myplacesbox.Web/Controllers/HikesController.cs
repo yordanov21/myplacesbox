@@ -1,7 +1,10 @@
 ﻿namespace MyPlacesBox.Web.Controllers
 {
+    using System;
     using System.Threading.Tasks;
+
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using MyPlacesBox.Data.Models;
@@ -17,6 +20,7 @@
         private readonly IHikeStartPointsService hikeStartPointsService;
         private readonly IHikeEndPointsService hikeEndPointsService;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly IWebHostEnvironment hostEnvironment;
 
         public HikesController(
             ICategoriesService categoriesService,
@@ -25,7 +29,8 @@
             IHikesService hikesService,
             IHikeStartPointsService hikeStartPointsService,
             IHikeEndPointsService hikeEndPointsService,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager,
+            IWebHostEnvironment hostEnvironment)
         {
             this.categoriesService = categoriesService;
             this.regionsService = regionsService;
@@ -34,6 +39,7 @@
             this.hikeStartPointsService = hikeStartPointsService;
             this.hikeEndPointsService = hikeEndPointsService;
             this.userManager = userManager;
+            this.hostEnvironment = hostEnvironment;
         }
 
         [Authorize]
@@ -44,7 +50,7 @@
                 CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs(),
                 RegionsItems = this.regionsService.GetAllAsKeyValuePairs(),
                 MountainsItems = this.mountainsService.GetAllAsKeyValuePairs(),
-                //HikeStartPoint = new HikeStartPointsService,
+                // HikeStartPoint = new HikeStartPointsService,
             };
             return this.View(viewModel);
         }
@@ -62,8 +68,35 @@
             }
 
             var user = await this.userManager.GetUserAsync(this.User);
-            await this.hikesService.CreateAsync(input, user.Id);
+            try
+            {
+                await this.hikesService.CreateAsync(input, user.Id, $"{this.hostEnvironment.WebRootPath}/images");
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+
+                input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+                input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
+                input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
+                return this.View(input);
+            }
+
             return this.Redirect("/");
+        }
+
+        public IActionResult All(int id = 1)
+        {
+            const int ItemsPerPage = 10;
+            var viewModel = new HikesListInputModel
+            {
+                PageNumber = id,
+                ColectionCount = this.hikesService.GetCount(),
+                Hikes = this.hikesService.GetAll<HikeInListInputModel>(id, ItemsPerPage),
+                ItemsPerPage = ItemsPerPage,
+            };
+
+            return this.View(viewModel);
         }
     }
 }

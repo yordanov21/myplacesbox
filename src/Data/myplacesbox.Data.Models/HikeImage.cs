@@ -1,26 +1,23 @@
-﻿using MyPlacesBox.Data.Common.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyPlacesBox.Data.Models
+﻿namespace MyPlacesBox.Data.Models
 {
-    public class HikeImage : BaseDeletableModel<int>
+    using System;
+
+    using MyPlacesBox.Data.Common.Models;
+
+    public class HikeImage : BaseDeletableModel<string>
     {
-        //public HikeImage()
-        //{
-        //    this.Id = Guid.NewGuid().ToString();
-        //}
+        public HikeImage()
+        {
+            this.Id = Guid.NewGuid().ToString();
+        }
 
-        //public int HikeId { get; set; }
-
-        //public int HikeId { get; set; }
+        public int HikeId { get; set; }
 
         public virtual Hike Hike { get; set; }
 
-        public string UrlPath { get; set; }
+        public string Extension { get; set; }
 
-        //// The contents of the image is in the file system
+        public string RemoteImageUrl { get; set; }
 
         public string UserId { get; set; }
 

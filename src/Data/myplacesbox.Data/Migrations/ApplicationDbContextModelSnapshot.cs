@@ -400,10 +400,8 @@ namespace MyPlacesBox.Data.Migrations
 
             modelBuilder.Entity("MyPlacesBox.Data.Models.HikeImage", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -411,7 +409,10 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("HikeId")
+                    b.Property<string>("Extension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("HikeId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -420,7 +421,7 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UrlPath")
+                    b.Property<string>("RemoteImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
@@ -821,7 +822,9 @@ namespace MyPlacesBox.Data.Migrations
                 {
                     b.HasOne("MyPlacesBox.Data.Models.Hike", "Hike")
                         .WithMany("HikeImages")
-                        .HasForeignKey("HikeId");
+                        .HasForeignKey("HikeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
                         .WithMany()

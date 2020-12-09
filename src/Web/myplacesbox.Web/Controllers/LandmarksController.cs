@@ -74,7 +74,7 @@
 
             // Get userId by UserManager
             var user = await this.userManager.GetUserAsync(this.User);
-
+            
             try
             {
                 await this.landmarksService.CreateAsync(input, user.Id, $"{this.hostEnvironment.WebRootPath}/images");
@@ -99,7 +99,7 @@
             var viewModel = new LandmarksListInputModel
             {
                 PageNumber = id,
-                LandmarksCount = this.landmarksService.GetCount(),
+                ColectionCount = this.landmarksService.GetCount(),
                 Landmarks = this.landmarksService.GetAll<LandmarkInListInputModel>(id, ItemsPerPage),
                 ItemsPerPage = ItemsPerPage,
             };

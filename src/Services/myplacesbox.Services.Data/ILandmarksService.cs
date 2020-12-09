@@ -14,5 +14,6 @@
         IEnumerable<T> GetAll<T>(int page, int itemsPage = 10);
 
         int GetCount();
+
     }
 }

@@ -1,37 +1,38 @@
 ﻿namespace MyPlacesBox.Services.Data
 {
     using System;
+    using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
     using MyPlacesBox.Data.Common.Repositories;
     using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Services.Mapping;
     using MyPlacesBox.Web.ViewModels.Hikes;
 
     public class HikesService : IHikesService
     {
+        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
         private readonly IDeletableEntityRepository<Hike> hikesRepository;
         private readonly IDeletableEntityRepository<HikeStartPoint> hikeStartPointsRepository;
         private readonly IDeletableEntityRepository<HikeEndPoint> hikeEndPointsRepository;
-        private readonly IDeletableEntityRepository<HikeImage> imagesRepository;
 
         public HikesService(
             IDeletableEntityRepository<Hike> hikesRepository,
             IDeletableEntityRepository<HikeStartPoint> hikeStartPointsRepository,
-            IDeletableEntityRepository<HikeEndPoint> hikeEndPointsRepository,
-            IDeletableEntityRepository<HikeImage> imagesRepository)
+            IDeletableEntityRepository<HikeEndPoint> hikeEndPointsRepository)
         {
             this.hikesRepository = hikesRepository;
             this.hikeStartPointsRepository = hikeStartPointsRepository;
             this.hikeEndPointsRepository = hikeEndPointsRepository;
-            this.imagesRepository = imagesRepository;
         }
 
-        public async Task CreateAsync(CreateHikeInputModel input, string userId)
+        public async Task CreateAsync(CreateHikeInputModel input, string userId, string imagePath)
         {
             var startPoint = this.hikeStartPointsRepository.All()
                 .FirstOrDefault(x => x.Name == input.HikeStartPoint.Name);
-            // TODO sled kato opravq v bazata danni za nadmoskatat visochina i koordinatite da go opravq tuk
+
             if (startPoint == null)
             {
                 startPoint = new HikeStartPoint
@@ -81,20 +82,49 @@
                 UserId = userId,
             };
 
-            foreach (var item in input.HikeImages)
+            Directory.CreateDirectory($"{imagePath}/hikes/");
+            foreach (var image in input.HikeImages)
             {
-                var image = this.imagesRepository.All().FirstOrDefault(x => x.UrlPath == item.UrlPath);
+                var extension = Path.GetExtension(image.FileName).TrimStart('.');
 
-                if (image == null)
+                if (!this.allowedExtensions.Any(x => extension.EndsWith(x)))
                 {
-                    image = new HikeImage { UrlPath = item.UrlPath };
+                    throw new Exception($"Invalid image extension {extension}");
                 }
 
-                hike.HikeImages.Add(image);
+                var dbImage = new HikeImage
+                {
+                    UserId = userId,
+                    Extension = extension,
+                };
+                hike.HikeImages.Add(dbImage);
+
+                var physicalPath = $"{imagePath}/landmarks/{dbImage.Id}.{extension}";
+                using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
+                await image.CopyToAsync(fileStream);
             }
 
             await this.hikesRepository.AddAsync(hike);
             await this.hikesRepository.SaveChangesAsync();
+        }
+
+
+        public IEnumerable<T> GetAll<T>(int page, int itemsPage = 10)
+        {
+            var landmarks = this.hikesRepository
+                .AllAsNoTracking()
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPage)
+                .Take(itemsPage)
+                .To<T>() // From automapper
+                .ToList();
+
+            return landmarks;
+        }
+
+        public int GetCount()
+        {
+            return this.hikesRepository.All().Count();
         }
     }
 }

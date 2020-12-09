@@ -7,7 +7,7 @@
 }
 <h1>@this.ViewData["Title"]</h1>
 
-<form method="post" class="col-md-6 offset-3">
+<form method="post" class="col-md-6 offset-3" enctype="multipart/form-data">
     <div asp-validation-summary="All"></div>
     <div class=" form-group">
         <label asp-for="Name"></label>
@@ -100,9 +100,10 @@
         <input asp-for="Stars" class="form-control" />
         <span asp-validation-for="Stars" class="text-danger"></span>
     </div>
-    <div  id="ImagesContaniner">
+    <div class=" form-group">
         <label asp-for="HikeImages"></label>
-        <a class="btn btn-success" onclick="AddMoreImages()">+</a>
+        <input asp-for="HikeImages" class="form-control" />
+        <span asp-validation-for="HikeImages" class="text-danger"></span>
     </div>
     <input type="submit" class="btn btn-primary" />
 </form>

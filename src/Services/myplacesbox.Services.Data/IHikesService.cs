@@ -1,14 +1,17 @@
-﻿using MyPlacesBox.Web.ViewModels.Hikes;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyPlacesBox.Services.Data
+﻿namespace MyPlacesBox.Services.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    using MyPlacesBox.Web.ViewModels.Hikes;
+
     public interface IHikesService
     {
         // with input model
-        Task CreateAsync(CreateHikeInputModel input, string userId);
+        Task CreateAsync(CreateHikeInputModel input, string userId, string imagePath);
+
+        IEnumerable<T> GetAll<T>(int page, int itemsPage = 10);
+
+        int GetCount();
     }
 }

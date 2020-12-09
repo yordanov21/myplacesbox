@@ -14,9 +14,9 @@
 
         public int NextPageNumber => this.PageNumber + 1;
 
-        public int PagesCount => (int)Math.Ceiling((double)this.LandmarksCount / this.ItemsPerPage);
+        public int PagesCount => (int)Math.Ceiling((double)this.ColectionCount / this.ItemsPerPage);
 
-        public int LandmarksCount { get; set; }
+        public int ColectionCount { get; set; }
 
         public int ItemsPerPage { get; set; }
     }

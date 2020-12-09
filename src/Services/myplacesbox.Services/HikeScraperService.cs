@@ -92,7 +92,7 @@
                     hike.HikeEndPointLatitude,
                     hike.HikeEndPointLongitude);
 
-                var images = await this.GetOrCreateImageAsync(hike.HikeImages);
+              //  var images = await this.GetOrCreateImageAsync(hike.HikeImages);
 
                 var landmarkExists = this.hikesRepository.AllAsNoTracking().Any(x => x.Name == hike.Name);
 
@@ -118,8 +118,33 @@
                     Difficulty = hike.Difficulty,
                     Description = hike.Description,
                     Stars = stars,
-                    HikeImages = images,
+                //    HikeImages = images,
                 };
+
+                var imagesCollection = new List<HikeImage>();
+
+                foreach (var image in hike.HikeImages)
+                {
+                    var imageUrl = this.imagesRepository
+                        .AllAsNoTracking()
+                        .FirstOrDefault(x => x.RemoteImageUrl == image.RemoteImageUrl);
+
+                    if (imageUrl == null)
+                    {
+                        imageUrl = new HikeImage
+                        {
+                            RemoteImageUrl = image.RemoteImageUrl,
+                            Extension = image.RemoteImageUrl.Split('.').Last(),
+                            Hike = newHike,
+                        };
+
+                        await this.imagesRepository.AddAsync(imageUrl);
+                        //  await this.imagesRepository.SaveChangesAsync();
+                        imagesCollection.Add(imageUrl);
+                    }
+                }
+
+                newHike.HikeImages = imagesCollection;
 
                 await this.hikesRepository.AddAsync(newHike);
                 await this.hikesRepository.SaveChangesAsync();
@@ -180,31 +205,31 @@
             return endPoint.Id;
         }
 
-        private async Task<ICollection<HikeImage>> GetOrCreateImageAsync(ICollection<HikeImage> images)
-        {
-            var imagesCollection = new List<HikeImage>();
+        //private async Task<ICollection<HikeImage>> GetOrCreateImageAsync(ICollection<HikeImage> images)
+        //{
+        //    var imagesCollection = new List<HikeImage>();
 
-            foreach (var image in images)
-            {
-                var imageUrl = this.imagesRepository
-                    .AllAsNoTracking()
-                    .FirstOrDefault(x => x.UrlPath == image.UrlPath);
+        //    foreach (var image in images)
+        //    {
+        //        var imageUrl = this.imagesRepository
+        //            .AllAsNoTracking()
+        //            .FirstOrDefault(x => x.UrlPath == image.UrlPath);
 
-                if (imageUrl == null)
-                {
-                    imageUrl = new HikeImage
-                    {
-                        UrlPath = image.UrlPath,
-                    };
+        //        if (imageUrl == null)
+        //        {
+        //            imageUrl = new HikeImage
+        //            {
+        //                UrlPath = image.UrlPath,
+        //            };
 
-                    await this.imagesRepository.AddAsync(imageUrl);
-                    await this.imagesRepository.SaveChangesAsync();
-                    imagesCollection.Add(imageUrl);
-                }
-            }
+        //            await this.imagesRepository.AddAsync(imageUrl);
+        //            await this.imagesRepository.SaveChangesAsync();
+        //            imagesCollection.Add(imageUrl);
+        //        }
+        //    }
 
-            return imagesCollection;
-        }
+        //    return imagesCollection;
+        //}
 
         private async Task<int> GetOrCreateMountainAsync(string mountainName)
         {
@@ -424,8 +449,10 @@
             foreach (var imageUrl in imagesUrl)
             {
                 var curentImageUrl = imageUrl.GetAttribute("src");
-                HikeImage image = new HikeImage();
-                image.UrlPath = curentImageUrl;
+                HikeImage image = new HikeImage
+                {
+                    RemoteImageUrl = curentImageUrl,
+                };
                 hike.HikeImages.Add(image);
             }
 
