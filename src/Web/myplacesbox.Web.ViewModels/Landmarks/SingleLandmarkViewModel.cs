@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Text;
     using AutoMapper;
+    using MyPlacesBox.Data.Common.Repositories;
     using MyPlacesBox.Data.Models;
     using MyPlacesBox.Services.Mapping;
 
@@ -45,6 +46,8 @@
         public string ImageUrl { get; set; }
 
         public virtual ICollection<LandmarkImage> LandmarkImages { get; set; }
+
+        public virtual IDeletableEntityRepository<Landmark> Landmarks { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
