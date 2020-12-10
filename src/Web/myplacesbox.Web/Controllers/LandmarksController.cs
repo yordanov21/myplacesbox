@@ -106,5 +106,11 @@
 
             return this.View(viewModel);
         }
+
+        public IActionResult ById(int id)
+        {
+            var landmark = this.landmarksService.GetById<SingleLandmarkViewModel>(id);
+            return this.View(landmark);
+        }
     }
 }

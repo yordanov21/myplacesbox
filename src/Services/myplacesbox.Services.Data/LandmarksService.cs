@@ -14,7 +14,7 @@
 
     public class LandmarksService : ILandmarksService
     {
-        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
+        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif", "jpeg" };
         private readonly IDeletableEntityRepository<Landmark> landmarksRepository;
 
         public LandmarksService(
@@ -85,6 +85,16 @@
                 .ToList();
 
             return landmarks;
+        }
+
+        public T GetById<T>(int id)
+        {
+            var landmark = this.landmarksRepository.AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+
+            return landmark;
         }
 
         public int GetCount()

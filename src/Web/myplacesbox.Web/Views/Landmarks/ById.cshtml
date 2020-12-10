@@ -1,0 +1,500 @@
+﻿@model MyPlacesBox.Web.ViewModels.Landmarks.SingleLandmarkViewModel
+@{
+    this.ViewData["Title"] = Model.Name;
+}
+<section class="main">
+    <div class="shell clearfix">
+        <nav class="breadcrumbs">
+            <ul>
+                <li><a href="/" target="_self">Home page</a></li>
+                <li><a href="/landmarks/All" target="_self">Landmarks</a></li>
+                <li>@Model.Name</li>
+            </ul>
+        </nav>
+        <landmark :id="@Model.Id" inline-template>
+            <section class="adventure" itemscope itemtype="http://schema.org/Hotel">
+
+                <header class="title">
+                    <h1>@Model.Name</h1>
+                </header>
+
+                <div class="details" id="details">
+
+                    <div class="gallery-container">
+
+                        <div class="gallery fallback-container ">
+                            <div class="bx-wrapper" style="max-width: 100%">
+                                <div class="bx-viewport">
+                                    <div class="gallery-slides">
+                                        <div class="gallery-slide" style="background-image: url(@Model.ImageUrl)" title="@Model.Name">
+                                            @Model.Name
+                                        </div>
+
+                                        @*<div class="gallery-slide" style="background-image: url(https://tripsjournal.com/wp-content/uploads/2015/05/gledka-belogradchik1-655x399.jpg)" title="Белоградчишките скали">
+                                    Белоградчишките скали
+                                </div>
+                                <div class="gallery-slide" style="background-image: url(https://tripsjournal.com/wp-content/uploads/2015/05/belogradchishki-skali1-655x399.jpg)" title="Белоградчишките скали">
+                                    Белоградчишките скали
+                                </div>
+                                <div class="gallery-slide" style="background-image: url(https://tripsjournal.com/wp-content/uploads/2015/05/belogradchishki-skali-21-655x399.jpg)" title="Белоградчишките скали">
+                                    Белоградчишките скали
+                                </div>*@
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @*<div class="gallery-thumbs">
+                    <div class="gallery-thumbs-slides">
+                        <a class="gallery-thumb current" href="#" data-slide-index="0">
+                            <img class="img-fluid attachment-157x94x1 size-157x94x1" src="@Model.ImageUrl" alt="@Model.Name" title="@Model.Name     />
+                        </a>
+                        @*<a class="gallery-thumb " href="#" data-slide-index="1">
+                            <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali1/2911599325.jpg ) no-repeat 0 0;">
+                                <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali1/817121343.jpg" class="attachment-157x94x1 size-157x94x1" alt="" title="Белоградчишките скали" />
+                            </span>
+                        </a>
+                        <a class="gallery-thumb " href="#" data-slide-index="2">
+                            <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-21/1822758164.jpg ) no-repeat 0 0;">
+                                <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-21/3359262917.jpg" class="attachment-157x94x1 size-157x94x1" alt="Природен феномен" title="Белоградчишките скали" />
+                            </span>
+                        </a>
+                        <a class="gallery-thumb " href="#" data-slide-index="3">
+                            <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-4/3621553307.jpg ) no-repeat 0 0;">
+                                <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-4/2571450621.jpg" class="attachment-157x94x1 size-157x94x1" alt="Красотата на Белоградчишките скали" title="Белоградчишките скали" />
+                            </span>
+                        </a>
+                        <a class="gallery-thumb " href="#" data-slide-index="4">
+                            <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-3/3709439362.jpg ) no-repeat 0 0;">
+                                <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-3/2474652132.jpg" class="attachment-157x94x1 size-157x94x1" alt="Белоградчишките скали" title="Белоградчишките скали" />
+                            </span>
+                        </a>
+                        <a class="gallery-thumb " href="#" data-slide-index="5">
+                            <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-6/2516157414.jpg ) no-repeat 0 0;">
+                                <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-6/3680518016.jpg" class="attachment-157x94x1 size-157x94x1" alt="Величието на скалите" title="Белоградчишките скали" />
+                            </span>
+                        </a>
+                        <a class="gallery-thumb " href="#" data-slide-index="6">
+                            <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-5/460751877.jpg ) no-repeat 0 0;">
+                                <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-5/1441740899.jpg" class="attachment-157x94x1 size-157x94x1" alt="Приказната долина - Белоградчик" title="Белоградчишките скали" />
+                            </span>
+                        </a>
+                        <a class="gallery-thumb " href="#" data-slide-index="7">
+                            <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-zalez/3360519477.jpg ) no-repeat 0 0;">
+                                <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-zalez/732137306.jpg" class="attachment-157x94x1 size-157x94x1" alt="Залез над скалите" title="Белоградчишките скали" />
+                            </span>
+                        </a>
+                        <a class="gallery-thumb " href="#" data-slide-index="8">
+                            <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/gledka-ot-skalite/1586093145.jpg ) no-repeat 0 0;">
+                                <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/gledka-ot-skalite/2285562195.jpg" class="attachment-157x94x1 size-157x94x1" alt="Панорама, преди слънцето да залезе" title="Белоградчишките скали" />
+                            </span>
+                        </a>
+                    </div>
+                </div>*@
+                    </div>
+
+                    <div class="list-table">
+                        <ul>
+                            <li>
+                                <strong>Category:</strong>
+                                <span>@Model.CategoryName</span>
+                            </li>
+                            <li>
+                                <strong>Region:</strong>
+                                <span>@Model.RegionName</span>
+                            </li>
+                            <li>
+                                <strong>Town:</strong>
+                                @if (Model.TownName == null || Model.TownName == "none")
+                                {
+                                    <span itemprop="location">none</span>
+                                }
+                                else
+                                {
+                                    <span itemprop="location">@Model.TownName</span>
+                                }
+
+                            </li>
+                            <li>
+                                <strong>Mountain:</strong>
+                                @if (Model.MountainName == null || Model.MountainName == "none")
+                                {
+                                    <span>none</span>
+                                }
+                                else
+                                {
+                                    <span>@Model.MountainName</span>
+                                }
+                            </li>
+                            <li>
+                                <strong>Coordinates:</strong>
+                                @if (Model.Latitude != null && Model.Longitute != null)
+                                {
+                                    <span itemprop="geo" ; itemscope="itemscope" itemtype="" http: //schema.org/GeoCoordinates""> @Model.Longitute, @Model.Latitude</span>
+                                }
+                                else
+                                {
+                                    <span itemprop="geo" ; itemscope="itemscope" itemtype=""> - </span>
+                                }
+
+                            </li>
+                            <li>
+                                <strong>Website:</strong>
+                                @if (Model.Websate != null)
+                                {
+                                    <span href="@Model.Websate" target="_blank" rel="nofollow" class="list-item-website">@Model.Websate</span>
+                                }
+                                else
+                                {
+                                    <span>—</span>
+                                }
+
+                            </li>
+                            <li>
+                                <strong>Адрес:</strong>
+                                <span itemprop="streetAddress">—</span>
+                            </li>
+                            <li>
+                                <strong>Phone:</strong>
+                                <span itemprop="telephone">+359 936 53 022</span>
+                            </li>
+                            <li>
+                                <strong>Work time:</strong>
+                                @if (Model.WorkTime != null)
+                                {
+                                    <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo""><em class="working-hours">@Model.WorkTime</em></span>
+                                }
+                                else
+                                {
+                                    <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo""><em class="working-hours"> - </em></span>
+                                }
+
+                            </li>
+                            <li>
+                                <strong>Days OFF:</strong>
+                                @if (Model.DayOff != null)
+                                {
+                                    <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo"">
+                                        <p>@Model.DayOff</p>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo"">
+                                        <em> - </em>
+                                    </span>
+                                }
+                            </li>
+                            <li>
+                                <strong>Entrance Fee</strong>
+                                @if (Model.EntranceFee != 0)
+                                {
+                                    <span>
+                                        <em>@Model.EntranceFee</em>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span>
+                                        <em> - </em>
+                                    </span>
+                                }
+
+                            </li>
+                            <li>
+                                <strong>Difficulty:</strong>
+                                <span>
+                                    <em class="rating" data-score="6" data-hints='["Екстремно","Много трудно","Трудно","Средно","Лесно","Много лесно","С автомобил"]'>@Model.Difficulty</em>
+                                </span>
+                            </li>
+                            <li>
+                                <strong>Stars:</strong>
+                                <span>
+                                    <em class="rating" data-score="6" data-hints='["Екстремно","Много трудно","Трудно","Средно","Лесно","Много лесно","С автомобил"]'>@Model.Stars</em>
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="cta clearfix">
+
+                    <div class="cta-buttons">
+
+                        <span class="tooltips">
+                            <a href='javascript:;' target='_blank' class='button' id='button-navigate' disabled='disabled' rel='nofollow' data-latitude='43.611554' data-longitude='22.67712000000006' data-alert='Достъпът до Вашите координати е отказан. Моля, позволете го, презаредете страницата и опитайте отново.'>
+                                <small class="icon icon-direction"></small>
+                            </a>
+
+                            <span class="tooltip">Навигирай</span>
+                        </span>
+                        <span class="tooltips">
+                            @*<a class='button ' rel='nofollow' @click.prevent='openModal("authorization")'>
+                        <small class="icon icon-pin"></small>
+                    </a>*@
+
+                            <span class="tooltip">Добави в планове</span>
+                        </span>
+                        <span class="tooltips">
+                            @*<a class='button ' rel='nofollow' @click.prevent='openModal("authorization")'>
+                        <small class="icon icon-check"></small>
+                    </a>*@
+
+                            <span class="tooltip">Добави в Посетени</span>
+                        </span>
+                        <span class="tooltips">
+                            <a class='button' href='https://tripsjournal.com/zabelezhitelnost/belogradchishkite-skali/noshtuvki-nablizo'>
+                                <small class="icon icon-lodge"></small>
+                            </a>
+
+                            <span class="tooltip">Нощувки наблизо</span>
+                        </span>
+                        <span class="tooltips">
+                            <a class='button' href='https://tripsjournal.com/zabelezhitelnost/belogradchishkite-skali/mesta-nablizo'>
+                                <small class="icon icon-flag"></small>
+                            </a>
+
+                            <span class="tooltip">Интересни места наблизо</span>
+                        </span>
+                        <span class="tooltips">
+                            <a href='https://tripsjournal.com/galeriq/belogradchishkite-skali-galeria' class='button'>
+                                <small class="icon icon-picture"></small>
+                            </a>
+
+                            <span class="tooltip">Галерия</span>
+                        </span>
+                    </div>
+
+                    <div class="add-this-share">
+                        <a class="addthis_button_facebook">
+                            <span class="icon icon-facebook"></span>
+                        </a>
+                        <a class="addthis_button_twitter">
+                            <span class="icon icon-twitter"></span>
+                        </a>
+                        <a class="addthis_button_email">
+                            <span class="icon icon-envelope"></span>
+                        </a>
+                        <a class="addthis_button_print">
+                            <span class="icon icon-print"></span>
+                        </a>
+                        <a class="addthis_button_compact">
+                            <span class="icon icon-plus"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <section class="post">
+                    <div class="entry-sidebar">
+                        <aside class="sidebar-post">
+                            <ul class="widgets">
+                                <li id="text-3" class="widget widget_text">
+                                    <h5 class="widget-title">Сигурен ли си в планината?</h5>
+                                    <div class="textwidget">
+                                        <p>
+                                            <a class="no-popup" href="https://www.parana.bg/bg/insurance_bulgaria" target="_blank" rel="noopener noreferrer"><img class="alignnone size-medium wp-image-11872" src="https://tripsjournal.com/wp-content/uploads/2019/07/udobnata-planinska-zastrahovka-trips-journal-300x147.png" alt="" width="300" height="147" /></a><br />
+                                            <a style="font-size: 18px; font-weight: bold;" href="https://www.parana.bg/bg/insurance_bulgaria" target="_blank" rel="noopener noreferrer">Купи тук!</a>
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </aside>
+                    </div>
+
+                    <article class="entry">
+                        <h2 class="h3">Description</h2>
+                        @foreach (var item in Model.Description.Split("\\n"))
+                        {
+                            <p>@item</p>
+                        }
+
+                        <adsense data-ad-slot="5137058607" type="horizontal"></adsense>
+
+
+                        <div class="add-this-share">
+                            <a class="addthis_button_facebook">
+                                <span class="icon icon-facebook"></span>
+                            </a>
+                            <a class="addthis_button_twitter">
+                                <span class="icon icon-twitter"></span>
+                            </a>
+                            <a class="addthis_button_email">
+                                <span class="icon icon-envelope"></span>
+                            </a>
+                            <a class="addthis_button_print">
+                                <span class="icon icon-print"></span>
+                            </a>
+                            <a class="addthis_button_compact">
+                                <span class="icon icon-plus"></span>
+                            </a>
+                        </div>
+
+                        <div>
+                            <h1>My First Google Map</h1>
+
+                            <div id="googleMap" style="width:100%;height:400px;"></div>
+                        </div>
+
+
+                        <div id="map">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47752.72784629606!2d@(Model.Latitude)!3d@(Model.Longitute)!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14ac598ad0d361bb%3A0x400a01269bf5a80!2sSmolyan!5e0!3m2!1sen!2sbg!4v1588191727950!5m2!1sen!2sbg"
+                                    width="100%" height="200px" frameborder="0" style="border:0;" allowfullscreen=""
+                                    aria-hidden="false" tabindex="0"></iframe>
+                        </div>
+                        <div class="map-bottom">
+                            <general-map v-if="landmarks.length" :markers-data="landmarks"></general-map>
+                        </div>
+                    </article>
+                </section>
+
+                <div>
+                    <h3>My Google Maps Demo</h3>
+                    <!--The div element for the map -->
+                    <div id="map"></div>
+                </div>
+
+                <section class="articles" id="nearby-places">
+                    <header class="articles-head">
+                        <h3 class="h1">
+                            <a href="https://tripsjournal.com/zabelezhitelnost/belogradchishkite-skali/mesta-nablizo">Интересни места наоколо, които да посетите</a>
+                        </h3>
+                    </header>
+
+                    <section class="articles-container clearfix">
+                        <a class="article" href="https://tripsjournal.com/zabelezhitelnost/belogradchishka-krepost-kaleto">
+                            <span class="article-image">
+                                <img src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishka-krepost/431430801.jpg" />
+                                <small class="icon icon-historical" title=""></small>
+                            </span>
+
+                            <span class="article-title">Белоградчишка крепост &#8222;Калето&#8220;</span>
+                        </a>
+                        <a class="article" href="https://tripsjournal.com/zabelezhitelnost/istoricheski-muzey-belogradchik">
+                            <span class="article-image">
+                                <img src="https://tripsjournal.com/wp-content/uploads/cache/2016/11/no-image-thumb/86375240.png" />
+                                <small class="icon icon-museum" title=""></small>
+                            </span>
+
+                            <span class="article-title">Исторически музей &#8211; Белоградчик</span>
+                        </a>
+                        <a class="article" href="https://tripsjournal.com/zabelezhitelnost/peshtera-magurata">
+                            <span class="article-image">
+                                <img src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/magurata-izhod/2830347028.jpg" />
+                                <small class="icon icon-leaf" title=""></small>
+                            </span>
+
+                            <span class="article-title">Пещера &#8222;Магурата&#8220;</span>
+                        </a>
+                        <a class="article" href="https://tripsjournal.com/marshrut/s-stakevtsi-h-gorski-ray">
+                            <span class="article-image">
+                                <img src="https://tripsjournal.com/wp-content/uploads/cache/2016/11/no-image-thumb/86375240.png" />
+                                <small class="icon icon-trekking" title=""></small>
+                            </span>
+
+                            <span class="article-title">с.Стакевци &#8211; х.Горски рай</span>
+                        </a>
+                        <a class="article" href="https://tripsjournal.com/marshrut/h-midzhur-vr-midzhur">
+                            <span class="article-image">
+                                <img src="https://tripsjournal.com/wp-content/uploads/cache/2016/11/no-image-thumb/86375240.png" />
+                                <small class="icon icon-trekking" title=""></small>
+                            </span>
+
+                            <span class="article-title">х.Миджур &#8211; вр.Миджур</span>
+                        </a>
+                        <a class="article" href="https://tripsjournal.com/zabelezhitelnost/regionalen-istoricheski-muzey-vidin">
+                            <span class="article-image">
+                                <img src="https://tripsjournal.com/wp-content/uploads/cache/2016/11/no-image-thumb/86375240.png" />
+                                <small class="icon icon-museum" title=""></small>
+                            </span>
+
+                            <span class="article-title">Регионален исторически музей &#8211; Видин</span>
+                        </a>
+                        <a class="article" href="https://tripsjournal.com/zabelezhitelnost/muzey-konaka">
+                            <span class="article-image">
+                                <img src="https://tripsjournal.com/wp-content/uploads/cache/2016/11/no-image-thumb/86375240.png" />
+                                <small class="icon icon-museum" title=""></small>
+                            </span>
+
+                            <span class="article-title">Музей &#8222;Конака&#8220;</span>
+                        </a>
+                        <a class="article" href="https://tripsjournal.com/zabelezhitelnost/muzey-krastatata-kazarma">
+                            <span class="article-image">
+                                <img src="https://tripsjournal.com/wp-content/uploads/cache/2016/11/no-image-thumb/86375240.png" />
+                                <small class="icon icon-museum" title=""></small>
+                            </span>
+
+                            <span class="article-title">Музей &#8222;Кръстатата казарма&#8220;</span>
+                        </a>
+                    </section>
+                </section>
+
+                <section class="links-group">
+
+                    <section class="links left" id="nearby-nights">
+                        <header class="links-head">
+                            <h3>
+                                <a href="https://tripsjournal.com/zabelezhitelnost/belogradchishkite-skali/noshtuvki-nablizo">Нощувки наблизо</a>
+                            </h3>
+                        </header>
+
+                        <section class="links-body">
+                            <a class="link" href="https://tripsjournal.com/noshtuvka/hizha-bozhuritsa">
+                                <span class="link-image">
+                                    <span class="link-image-inner"><img src="https://tripsjournal.com/wp-content/uploads/cache/2016/04/hija-bozhuritsa/267272813.jpg" /></span>
+                                </span>
+
+                                <span class="link-text">
+                                    <strong class="link-title">Хижа Божурица</strong>
+
+                                </span>
+                            </a>
+                        </section>
+
+                    </section>
+
+                </section>
+            </section>
+        </landmark>
+
+
+    </div>
+</section>
+
+
+
+<script defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRhXjWy7NSz9HrW0zRTZ65RReKgRpdZ-Y&callback=initMap">
+</script>
+    <style type="text/css">
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px;
+            /* The height is 400 pixels */
+            width: 100%;
+            /* The width is the width of the web page */
+        }
+    </style>
+    <script>
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            const uluru = { lat: @Model.Latitude, lng: @Model.Longitute };
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 15,
+                center: uluru,
+            });
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+            });
+        }
+    </script>
+
+<!--<div>
+    <h3>My Google Maps Demo</h3>-->
+    <!--The div element for the map -->
+    <!--<div id="map"></div>
+</div>-->

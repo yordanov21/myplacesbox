@@ -11,7 +11,7 @@
         <div class="media">
             <img src="@landmark.ImageUrl" width="150" class="mr-3 img-responsive" alt="...">
             <div class="media-body">
-                <h5 class="mt-0">@landmark.Name</h5>
+                <h5 class="mt-0"><a asp-action="ById" asp-route-id="@landmark.Id">@landmark.Name</a></h5>
                 <p>@(landmark.Description.Length<400? landmark.Description:landmark.Description.Substring(0, 400))...</p>
                 <ul class="list-item-meta">
                     <li>@landmark.CategoryName</li>
