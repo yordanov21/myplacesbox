@@ -9,6 +9,7 @@
         public Landmark()
         {
             this.LandmarkImages = new HashSet<LandmarkImage>();
+            this.LandmarkVotes = new HashSet<LandmarkVote>();
         }
 
         public string Name { get; set; }

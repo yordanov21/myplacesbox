@@ -1,16 +1,13 @@
-﻿using MyPlacesBox.Data.Common.Repositories;
-using MyPlacesBox.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyPlacesBox.Services.Data
+﻿namespace MyPlacesBox.Services.Data
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using MyPlacesBox.Data.Common.Repositories;
+    using MyPlacesBox.Data.Models;
+
     public class LandmarkVotesService : ILandmarkVotesService
     {
-
         private readonly IRepository<LandmarkVote> votesRepository;
 
         public LandmarkVotesService(IRepository<LandmarkVote> votesRepository)

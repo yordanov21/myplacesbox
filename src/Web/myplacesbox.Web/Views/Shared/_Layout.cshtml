@@ -11,7 +11,7 @@
     <link href="~/css/admin-bar.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
 
-    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" asp-append-version="true" />
 
     <link href="~/css/style.min.css" rel="stylesheet" asp-append-version="true" />
 
@@ -48,6 +48,12 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Hikes" asp-action="Create">Create Hikes</a>
+                                </li>
+                            }
+                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="Administration" asp-controller="Categories" asp-action="Index">Categories Admin</a>
                                 </li>
                             }
                         </ul>

@@ -16,6 +16,7 @@ namespace MyPlacesBox.Data.Models
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.LandmarkVotes = new HashSet<LandmarkVote>();
         }
 
         // Audit info
@@ -34,6 +35,6 @@ namespace MyPlacesBox.Data.Models
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
-        public virtual ICollection<LandmarkImage> LandmarkVotes { get; set; }
+        public virtual ICollection<LandmarkVote> LandmarkVotes { get; set; }
     }
 }

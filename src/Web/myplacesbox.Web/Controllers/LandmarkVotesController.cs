@@ -1,15 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MyPlacesBox.Services.Data;
-using MyPlacesBox.Web.ViewModels.Votes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-
-namespace MyPlacesBox.Web.Controllers
+﻿namespace MyPlacesBox.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+    using MyPlacesBox.Services.Data;
+    using MyPlacesBox.Web.ViewModels.Votes;
+
     [ApiController]
     [Route("api/[controller]")]
     public class LandmarkVotesController : BaseController

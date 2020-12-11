@@ -356,18 +356,21 @@
             });
         }
 </script>
+
 <form method="post" id="antiForgeryForm"></form>
 @section Scripts {
     <script>
         $("li[data-vote]").each(function (el) {
             $(this).click(function () {
                 var value = $(this).attr("data-vote");
+                console.log(value);
                 var landmarkId = @Model.SingleLandmarkView.Id;
+                console.log(landmarkId);
                 var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
                 var data = { landmarkId: landmarkId, value: value };
                 $.ajax({
                     type: "POST",
-                    url: "/api/Votes",
+                    url: "/api/LandmarkVotes",
                     data: JSON.stringify(data),
                     headers: {
                         'X-CSRF-TOKEN': antiForgeryToken
