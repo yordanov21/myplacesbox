@@ -483,6 +483,35 @@ namespace MyPlacesBox.Data.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "LandmarkVotes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    LandmarkId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Value = table.Column<byte>(type: "tinyint", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LandmarkVotes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_LandmarkVotes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_LandmarkVotes_Landmarks_LandmarkId",
+                        column: x => x.LandmarkId,
+                        principalTable: "Landmarks",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -643,6 +672,16 @@ namespace MyPlacesBox.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LandmarkVotes_LandmarkId",
+                table: "LandmarkVotes",
+                column: "LandmarkId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LandmarkVotes_UserId",
+                table: "LandmarkVotes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Mountains_IsDeleted",
                 table: "Mountains",
                 column: "IsDeleted");
@@ -685,6 +724,9 @@ namespace MyPlacesBox.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "LandmarkImages");
+
+            migrationBuilder.DropTable(
+                name: "LandmarkVotes");
 
             migrationBuilder.DropTable(
                 name: "Settings");

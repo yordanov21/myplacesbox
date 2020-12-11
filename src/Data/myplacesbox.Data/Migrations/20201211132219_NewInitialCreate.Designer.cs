@@ -10,7 +10,7 @@ using MyPlacesBox.Data;
 namespace MyPlacesBox.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201209212257_NewInitialCreate")]
+    [Migration("20201211132219_NewInitialCreate")]
     partial class NewInitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -594,6 +594,37 @@ namespace MyPlacesBox.Data.Migrations
                     b.ToTable("LandmarkImages");
                 });
 
+            modelBuilder.Entity("MyPlacesBox.Data.Models.LandmarkVote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LandmarkId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<byte>("Value")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("LandmarkId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("LandmarkVotes");
+                });
+
             modelBuilder.Entity("MyPlacesBox.Data.Models.Mountain", b =>
                 {
                     b.Property<int>("Id")
@@ -887,6 +918,23 @@ namespace MyPlacesBox.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
+                        .WithMany("LandmarkVotes")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Landmark");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MyPlacesBox.Data.Models.LandmarkVote", b =>
+                {
+                    b.HasOne("MyPlacesBox.Data.Models.Landmark", "Landmark")
+                        .WithMany("LandmarkVotes")
+                        .HasForeignKey("LandmarkId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
@@ -898,6 +946,8 @@ namespace MyPlacesBox.Data.Migrations
             modelBuilder.Entity("MyPlacesBox.Data.Models.ApplicationUser", b =>
                 {
                     b.Navigation("Claims");
+
+                    b.Navigation("LandmarkVotes");
 
                     b.Navigation("Logins");
 
@@ -929,6 +979,8 @@ namespace MyPlacesBox.Data.Migrations
             modelBuilder.Entity("MyPlacesBox.Data.Models.Landmark", b =>
                 {
                     b.Navigation("LandmarkImages");
+
+                    b.Navigation("LandmarkVotes");
                 });
 
             modelBuilder.Entity("MyPlacesBox.Data.Models.Mountain", b =>

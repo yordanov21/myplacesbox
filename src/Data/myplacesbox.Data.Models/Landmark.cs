@@ -55,5 +55,7 @@
         public virtual Mountain Mountain { get; set; }
 
         public virtual ICollection<LandmarkImage> LandmarkImages { get; set; }
+
+        public virtual ICollection<LandmarkVote> LandmarkVotes { get; set; }
     }
 }

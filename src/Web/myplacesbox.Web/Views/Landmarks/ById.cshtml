@@ -19,206 +19,194 @@
                     <h1>@Model.SingleLandmarkView.Name</h1>
                 </header>
 
-                <div class="details" id="details">
+                <div class="row col-xl-9 col-12">
+                    <ul class="entry-meta">
+                        <li class="single-meta">
+                            <i class="far fa-calendar-alt"></i>
+                            @Model.SingleLandmarkView.CreatedOn.ToShortDateString()
+                        </li>
+                        <li class="single-meta">
+                            <i class="fas fa-user"></i><strong>Added by:</strong>
+                            @if (string.IsNullOrWhiteSpace(Model.SingleLandmarkView.UserUserName))
+                            {
+                                <span>
+                                    <a href="https://tripsjournal.com/" target="_blank"> https://tripsjournal.com/ </a>
+                                </span>
+                            }
+                            else
+                            {
+                                <span>
+                                    @Model.SingleLandmarkView.UserUserName
+                                </span>
+                            }
+                        </li>
+                        <li class="single-meta">
+                            <ul class="item-rating">
+                                <li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
+                                <li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
+                                <li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
+                                <li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
+                                <li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
+                                <li><span id="averageVoteValue">@Model.SingleLandmarkView.AverageVote.ToString("0.0")</span><span> / 5</span> </li>
+                            </ul>
+                        </li>
+                        @*@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        {
+            <li class="single-meta">
+                <a asp-controller="Recipes" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
+            </li>
+            <li class="single-meta">
+                <form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
+                </form>
+                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+            </li>
+            <li class="single-meta">
+                <form method="post" asp-action="SendToEmail" asp-route-id="@Model.Id">
+                    <button class="btn btn-warning">Send to my email</button>
+                </form>
+            </li>
+            <li class="single-meta">
+                <button class="btn btn-warning" onclick="window.print()">Print</button>
+            </li>
+        }*@
+                    </ul>
+                </div>
+                <br />
+                <div class="details " id="details">
 
-                    <div class="gallery-container">
+                    <div class="row">
+                        <div class="list-table col-xs-6">
+                            <ul>
+                                <li>
+                                    <strong>Category:</strong>
+                                    <span>@Model.SingleLandmarkView.CategoryName</span>
+                                </li>
+                                <li>
+                                    <strong>Region:</strong>
+                                    <span>@Model.SingleLandmarkView.RegionName</span>
+                                </li>
+                                <li>
+                                    <strong>Town:</strong>
+                                    @if (Model.SingleLandmarkView.TownName == null || Model.SingleLandmarkView.TownName == "none")
+                                    {
+                                        <span itemprop="location">none</span>
+                                    }
+                                    else
+                                    {
+                                        <span itemprop="location">@Model.SingleLandmarkView.TownName</span>
+                                    }
 
-                        <div class="gallery fallback-container ">
-                            <div class="bx-wrapper" style="max-width: 100%">
-                                <div class="bx-viewport">
-                                    <div class="gallery-slides">
-                                        <div class="gallery-slide" style="background-image: url(@Model.SingleLandmarkView.ImageUrl)" title="@Model.SingleLandmarkView.Name">
-                                            @Model.SingleLandmarkView.Name
-                                        </div>
+                                </li>
+                                <li>
+                                    <strong>Mountain:</strong>
+                                    @if (Model.SingleLandmarkView.MountainName == null || Model.SingleLandmarkView.MountainName == "none")
+                                    {
+                                        <span>none</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@Model.SingleLandmarkView.MountainName</span>
+                                    }
+                                </li>
+                                <li>
+                                    <strong>Coordinates:</strong>
+                                    @if (Model.SingleLandmarkView.Latitude != null && Model.SingleLandmarkView.Longitute != null)
+                                    {
+                                        <span itemprop="geo" ; itemscope="itemscope" itemtype="" http: //schema.org/GeoCoordinates""> @Model.SingleLandmarkView.Longitute, @Model.SingleLandmarkView.Latitude</span>
+                                    }
+                                    else
+                                    {
+                                        <span itemprop="geo" ; itemscope="itemscope" itemtype=""> - </span>
+                                    }
 
-                                        @*<div class="gallery-slide" style="background-image: url(https://tripsjournal.com/wp-content/uploads/2015/05/gledka-belogradchik1-655x399.jpg)" title="Белоградчишките скали">
-                                                Белоградчишките скали
-                                            </div>
-                                            <div class="gallery-slide" style="background-image: url(https://tripsjournal.com/wp-content/uploads/2015/05/belogradchishki-skali1-655x399.jpg)" title="Белоградчишките скали">
-                                                Белоградчишките скали
-                                            </div>
-                                            <div class="gallery-slide" style="background-image: url(https://tripsjournal.com/wp-content/uploads/2015/05/belogradchishki-skali-21-655x399.jpg)" title="Белоградчишките скали">
-                                                Белоградчишките скали
-                                            </div>*@
-                                    </div>
-                                </div>
+                                </li>
+                                <li>
+                                    <strong>Website:</strong>
+                                    @if (Model.SingleLandmarkView.Websate != null)
+                                    {
+                                        <span href="@Model.SingleLandmarkView.Websate" target="_blank" rel="nofollow" class="list-item-website">@Model.SingleLandmarkView.Websate</span>
+                                    }
+                                    else
+                                    {
+                                        <span>—</span>
+                                    }
+
+                                </li>
+                                <li>
+                                    <strong>Адрес:</strong>
+                                    <span itemprop="streetAddress">—</span>
+                                </li>
+                                <li>
+                                    <strong>Phone:</strong>
+                                    <span itemprop="telephone">+359 936 53 022</span>
+                                </li>
+                                <li>
+                                    <strong>Work time:</strong>
+                                    @if (Model.SingleLandmarkView.WorkTime != null)
+                                    {
+                                        <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo""><em class="working-hours">@Model.SingleLandmarkView.WorkTime</em></span>
+                                    }
+                                    else
+                                    {
+                                        <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo""><em class="working-hours"> - </em></span>
+                                    }
+
+                                </li>
+                                <li>
+                                    <strong>Days OFF:</strong>
+                                    @if (Model.SingleLandmarkView.DayOff != null)
+                                    {
+                                        <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo"">
+                                            <p>@Model.SingleLandmarkView.DayOff</p>
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo"">
+                                            <em> - </em>
+                                        </span>
+                                    }
+                                </li>
+                                <li>
+                                    <strong>Entrance Fee</strong>
+                                    @if (Model.SingleLandmarkView.EntranceFee != 0)
+                                    {
+                                        <span>
+                                            <em>@Model.SingleLandmarkView.EntranceFee</em>
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span>
+                                            <em> - </em>
+                                        </span>
+                                    }
+
+                                </li>
+                                <li>
+                                    <strong>Difficulty:</strong>
+                                    <span>
+                                        <em class="rating" data-score="6" data-hints='["Екстремно","Много трудно","Трудно","Средно","Лесно","Много лесно","С автомобил"]'>@Model.SingleLandmarkView.Difficulty</em>
+                                    </span>
+                                </li>
+                                <li>
+                                    <strong>Stars:</strong>
+                                    <span>
+                                        <em class="rating" data-score="6" data-hints='["Екстремно","Много трудно","Трудно","Средно","Лесно","Много лесно","С автомобил"]'>@Model.SingleLandmarkView.Stars</em>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-xs-6">
+                            <div img-fluid>
+                                <img class="img-fluid" alt="Responsive image" src="@Model.SingleLandmarkView.ImageUrl">
                             </div>
-
                         </div>
 
-                        @*<div class="gallery-thumbs">
-                                <div class="gallery-thumbs-slides">
-                                    <a class="gallery-thumb current" href="#" data-slide-index="0">
-                                        <img class="img-fluid attachment-157x94x1 size-157x94x1" src="@Model.ImageUrl" alt="@Model.Name" title="@Model.Name     />
-                                    </a>
-                                    @*<a class="gallery-thumb " href="#" data-slide-index="1">
-                                        <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali1/2911599325.jpg ) no-repeat 0 0;">
-                                            <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali1/817121343.jpg" class="attachment-157x94x1 size-157x94x1" alt="" title="Белоградчишките скали" />
-                                        </span>
-                                    </a>
-                                    <a class="gallery-thumb " href="#" data-slide-index="2">
-                                        <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-21/1822758164.jpg ) no-repeat 0 0;">
-                                            <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-21/3359262917.jpg" class="attachment-157x94x1 size-157x94x1" alt="Природен феномен" title="Белоградчишките скали" />
-                                        </span>
-                                    </a>
-                                    <a class="gallery-thumb " href="#" data-slide-index="3">
-                                        <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-4/3621553307.jpg ) no-repeat 0 0;">
-                                            <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-4/2571450621.jpg" class="attachment-157x94x1 size-157x94x1" alt="Красотата на Белоградчишките скали" title="Белоградчишките скали" />
-                                        </span>
-                                    </a>
-                                    <a class="gallery-thumb " href="#" data-slide-index="4">
-                                        <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-3/3709439362.jpg ) no-repeat 0 0;">
-                                            <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-3/2474652132.jpg" class="attachment-157x94x1 size-157x94x1" alt="Белоградчишките скали" title="Белоградчишките скали" />
-                                        </span>
-                                    </a>
-                                    <a class="gallery-thumb " href="#" data-slide-index="5">
-                                        <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-6/2516157414.jpg ) no-repeat 0 0;">
-                                            <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-6/3680518016.jpg" class="attachment-157x94x1 size-157x94x1" alt="Величието на скалите" title="Белоградчишките скали" />
-                                        </span>
-                                    </a>
-                                    <a class="gallery-thumb " href="#" data-slide-index="6">
-                                        <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-5/460751877.jpg ) no-repeat 0 0;">
-                                            <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-5/1441740899.jpg" class="attachment-157x94x1 size-157x94x1" alt="Приказната долина - Белоградчик" title="Белоградчишките скали" />
-                                        </span>
-                                    </a>
-                                    <a class="gallery-thumb " href="#" data-slide-index="7">
-                                        <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-zalez/3360519477.jpg ) no-repeat 0 0;">
-                                            <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishki-skali-zalez/732137306.jpg" class="attachment-157x94x1 size-157x94x1" alt="Залез над скалите" title="Белоградчишките скали" />
-                                        </span>
-                                    </a>
-                                    <a class="gallery-thumb " href="#" data-slide-index="8">
-                                        <span style="background: url( https://tripsjournal.com/wp-content/uploads/cache/2015/05/gledka-ot-skalite/1586093145.jpg ) no-repeat 0 0;">
-                                            <img width="157" height="94" src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/gledka-ot-skalite/2285562195.jpg" class="attachment-157x94x1 size-157x94x1" alt="Панорама, преди слънцето да залезе" title="Белоградчишките скали" />
-                                        </span>
-                                    </a>
-                                </div>
-                            </div>*@
                     </div>
 
-                    <div class="list-table">
-                        <ul>
-                            <li>
-                                <strong>Category:</strong>
-                                <span>@Model.SingleLandmarkView.CategoryName</span>
-                            </li>
-                            <li>
-                                <strong>Region:</strong>
-                                <span>@Model.SingleLandmarkView.RegionName</span>
-                            </li>
-                            <li>
-                                <strong>Town:</strong>
-                                @if (Model.SingleLandmarkView.TownName == null || Model.SingleLandmarkView.TownName == "none")
-                                {
-                                    <span itemprop="location">none</span>
-                                }
-                                else
-                                {
-                                    <span itemprop="location">@Model.SingleLandmarkView.TownName</span>
-                                }
-
-                            </li>
-                            <li>
-                                <strong>Mountain:</strong>
-                                @if (Model.SingleLandmarkView.MountainName == null || Model.SingleLandmarkView.MountainName == "none")
-                                {
-                                    <span>none</span>
-                                }
-                                else
-                                {
-                                    <span>@Model.SingleLandmarkView.MountainName</span>
-                                }
-                            </li>
-                            <li>
-                                <strong>Coordinates:</strong>
-                                @if (Model.SingleLandmarkView.Latitude != null && Model.SingleLandmarkView.Longitute != null)
-                                {
-                                    <span itemprop="geo" ; itemscope="itemscope" itemtype="" http: //schema.org/GeoCoordinates""> @Model.SingleLandmarkView.Longitute, @Model.SingleLandmarkView.Latitude</span>
-                                }
-                                else
-                                {
-                                    <span itemprop="geo" ; itemscope="itemscope" itemtype=""> - </span>
-                                }
-
-                            </li>
-                            <li>
-                                <strong>Website:</strong>
-                                @if (Model.SingleLandmarkView.Websate != null)
-                                {
-                                    <span href="@Model.SingleLandmarkView.Websate" target="_blank" rel="nofollow" class="list-item-website">@Model.SingleLandmarkView.Websate</span>
-                                }
-                                else
-                                {
-                                    <span>—</span>
-                                }
-
-                            </li>
-                            <li>
-                                <strong>Адрес:</strong>
-                                <span itemprop="streetAddress">—</span>
-                            </li>
-                            <li>
-                                <strong>Phone:</strong>
-                                <span itemprop="telephone">+359 936 53 022</span>
-                            </li>
-                            <li>
-                                <strong>Work time:</strong>
-                                @if (Model.SingleLandmarkView.WorkTime != null)
-                                {
-                                    <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo""><em class="working-hours">@Model.SingleLandmarkView.WorkTime</em></span>
-                                }
-                                else
-                                {
-                                    <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo""><em class="working-hours"> - </em></span>
-                                }
-
-                            </li>
-                            <li>
-                                <strong>Days OFF:</strong>
-                                @if (Model.SingleLandmarkView.DayOff != null)
-                                {
-                                    <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo"">
-                                        <p>@Model.SingleLandmarkView.DayOff</p>
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo"">
-                                        <em> - </em>
-                                    </span>
-                                }
-                            </li>
-                            <li>
-                                <strong>Entrance Fee</strong>
-                                @if (Model.SingleLandmarkView.EntranceFee != 0)
-                                {
-                                    <span>
-                                        <em>@Model.SingleLandmarkView.EntranceFee</em>
-                                    </span>
-                                }
-                                else
-                                {
-                                    <span>
-                                        <em> - </em>
-                                    </span>
-                                }
-
-                            </li>
-                            <li>
-                                <strong>Difficulty:</strong>
-                                <span>
-                                    <em class="rating" data-score="6" data-hints='["Екстремно","Много трудно","Трудно","Средно","Лесно","Много лесно","С автомобил"]'>@Model.SingleLandmarkView.Difficulty</em>
-                                </span>
-                            </li>
-                            <li>
-                                <strong>Stars:</strong>
-                                <span>
-                                    <em class="rating" data-score="6" data-hints='["Екстремно","Много трудно","Трудно","Средно","Лесно","Много лесно","С автомобил"]'>@Model.SingleLandmarkView.Stars</em>
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
-
+                <br />
                 <section class="post">
                     <div class="entry-sidebar">
                         <aside class="sidebar-post">
@@ -243,25 +231,27 @@
                             <p>@item</p>
                         }
 
-                        <adsense data-ad-slot="5137058607" type="horizontal"></adsense>
+                        @*<adsense data-ad-slot="5137058607" type="horizontal"></adsense>*@
 
 
-                        <div class="add-this-share">
-                            <a class="addthis_button_facebook">
-                                <span class="icon icon-facebook"></span>
-                            </a>
-                            <a class="addthis_button_twitter">
-                                <span class="icon icon-twitter"></span>
-                            </a>
-                            <a class="addthis_button_email">
-                                <span class="icon icon-envelope"></span>
-                            </a>
-                            <a class="addthis_button_print">
-                                <span class="icon icon-print"></span>
-                            </a>
-                            <a class="addthis_button_compact">
-                                <span class="icon icon-plus"></span>
-                            </a>
+
+
+
+                        <div class="">
+                            <ul class="row ">
+                                <li>
+                                    <a href="#"><i class="fab fa-facebook-f icon"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fab fa-twitter icon"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fab fa-instagram icon"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fab fa-google-plus-g icon"></i></a>
+                                </li>
+                            </ul>
                         </div>
 
                         @*<div>
@@ -297,13 +287,15 @@
 
                     <section class="articles-container clearfix">
                         @{
-                            var landmarkArount = Model.LandmarksListInput.Landmarks.Where(x => x.RegionName == Model.SingleLandmarkView.RegionName );
+                            var landmarkArount = Model.LandmarksListInput.Landmarks.Where(x => x.RegionName == Model.SingleLandmarkView.RegionName);
                             int countlandmarks = 0;
-                            }
-                            
-                            @foreach (var item in landmarkArount)
+                        }
+
+                        @foreach (var item in landmarkArount)
+                        {
+
+                            if (Model.SingleLandmarkView.Id != item.Id)
                             {
-                       
                                 <a class="article" asp-action="ById" asp-route-id="@item.Id">
                                     <span class="article-image">
                                         <img src="@item.ImageUrl" />
@@ -312,17 +304,17 @@
 
                                     <span class="article-title">@item.Name </span>
                                 </a>
-   
                             }
+                        }
                         @*<a class="article" href="https://tripsjournal.com/zabelezhitelnost/belogradchishka-krepost-kaleto">
-                            <span class="article-image">
-                                <img src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishka-krepost/431430801.jpg" />
-                                <small class="icon icon-historical" title=""></small>
-                            </span>
+                                <span class="article-image">
+                                    <img src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishka-krepost/431430801.jpg" />
+                                    <small class="icon icon-historical" title=""></small>
+                                </span>
 
-                            <span class="article-title">Белоградчишка крепост &#8222;Калето&#8220;</span>
-                        </a>*@
-                      
+                                <span class="article-title">Белоградчишка крепост &#8222;Калето&#8220;</span>
+                            </a>*@
+
                     </section>
                 </section>
 
@@ -364,4 +356,29 @@
             });
         }
 </script>
+<form method="post" id="antiForgeryForm"></form>
+@section Scripts {
+    <script>
+        $("li[data-vote]").each(function (el) {
+            $(this).click(function () {
+                var value = $(this).attr("data-vote");
+                var landmarkId = @Model.SingleLandmarkView.Id;
+                var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
+                var data = { landmarkId: landmarkId, value: value };
+                $.ajax({
+                    type: "POST",
+                    url: "/api/Votes",
+                    data: JSON.stringify(data),
+                    headers: {
+                        'X-CSRF-TOKEN': antiForgeryToken
+                    },
+                    success: function (data) {
+                        $('#averageVoteValue').html(data.averageVote.toFixed(1));
+                    },
+                    contentType: 'application/json',
+                });
+            })
+        });
+    </script>
+}
 

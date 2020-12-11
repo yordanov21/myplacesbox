@@ -7,10 +7,12 @@
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
 
-
     <link href="~/css/main.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/admin-bar.css" rel="stylesheet" asp-append-version="true" />
     <link href="~/css/site.min.css" rel="stylesheet" asp-append-version="true" />
+
+    <link href="~/lib/fontawesome/css/all.css" rel="stylesheet" />
+
     <link href="~/css/style.min.css" rel="stylesheet" asp-append-version="true" />
 
 </head>
@@ -65,10 +67,34 @@
 
 
 
-        <footer class="footer">
+        <footer class="">
+
             <div class="shell">
                 &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Contacts</a></li>
+            </ul>
+
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="fab fa-facebook-f icon"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"><i class="fab fa-twitter icon"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fab fa-instagram icon"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fab fa-google-plus-g icon"></i></a>
+                </li>
+            </ul>
         </footer>
 
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>

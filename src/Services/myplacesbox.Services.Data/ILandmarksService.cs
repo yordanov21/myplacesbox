@@ -17,7 +17,5 @@
 
         T GetById<T>(int id);
 
-
-
     }
 }
