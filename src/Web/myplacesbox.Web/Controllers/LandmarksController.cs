@@ -121,7 +121,7 @@
                 this.mountainsService.GetAllAsKeyValuePairs();
                 return this.View(input);
             }
-           
+
             return this.Redirect("/");
         }
 
