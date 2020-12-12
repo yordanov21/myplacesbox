@@ -7,17 +7,52 @@
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <div class="col-md-4 offset-4">
-        <p>We have:</p>
-        <ul class="list-group">
-            <li class="list-group-item bg-info">Landmarks: @Model.LandmarksCount</li>
-            <li class="list-group-item bg-info">Landmark Images: @Model.LandmarkImagesCount</li>
-            <li class="list-group-item bg-info">Hikes: @Model.HikesCount</li>
-            <li class="list-group-item bg-info">Hike Images: @Model.HikeImagesCount</li>
-            <li class="list-group-item bg-info">Categories: @Model.CategoriesCount</li>
-            <li class="list-group-item bg-info">Regions: @Model.RegionsCount</li>
-            <li class="list-group-item bg-info">Towns: @Model.TownsCount</li>
-            <li class="list-group-item bg-info">Mountains: @Model.MountainsCount</li>
-        </ul>
+    <div class="row">
+        <div class="col-md-7">
+            <div class="row">
+                @foreach (var landmark in this.Model.RandomLandmarks)
+                {
+                    <div class="card col-md-4">
+                        <img class="card-img-top" src="@landmark.ImageUrl" alt="@landmark.Name">
+                        <div class="card-body">
+                            <h5 class="card-title">@landmark.Name</h5>
+                            <p class="card-text">@landmark.CategoryName</p>
+                            <a asp-controller="Landmarks" asp-action="ById" asp-route-id="@landmark.Id" class="btn btn-primary">Go to landmark</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="col-md-5 ">
+            <div>
+                <p>We have:</p>
+                <ul class="list-group">
+                    <li class="list-group-item bg-info">Landmarks: @Model.LandmarksCount</li>
+                    <li class="list-group-item bg-info">Landmark Images: @Model.LandmarkImagesCount</li>
+                    <li class="list-group-item bg-info">Hikes: @Model.HikesCount</li>
+                    <li class="list-group-item bg-info">Hike Images: @Model.HikeImagesCount</li>
+                    <li class="list-group-item bg-info">Categories: @Model.CategoriesCount</li>
+                    <li class="list-group-item bg-info">Regions: @Model.RegionsCount</li>
+                    <li class="list-group-item bg-info">Towns: @Model.TownsCount</li>
+                    <li class="list-group-item bg-info">Mountains: @Model.MountainsCount</li>
+                </ul>
+            </div>
+        </div>
     </div>
+   
+    <div class="media">
+        <div class="row">
+            @foreach (var landmark in this.Model.RandomLandmarks)
+            {
+                <div class="card col-md-4">
+                    <img class="mr-3" src="@landmark.ImageUrl" alt="Generic placeholder image">
+                    <div class="media-body">
+                        <h5 class="mt-0">Media heading</h5>
+                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
 </div>

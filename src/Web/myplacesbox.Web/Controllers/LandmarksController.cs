@@ -10,6 +10,7 @@
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using MyPlacesBox.Common;
     using MyPlacesBox.Data.Models;
     using MyPlacesBox.Services.Data;
     using MyPlacesBox.Web.ViewModels.Landmarks;
@@ -41,6 +42,36 @@
             this.userManager = userManager;
             this.hostEnvironment = hostEnvironment;
         }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult Edit(int id)
+        {
+            var inputModel = this.landmarksService.GetById<EditLandmarkInputModel>(id);
+            inputModel.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+            inputModel.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
+            inputModel.TownsItems = this.townsService.GetAllAsKeyValuePairs();
+            inputModel.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
+
+            return this.View(inputModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Edit(int id, EditLandmarkInputModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+                input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
+                input.TownsItems = this.townsService.GetAllAsKeyValuePairs();
+                input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
+                return this.View(input);
+            }
+
+            await this.landmarksService.UpdateAsync(id, input);
+            return this.RedirectToAction(nameof(this.ById), new { id });
+        }
+
 
         [Authorize]
         public IActionResult Create()

@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using MyPlacesBox.Data.Common.Repositories;
@@ -100,6 +99,35 @@
         public int GetCount()
         {
           return this.landmarksRepository.All().Count();
+        }
+
+        public IEnumerable<T> GetRandom<T>(int count)
+        {
+            return this.landmarksRepository.All()
+                 .OrderBy(x => Guid.NewGuid()) // this return random in EF
+                 .Take(count)
+                 .To<T>().ToList();
+        }
+
+        public async Task UpdateAsync(int id, EditLandmarkInputModel input)
+        {
+            var landmark = this.landmarksRepository.All().FirstOrDefault(x => x.Id == id);
+            landmark.Name = input.Name;
+            landmark.CategoryId = input.CategoryId;
+            landmark.RegionId = input.RegionId;
+            landmark.TownId = input.TownId;
+            landmark.MountainId = input.MountainId;
+            landmark.Latitude = input.Latitude;
+            landmark.Longitute = input.Longitute;
+            landmark.Websate = input.Websate;
+            landmark.PhoneNumber = input.PhoneNumber;
+            landmark.WorkTime = input.WorkTime;
+            landmark.DayOff = input.DayOff;
+            landmark.EntranceFee = input.EntranceFee;
+            landmark.Difficulty = input.Difficulty;
+            landmark.Stars = input.Stars;
+
+            await this.landmarksRepository.SaveChangesAsync();
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     using System.Diagnostics;
     using System.Linq;
+
     using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using MyPlacesBox.Data;
@@ -16,18 +17,19 @@
     public class HomeController : BaseController
     {
         private readonly IGetCountsService countsService;
-        // private readonly IMapper mapper;
+        private readonly ILandmarksService landmarksService;
 
-        public HomeController(IGetCountsService countsService)
+        public HomeController(
+            IGetCountsService countsService,
+            ILandmarksService landmarksService)
         {
             this.countsService = countsService;
-            // this.mapper = mapper;
+            this.landmarksService = landmarksService;
         }
 
         public IActionResult Index()
         {
             var countsDto = this.countsService.GetCounts();
-            //// var viewModel = this.mapper.Map<IndexViewModel>(counts);
             var viewModel = new IndexViewModel
             {
                 LandmarksCount = countsDto.LandmarksCount,
@@ -38,7 +40,7 @@
                 RegionsCount = countsDto.RegionsCount,
                 TownsCount = countsDto.TownsCount,
                 MountainsCount = countsDto.MountainsCount,
-               
+                RandomLandmarks = this.landmarksService.GetRandom<IndexPageLandmarkViewModel>(6),
             };
 
             return this.View(viewModel);

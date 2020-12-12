@@ -1,7 +1,11 @@
 ﻿namespace MyPlacesBox.Web.ViewModels.Home
 {
+    using System.Collections.Generic;
+
     public class IndexViewModel
     {
+        public IEnumerable<IndexPageLandmarkViewModel> RandomLandmarks { get; set; }
+
         public int LandmarksCount { get; set; }
 
         public int LandmarkImagesCount { get; set; }

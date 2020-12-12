@@ -1,4 +1,5 @@
-﻿@model MyPlacesBox.Web.ViewModels.Landmarks.MainLandmarkViewModel
+﻿@using MyPlacesBox.Common
+@model MyPlacesBox.Web.ViewModels.Landmarks.MainLandmarkViewModel
 
 @{
     this.ViewData["Title"] = Model.SingleLandmarkView.Name;
@@ -50,25 +51,28 @@
                                 <li><span id="averageVoteValue">@Model.SingleLandmarkView.AverageVote.ToString("0.0")</span><span> / 5</span> </li>
                             </ul>
                         </li>
-                        @*@if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-        {
-            <li class="single-meta">
-                <a asp-controller="Recipes" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-secondary">Edit</a>
-            </li>
-            <li class="single-meta">
-                <form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.Id">
-                </form>
-                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
-            </li>
-            <li class="single-meta">
-                <form method="post" asp-action="SendToEmail" asp-route-id="@Model.Id">
-                    <button class="btn btn-warning">Send to my email</button>
-                </form>
-            </li>
-            <li class="single-meta">
-                <button class="btn btn-warning" onclick="window.print()">Print</button>
-            </li>
-        }*@
+                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                        {
+                            <li class="single-meta">
+                                <a asp-controller="Landmarks" asp-action="Edit" asp-route-id="@Model.SingleLandmarkView.Id" class="btn btn-secondary">Edit</a>
+                            </li>
+                            <li class="single-meta">
+                                <form method="post" asp-action="Delete" id="deleteForm" asp-route-id="@Model.SingleLandmarkView.Id">
+                                </form>
+                                <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                            </li>
+                        }
+                        @if (this.User.Identity.IsAuthenticated)
+                        {
+                            <li class="single-meta">
+                                <form method="post" asp-action="SendToEmail" asp-route-id="@Model.SingleLandmarkView.Id">
+                                    <button class="btn btn-warning">Send to my email</button>
+                                </form>
+                            </li>
+                            <li class="single-meta">
+                                <button class="btn btn-warning" onclick="window.print()">Print</button>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <br />
