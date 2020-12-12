@@ -73,6 +73,13 @@
             await this.landmarksRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var landmark = this.landmarksRepository.All().FirstOrDefault(x => x.Id == id);
+            this.landmarksRepository.Delete(landmark);
+            await this.landmarksRepository.SaveChangesAsync();
+        }
+
         public IEnumerable<T> GetAll<T>(int page, int itemsPage = 10)
         {
             var landmarks = this.landmarksRepository

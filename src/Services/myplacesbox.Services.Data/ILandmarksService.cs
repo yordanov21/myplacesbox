@@ -20,5 +20,7 @@
         T GetById<T>(int id);
 
         Task UpdateAsync(int id, EditLandmarkInputModel input);
+
+        Task DeleteAsync(int id);
     }
 }
