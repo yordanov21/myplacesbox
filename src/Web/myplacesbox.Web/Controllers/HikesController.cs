@@ -58,13 +58,15 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(int id, EditHikekInputModel input)
         {
-            if (!this.ModelState.IsValid)
-            {
-                input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
-                input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
-                input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
-                return this.View(input);
-            }
+            ;
+
+            //if (!this.ModelState.IsValid)
+            //{
+            //    input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+            //    input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
+            //    input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
+            //    return this.View(input);
+            //}
 
             await this.hikesService.UpdateAsync(id, input);
             return this.RedirectToAction(nameof(this.ById), new { id });
@@ -107,6 +109,7 @@
                 input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
                 input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
                 input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
+
                 return this.View(input);
             }
 

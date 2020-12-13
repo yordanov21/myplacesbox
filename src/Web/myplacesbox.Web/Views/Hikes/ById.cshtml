@@ -399,13 +399,13 @@
             $(this).click(function () {
                 var value = $(this).attr("data-vote");
                 console.log(value);
-                var landmarkId = @Model.SingleHikeView.Id;
-                console.log(landmarkId);
+                var hikekId = @Model.SingleHikeView.Id;
+                console.log(hikekId);
                 var antiForgeryToken = $('#antiForgeryForm input[name=__RequestVerificationToken]').val();
-                var data = { landmarkId: landmarkId, value: value };
+                var data = { hikekId: hikekId, value: value };
                 $.ajax({
                     type: "POST",
-                    url: "/api/LandmarkVotes",
+                    url: "/api/HikeVotes",
                     data: JSON.stringify(data),
                     headers: {
                         'X-CSRF-TOKEN': antiForgeryToken
