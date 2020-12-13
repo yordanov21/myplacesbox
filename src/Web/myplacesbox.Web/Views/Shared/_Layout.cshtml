@@ -29,8 +29,8 @@
                 <div class="container">
                     <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
                         <div class="container">
-                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            <a class="navbar-brand topnav text-black-50" asp-area="" asp-controller="Home" asp-action="Index">@GlobalConstants.SystemName</a>
+                            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                                     aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
@@ -41,9 +41,6 @@
                                         <a class="nav-link text-dark topnav" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark topnav" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
-                                    </li>
-                                    <li class="nav-item">
                                         <a class="nav-link text-dark topnav" asp-area="" asp-controller="Landmarks" asp-action="All">All Landmarks</a>
                                     </li>
                                     <li class="nav-item">
@@ -52,27 +49,38 @@
                                     @if (this.User.Identity.IsAuthenticated)
                                     {
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Landmarks" asp-action="Create">Create Landmarks</a>
+                                            <a class="nav-link text-dark topnav" asp-area="" asp-controller="Landmarks" asp-action="Create">Create Landmarks</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="" asp-controller="Hikes" asp-action="Create">Create Hikes</a>
-                                        </li>
-                                    }
-                                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                                    {
-                                        <li class="nav-item">
-                                            <a class="nav-link text-dark" asp-area="Administration" asp-controller="Categories" asp-action="Index">Categories Admin</a>
+                                            <a class="nav-link text-dark topnav" asp-area="" asp-controller="Hikes" asp-action="Create">Create Hikes</a>
                                         </li>
                                     }
                                 </ul>
                             </div>
                         </div>
+
                     </nav>
-                    <div class="container h-100">
+                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                    {
+                        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
+
+                            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                                <ul>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark topnav" asp-area="Administration" asp-controller="Categories" asp-action="Index">Categories Admin</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </nav>
+                    }
+                    <div class="container" style="margin-top: 75px;">
                         <div class="row h-100 align-items-center">
                             <div class="col-12 text-center">
-                                <h1 class="font-weight-light">Vertically Centered Masthead Content</h1>
-                                <p class="lead">A great starter layout for a landing page</p>
+                                <h1 class="font-weight-light">
+                                    Discover the amazing places of Bulgaria
+                                </h1>
+                                <p class="lead">See the incredible landmarks and hikes collected in one site</p>
                             </div>
                         </div>
                     </div>
@@ -92,34 +100,43 @@
 
 
 
-        <footer class="">
 
+
+        <footer class="footer" style=" background-color: #DEDFD9">
+            <div>
+                <ul>
+                    <li><a href="https://www.btsbg.org/">Bulgarian Tourist Union</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Team">Team</a></li>
+                    <li><a href="#">Contacts</a></li>
+                    @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+                    {
+                        <li>
+                            <a asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
+                        </li>
+                    }
+                </ul>
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i class="fab fa-facebook-f icon"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fab fa-twitter icon"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fab fa-instagram icon"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fab fa-google-plus-g icon"></i></a>
+                    </li>
+                </ul>
+
+            </div>
             <div class="shell">
                 &copy; @DateTime.Now.Year - @GlobalConstants.SystemName - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
-            <ul>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Team</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">Contacts</a></li>
-            </ul>
-
-            <ul>
-                <li>
-                    <a href="#">
-                        <i class="fab fa-facebook-f icon"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"><i class="fab fa-twitter icon"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fab fa-instagram icon"></i></a>
-                </li>
-                <li>
-                    <a href="#"><i class="fab fa-google-plus-g icon"></i></a>
-                </li>
-            </ul>
         </footer>
 
         <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>

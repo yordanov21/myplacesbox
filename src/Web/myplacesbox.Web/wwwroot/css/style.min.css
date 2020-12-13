@@ -1787,23 +1787,23 @@ pre.wp-block-verse {
 /* The navbar */
 .topnav {
     overflow: hidden;
-   /* background-color: #333;*/
+    /* background-color: #333;*/
 }
 
-    /* Navbar links */
-    .topnav  {
-        float: left;
-        color: wheat;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-    }
+/* Navbar links */
+.topnav {
+    float: left;
+    color: wheat;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
 
-        .topnav:hover {
-            background-color: #f0ece5;
-            color: black;
-        }
+    .topnav:hover {
+        background-color: #f0ece5;
+        color: black;
+    }
 
 html {
     position: relative;
@@ -1811,10 +1811,11 @@ html {
 }
 
 body {
-    margin-bottom: 60px
+    margin-bottom: 60px;
+    background-color: #DEDFD9;
 }
 
-footer {
+/*footer {
     position: absolute;
     bottom: 0;
     text-decoration: none;
@@ -1824,6 +1825,121 @@ footer {
     line-height: 60px;
     width: 100%;
     background-color: moccasin;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
+}*/
+
+
+footer {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    bottom: 10px;
+    width: 100%;
+    height: 250px;
+    line-height: 100px;
+    background-color: moccasin;
+    color: rgba(0, 0, 0, 0.39);
+    font-size: 20px;
+    min-height: 250px;
 }
+
+    footer ul:nth-child(1) {
+        display: flex;
+        flex-flow: row wrap;
+        list-style-type: none;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+        footer ul:nth-child(1) li a {
+            padding: 0 10px;
+            margin: 0;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+            footer ul:nth-child(1) li a:hover {
+                color: rgb(27, 38, 49);
+            }
+
+        footer ul:nth-child(1) li:hover {
+            justify-content: start;
+            transition: transform 0.7s;
+            transform: scale(1.15);
+            color: rgb(27, 38, 49);
+        }
+    /* for social media */
+
+    footer ul:nth-child(2) {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+        footer ul:nth-child(2) li {
+            list-style: none;
+        }
+
+            footer ul:nth-child(2) li a {
+                width: 50px;
+                height: 50px;
+                background-color: #fff;
+                text-align: center;
+                line-height: 50px;
+                font-size: 35px;
+                margin: 0 10px;
+                display: block;
+                border-radius: 50%;
+                position: relative;
+                overflow: hidden;
+                border: 3px solid #fff;
+                z-index: 1;
+            }
+
+                footer ul:nth-child(2) li a .icon {
+                    position: relative;
+                    color: #262626;
+                    transition: .5s;
+                    z-index: 3;
+                }
+
+                footer ul:nth-child(2) li a:hover .icon {
+                    color: #fff;
+                    transform: rotateY(360deg);
+                }
+
+                footer ul:nth-child(2) li a:before {
+                    content: "";
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: #f00;
+                    transition: .5s;
+                    z-index: 2;
+                }
+
+                footer ul:nth-child(2) li a:hover:before {
+                    top: 0;
+                }
+
+            footer ul:nth-child(2) li:nth-child(1) a:before {
+                background: #3b5999;
+            }
+
+            footer ul:nth-child(2) li:nth-child(2) a:before {
+                background: #55acee;
+            }
+
+            footer ul:nth-child(2) li:nth-child(3) a:before {
+                background: #FF553E;
+            }
+
+            footer ul:nth-child(2) li:nth-child(4) a:before {
+                background: #dd4b39;
+            }
