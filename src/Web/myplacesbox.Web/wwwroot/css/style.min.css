@@ -1943,3 +1943,35 @@ footer {
             footer ul:nth-child(2) li:nth-child(4) a:before {
                 background: #dd4b39;
             }
+
+
+
+.placeslist {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+.homelandmarkstext {
+   
+    color: black;
+}
+
+.homelandmarkstext:hover {
+    color: aliceblue;
+}
+
+.homelandmarks{
+    border:solid;
+    border-radius: 5px;
+    
+}
+
+    .homelandmarks:hover {
+        /* Animation */
+        transition: transform .5s;
+        /* (105% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        transform: scale(1.05);
+        background-color: moccasin;
+        /* opacity: 0.95; */
+    }

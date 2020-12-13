@@ -126,5 +126,13 @@
         {
             return this.hikesRepository.All().Count();
         }
+
+        public IEnumerable<T> GetRandom<T>(int count)
+        {
+            return this.hikesRepository.All()
+                 .OrderBy(x => Guid.NewGuid()) // this return random in EF
+                 .Take(count)
+                 .To<T>().ToList();
+        }
     }
 }

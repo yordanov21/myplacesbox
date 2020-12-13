@@ -10,50 +10,117 @@
         <div>
             <p>Enjoy our places:</p>
             <ul class="list-inline row">
-                <li class="list-group-item bg-info col-md-3">Landmarks: @Model.LandmarksCount</li>
-                <li class="list-group-item bg-info col-md-3">Landmark Images: @Model.LandmarkImagesCount</li>
-                <li class="list-group-item bg-info col-md-3">Hikes: @Model.HikesCount</li>
-                <li class="list-group-item bg-info col-md-3">Hike Images: @Model.HikeImagesCount</li>
-                @*<li class="list-group-item bg-info">Categories: @Model.CategoriesCount</li>*@
+                <li class="list-group-item bg-img col-md-3">Landmarks: @Model.LandmarksCount</li>
+                <li class="list-group-item bg-img col-md-3">Landmark Images: @Model.LandmarkImagesCount</li>
+                <li class="list-group-item bg-img col-md-3">Hikes: @Model.HikesCount</li>
+                <li class="list-group-item bg-img col-md-3">Hike Images: @Model.HikeImagesCount</li>
             </ul>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-8">
-            <div class="row">
-                @foreach (var landmark in this.Model.RandomLandmarks)
-                {
-                    <a asp-controller="Landmarks" asp-action="ById" asp-route-id="@landmark.Id" class="card col-md-4" style="width: 100%; text-decoration: none; padding: 0px; margin: 10px">
-                        <img class="card-img-top" src="@landmark.ImageUrl" alt="@landmark.Name" style="height: 150px;">
-                        <div class="card-body" style="padding: 0px;">
-                            <h5 class="card-title">@landmark.Name</h5>
-                            <p class="card-text">@landmark.CategoryName</p>
-                        </div>
-                    </a>
-                }
+
+    <div class="stories w-100">
+        <article class="nature">
+            <a href="#/articles/mountains">
+                <section class="mointain destination" id="article_mountain">
+                    <h2>Climb the Mointains of Bulgaria</h2>
+                    <p>
+                        Mountains constitute a significant part of Bulgaria and are dominant in the
+                        southwest and central
+                        parts.
+                        Bulgaria's highest mountains are Rila (highest peak Musala, 2925 m; the highest in the Balkans) and
+                        Pirin (highest peak Vihren, 2914 m). The large mountain chain of Stara planina (Balkan Mountains)
+                        runs
+                        west-east across the entire country, bisecting it and giving the name to the entire Balkan
+                        peninsula.
+                        Other extensive mountains are the massifs Rhodopes and Strandzha in the south.
+                    </p>
+                </section>
+            </a>
+            <a href="#/articles/sea">
+                <section class="sea destination" id="article_sea">
+                    <h2>Еnjoy the Black Sea coast</h2>
+                    <p>
+                        The Bulgarian Black Sea Coast , covers the entire eastern bound of Bulgaria
+                        stretching from the
+                        Romanian
+                        Black Sea resorts
+                        in the north to European Turkey in the south, along 378 km of coastline. White and golden sandy
+                        beaches
+                        occupy approximately 130 km of the 378 km long coast. The region is an important center of tourism
+                        during the summer season (May–October), drawing millions of foreign and local tourists alike and
+                        constituting one of the country's most popular tourist destinations.
+                    </p>
+                </section>
+            </a>
+        </article>
+        <article class="ather">
+            <a href="#/articles/cities">
+                <section class="city destination" id="article_city">
+                    <h2>Visit the Cities of Bulgaria</h2>
+                    <p>
+                        This is a complete list of all cities and towns in Bulgaria sorted by population. Province capitals
+                        are shown in bold. Primary sources are the National Statistical Institute (NSI)[1] and the Bulgarian
+                        Academy of Sciences.[2]
+                        The largest city is Sofia with about 1.3 million inhabitants and the smallest is Melnik with about
+                        300. Smallest towns are not necessarily larger than all villages as many villages are more populous
+                        than many towns, compare Lozen, a large village with more than 5,000 inhabitants.
+                    </p>
+                </section>
+            </a>
+            <a href="#/articles/legacy">
+                <section class="legacy destination" id="article_legacy">
+                    <h2>Expore the Legacy of Bulgaria</h2>
+                    <p>
+                        Bulgaria is a country with 1900 years of history. The land is famous for its
+                        nature and a great
+                        variety
+                        of well preserved cultural and historical monuments dating to the ancient times. With this tour we
+                        want
+                        to introduce Bulgaria from ancient times till today, from beautiful green mountains to the wonderful
+                        beaches at Bulgarian Sea Coasts (a 378 km long coastal strip), a treasure of nature - over 500
+                        mineral
+                        springs which define Bulgaria as a preferred destination for SPA - recreation and treatment. The
+                        tour
+                        includes the most significant Bulgarian treasures included in the UNESCO World Heritage and 24
+                        Wonders
+                        of Bulgaria.
+                    </p>
+                </section>
+            </a>
+        </article>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="placeslist row">
+                    @foreach (var landmark in this.Model.RandomLandmarks)
+                    {
+                        <a asp-controller="Landmarks" asp-action="ById" asp-route-id="@landmark.Id" class="homelandmarks card col-lg-3" style="width: 100%; text-decoration: none; padding: 10px; margin: 10px">
+                            <img class="card-img-top" src="@landmark.ImageUrl" alt="@landmark.Name" style="height: 150px;">
+                            <div class="card-body" style="padding: 0px;">
+                                <h5 class="homelandmarkstext card-title">@landmark.Name</h5>
+                                <p class="homelandmarkstext card-text">@landmark.CategoryName</p>
+                            </div>
+                        </a>
+                    }
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="media col-md-12">
+                <div class="row">
+                    @foreach (var landmark in this.Model.RandomLandmarks)
+                    {
+                        <a asp-controller="Landmarks" asp-action="ById" asp-route-id="@landmark.Id" class="homelandmarks card col-md-3" style="width: 100%; text-decoration: none; padding: 0px; margin: 10px">
+                            <img class="card-img-top" src="@landmark.ImageUrl" alt="@landmark.Name" style="height: 150px;">
+                            <div class="card-body" style="padding: 0px;">
+                                <h5 class="homelandmarkstext card-title">@landmark.Name</h5>
+                                <p class="homelandmarkstext card-text">@landmark.CategoryName</p>
+                            </div>
+                        </a>
+                    }
+                </div>
             </div>
         </div>
 
     </div>
-    <div class="row">
-        <div class="embed-responsive embed-responsive-16by9 col-md-4">
-            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-        </div>
-        <div class="media col-md-8">
-            <div class="row">
-                @foreach (var landmark in this.Model.RandomLandmarks)
-                {
-                    <div class="card col-md-4">
-                        <img class="card-img-top" src="@landmark.ImageUrl" alt="@landmark.Name">
-                        <div class="card-body">
-                            <h5 class="card-title">@landmark.Name</h5>
-                            <p class="card-text">@landmark.CategoryName</p>
-                            <a asp-controller="Landmarks" asp-action="ById" asp-route-id="@landmark.Id" class="btn btn-primary">Go to landmark</a>
-                        </div>
-                    </div>
-                }
-            </div>
-        </div>
-    </div>
-
-</div>

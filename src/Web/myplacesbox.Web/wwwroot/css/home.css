@@ -1,0 +1,190 @@
+.home {
+    background-color: rgba(0, 0, 0, 0.308);
+    margin: 0.5em auto;
+    margin-top: 5em;
+}
+
+.responsive {
+    width: 100%;
+    /* max-width: 400px; */
+    height: auto;
+}
+
+.btn {
+    background-color: rgb(108, 107, 110);
+}
+
+.home-text {
+    color: white;
+}
+
+.wrapper {
+    position: relative;
+    padding: 2em;
+}
+
+.wrapper .bottom {
+    position: relative;
+    width: 100%;
+    top: 25%;
+}
+
+.btn {
+    min-width: 20%;
+}
+
+textarea {
+    resize: none;
+    width: 100%;
+    height: 6em;
+}
+
+.btn {
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    filter: brightness(90%);
+    color: white;
+    justify-content: start;
+    transition: transform 0.7s;
+    transform: scale(1.05);
+}
+
+.stories {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.stories article {
+    width: 45%;
+    padding: 1em;
+    margin: 0;
+    height: 100%;
+}
+
+.stories article a section {
+    padding: 5px;
+    /* background-color: gainsboro; */
+    color: white;
+    height: 100%;
+    /* border-radius: 1em; */
+    margin-top: 1em;
+    margin-bottom: 2em;
+    box-shadow: 0 0 20px gray;
+}
+
+.mainpart {
+    padding-top: 10px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainpart h1 {
+    font-weight: bold;
+    color: white;
+}
+
+.mainpart button {
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    border: none;
+    background-color: rgb(108, 107, 110);
+    min-width: 20%;
+    border-radius: 5px;
+}
+
+.mainpart button:hover {
+    filter: brightness(90%);
+    color: white;
+}
+
+.mainpart h1 {
+    color: rgb(108, 107, 110);
+}
+
+.stories article a {
+    text-decoration: none;
+    color: white;
+}
+
+.stories article a:hover {
+    filter: brightness(90%);
+    color: white;
+}
+
+#article_mountain {
+    height: 350px;
+}
+
+#article_sea {
+    height: 250px;
+}
+
+#article_city {
+    height: 250px;
+}
+
+#article_legacy {
+    height: 350px;
+}
+
+.mointain {
+    background: url("../images/articles/mountains/winter_head.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.destination {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: end;
+    align-items: flex-end;
+}
+
+.destination:hover {
+    /* Animation */
+    transition: transform .5s;
+    /* (105% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    transform: scale(1.05);
+    background-color: rgba(155, 15, 15, 0.15);
+    /* opacity: 0.95; */
+}
+
+.destination p {
+    display: none;
+}
+
+.destination:hover p {
+    display: inline-block;
+    background-color: rgba(155, 15, 15, 0.15);
+}
+
+.sea {
+    background: url("../images/articles/photo_verybig_153044.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.city {
+    background: url("../images/articles/city.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
+.legacy {
+    background: url("../images/articles/expolere.jpg");
+    background-position: center;
+    background-size: cover;
+}
