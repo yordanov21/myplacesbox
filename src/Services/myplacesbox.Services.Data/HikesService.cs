@@ -13,7 +13,7 @@
 
     public class HikesService : IHikesService
     {
-        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif" };
+        private readonly string[] allowedExtensions = new[] { "jpg", "png", "gif", "jpeg" };
         private readonly IDeletableEntityRepository<Hike> hikesRepository;
         private readonly IDeletableEntityRepository<HikeStartPoint> hikeStartPointsRepository;
         private readonly IDeletableEntityRepository<HikeEndPoint> hikeEndPointsRepository;
@@ -108,6 +108,12 @@
             await this.hikesRepository.SaveChangesAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var hike = this.hikesRepository.All().FirstOrDefault(x => x.Id == id);
+            this.hikesRepository.Delete(hike);
+            await this.hikesRepository.SaveChangesAsync();
+        }
 
         public IEnumerable<T> GetAll<T>(int page, int itemsPage = 10)
         {
@@ -122,6 +128,16 @@
             return landmarks;
         }
 
+        public T GetById<T>(int id)
+        {
+            var hike = this.hikesRepository.AllAsNoTracking()
+                .Where(x => x.Id == id)
+                .To<T>()
+                .FirstOrDefault();
+
+            return hike;
+        }
+
         public int GetCount()
         {
             return this.hikesRepository.All().Count();
@@ -133,6 +149,62 @@
                  .OrderBy(x => Guid.NewGuid()) // this return random in EF
                  .Take(count)
                  .To<T>().ToList();
+        }
+
+        public async Task UpdateAsync(int id, EditHikekInputModel input)
+        {
+            var startPoint = this.hikeStartPointsRepository.All()
+                  .FirstOrDefault(x => x.Name == input.HikeStartPoint.Name);
+
+            if (startPoint == null)
+            {
+                startPoint = new HikeStartPoint
+                {
+                    Name = input.HikeStartPoint.Name,
+                    Altitude = input.HikeStartPoint.Altitude,
+                    Latitude = input.HikeStartPoint.Longitute,
+                    Longitute = input.HikeStartPoint.Longitute,
+                };
+
+                await this.hikeStartPointsRepository.AddAsync(startPoint);
+                await this.hikeStartPointsRepository.SaveChangesAsync();
+            }
+
+            var endPoint = this.hikeEndPointsRepository.All()
+                .FirstOrDefault(x => x.Name == input.HikeEndPoint.Name);
+
+            if (endPoint == null)
+            {
+                endPoint = new HikeEndPoint
+                {
+                    Name = input.HikeEndPoint.Name,
+                    Altitude = input.HikeEndPoint.Altitude,
+                    Latitude = input.HikeEndPoint.Latitude,
+                    Longitute = input.HikeEndPoint.Longitute,
+                };
+
+                await this.hikeEndPointsRepository.AddAsync(endPoint);
+                await this.hikeEndPointsRepository.SaveChangesAsync();
+            }
+
+            var hike = new Hike
+            {
+                Name = input.Name,
+                Length = input.Length,
+                Duration = TimeSpan.FromMinutes(input.Duration),
+                Description = input.Description,
+                Marking = input.Marking,
+                Difficulty = input.Difficulty,
+                Stars = input.Stars,
+                CategoryId = input.CategoryId,
+                RegionId = input.RegionId,
+                MountainId = input.RegionId,
+                HikeStartPointId = startPoint.Id,
+                HikeEndPointId = endPoint.Id,
+                Denivelation = startPoint.Altitude - endPoint.Altitude,
+            };
+
+            await this.hikesRepository.SaveChangesAsync();
         }
     }
 }

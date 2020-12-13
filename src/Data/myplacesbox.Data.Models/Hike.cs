@@ -10,6 +10,7 @@
         public Hike()
         {
             this.HikeImages = new HashSet<HikeImage>();
+            this.HikeVotes = new HashSet<HikeVote>();
         }
 
         public string Name { get; set; }
@@ -53,5 +54,7 @@
         public virtual Mountain Mountain { get; set; }
 
         public virtual ICollection<HikeImage> HikeImages { get; set; }
+
+        public virtual ICollection<HikeVote> HikeVotes { get; set; }
     }
 }

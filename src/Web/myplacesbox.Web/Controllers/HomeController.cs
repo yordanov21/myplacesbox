@@ -18,13 +18,16 @@
     {
         private readonly IGetCountsService countsService;
         private readonly ILandmarksService landmarksService;
+        private readonly IHikesService hikesService;
 
         public HomeController(
             IGetCountsService countsService,
-            ILandmarksService landmarksService)
+            ILandmarksService landmarksService,
+            IHikesService hikesService)
         {
             this.countsService = countsService;
             this.landmarksService = landmarksService;
+            this.hikesService = hikesService;
         }
 
         public IActionResult Index()
@@ -41,6 +44,7 @@
                 TownsCount = countsDto.TownsCount,
                 MountainsCount = countsDto.MountainsCount,
                 RandomLandmarks = this.landmarksService.GetRandom<IndexPageLandmarkViewModel>(6),
+                RandomHikes = this.hikesService.GetRandom<IndexPageHikesViewModel>(6),
             };
 
             return this.View(viewModel);

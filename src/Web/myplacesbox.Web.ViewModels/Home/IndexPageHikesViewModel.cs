@@ -28,6 +28,5 @@
                         x.HikeImages.FirstOrDefault().RemoteImageUrl :
                         "/images/hikes/" + x.HikeImages.FirstOrDefault().Id + "." + x.HikeImages.FirstOrDefault().Extension));
         }
-
     }
 }

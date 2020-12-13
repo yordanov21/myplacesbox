@@ -5,13 +5,11 @@
 
     using MyPlacesBox.Web.ViewModels.Hikes;
 
-    public interface IHikesService
+    public interface IHikesService : IAllPlacesService
     {
         // with input model
         Task CreateAsync(CreateHikeInputModel input, string userId, string imagePath);
 
-        IEnumerable<T> GetAll<T>(int page, int itemsPage = 10);
-
-        int GetCount();
+        Task UpdateAsync(int id, EditHikekInputModel input);
     }
 }

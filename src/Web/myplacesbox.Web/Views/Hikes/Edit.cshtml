@@ -1,0 +1,130 @@
+﻿@model MyPlacesBox.Web.ViewModels.Hikes.EditHikekInputModel
+@{
+    ViewData["Title"] = "Edit Hike";
+    var categoryItems = this.Model.CategoriesItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var mountainItems = this.Model.MountainsItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var regionItems = this.Model.RegionsItems.Select(x => new SelectListItem(x.Value, x.Key));
+  //  var townItems = this.Model.TownsItems.Select(x => new SelectListItem(x.Value, x.Key));
+}
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post" id="editForm">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="CategoryId"></label>
+        <select asp-for="CategoryId" class="form-control" asp-items="categoryItems"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="RegionId">Region</label>
+        <select asp-for="RegionId" class="form-control" asp-items="regionItems"></select>
+        <span asp-validation-for="RegionId" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="MountainId">Mountain</label>
+        <select asp-for="MountainId" class="form-control" asp-items="mountainItems"></select>
+        <span asp-validation-for="MountainId" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="Description"></label>
+        <textarea asp-for="Description" class="form-control" rows="10"></textarea>
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    @*<div class=" form-group">
+        <label asp-for="Latitude">Latitude</label>
+        <input asp-for="Latitude" class="form-control" />
+        <span asp-validation-for="Latitude" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="Longitute">Longitute</label>
+        <input asp-for="Longitute" class="form-control" />
+        <span asp-validation-for="Longitute" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="Websate"></label>
+        <input asp-for="Websate" class="form-control" />
+        <span asp-validation-for="Websate" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="PhoneNumber"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="WorkTime"></label>
+        <input asp-for="WorkTime" class="form-control" />
+        <span asp-validation-for="WorkTime" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="DayOff"></label>
+        <input asp-for="DayOff" class="form-control" />
+        <span asp-validation-for="DayOff" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="EntranceFee"></label>
+        <input asp-for="EntranceFee" class="form-control" />
+        <span asp-validation-for="EntranceFee" class="text-danger"></span>
+    </div>*@
+    <div class=" form-group">
+        <label asp-for="Difficulty"></label>
+        <input asp-for="Difficulty" class="form-control" />
+        <span asp-validation-for="Difficulty" class="text-danger"></span>
+    </div>
+    <div class=" form-group">
+        <label asp-for="Stars"></label>
+        <input asp-for="Stars" class="form-control" />
+        <span asp-validation-for="Stars" class="text-danger"></span>
+    </div>
+    @*<div class=" form-group">
+        <label asp-for="LandmarkImages"></label>
+        <input asp-for="LandmarkImages" class="form-control" />
+        <span asp-validation-for="LandmarkImages" class="text-danger"></span>
+    </div>*@
+    <hr />
+    <input type="hidden" asp-for="Id" />
+</form>
+
+<button type="submit" class="btn btn-success" data-toggle="modal" data-target="#modalEdit">Save changes</button>
+
+
+
+<!-- Modal -->
+<div class="modal" id="modalEdit" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirm edit</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Do you confirm this changes?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="editForm.submit()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        //UrlPath
+        var imageIndex = 0;
+        function AddMoreImages() {
+            $("#ImagesContaniner")
+                .append("<div class='form-control'>Image url <input type='text' name='LandmarkImages[" + imageIndex + "].UrlPath'/></div>");
+            imageIndex++;
+        }
+    </script>
+}

@@ -5,6 +5,7 @@
     public class IndexViewModel
     {
         public IEnumerable<IndexPageLandmarkViewModel> RandomLandmarks { get; set; }
+        public IEnumerable<IndexPageHikesViewModel> RandomHikes { get; set; }
 
         public int LandmarksCount { get; set; }
 
