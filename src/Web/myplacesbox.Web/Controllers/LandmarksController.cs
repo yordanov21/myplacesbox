@@ -44,7 +44,7 @@
         public IActionResult Edit(int id)
         {
             var inputModel = this.landmarksService.GetById<EditLandmarkInputModel>(id);
-            inputModel.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+            inputModel.CategoriesItems = this.categoriesService.GetAllLandmarkCategotiesAsKeyValuePairs();
             inputModel.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
             inputModel.TownsItems = this.townsService.GetAllAsKeyValuePairs();
             inputModel.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
@@ -58,7 +58,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+                input.CategoriesItems = this.categoriesService.GetAllLandmarkCategotiesAsKeyValuePairs();
                 input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
                 input.TownsItems = this.townsService.GetAllAsKeyValuePairs();
                 input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
@@ -74,7 +74,7 @@
         {
             var viewModel = new CreateLandmarkInputModel
             {
-                CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs(),
+                CategoriesItems = this.categoriesService.GetAllLandmarkCategotiesAsKeyValuePairs(),
                 RegionsItems = this.regionsService.GetAllAsKeyValuePairs(),
                 TownsItems = this.townsService.GetAllAsKeyValuePairs(),
                 MountainsItems = this.mountainsService.GetAllAsKeyValuePairs(),
@@ -89,7 +89,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                this.categoriesService.GetAllAsKeyValuePairs();
+                this.categoriesService.GetAllLandmarkCategotiesAsKeyValuePairs();
                 this.regionsService.GetAllAsKeyValuePairs();
                 this.townsService.GetAllAsKeyValuePairs();
                 this.mountainsService.GetAllAsKeyValuePairs();
@@ -103,13 +103,14 @@
             var user = await this.userManager.GetUserAsync(this.User);
             try
             {
+                ;
                 await this.landmarksService.CreateAsync(input, user.Id, $"{this.hostEnvironment.WebRootPath}/images");
             }
             catch (Exception ex)
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
 
-                this.categoriesService.GetAllAsKeyValuePairs();
+                this.categoriesService.GetAllLandmarkCategotiesAsKeyValuePairs();
                 this.regionsService.GetAllAsKeyValuePairs();
                 this.townsService.GetAllAsKeyValuePairs();
                 this.mountainsService.GetAllAsKeyValuePairs();

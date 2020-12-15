@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace MyPlacesBox.Web.ViewModels.Votes
+﻿namespace MyPlacesBox.Web.ViewModels.Votes
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public class PostLandmarkVoteInputModel
     {
         public int LandmarkId { get; set; }

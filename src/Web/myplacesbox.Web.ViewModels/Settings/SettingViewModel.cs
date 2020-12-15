@@ -1,9 +1,8 @@
 ﻿namespace MyPlacesBox.Web.ViewModels.Settings
 {
+    using AutoMapper;
     using MyPlacesBox.Data.Models;
     using MyPlacesBox.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

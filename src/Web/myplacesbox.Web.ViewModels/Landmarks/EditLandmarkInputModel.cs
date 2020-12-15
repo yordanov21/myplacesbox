@@ -11,7 +11,7 @@
     using MyPlacesBox.Data.Models;
     using MyPlacesBox.Services.Mapping;
 
-    public class EditLandmarkInputModel : IMapFrom<Landmark>//, IHaveCustomMappings
+    public class EditLandmarkInputModel : IMapFrom<Landmark>
     {
         public int Id { get; set; }
 
@@ -26,6 +26,9 @@
 
         [MinLength(5)]
         public string Websate { get; set; }
+
+        [MinLength(5)]
+        public string Address { get; set; }
 
         [MinLength(7)]
         public string PhoneNumber { get; set; }
@@ -48,8 +51,6 @@
         [Range(1, 6)]
         public int Difficulty { get; set; }
 
-     //   public string ImageUrl { get; set; }
-
         public int CategoryId { get; set; }
 
         public int RegionId { get; set; }
@@ -58,8 +59,6 @@
 
         public int MountainId { get; set; }
 
-      //  public IEnumerable<IFormFile> LandmarkImages { get; set; }
-
         public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> RegionsItems { get; set; }
@@ -67,13 +66,5 @@
         public IEnumerable<KeyValuePair<string, string>> TownsItems { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> MountainsItems { get; set; }
-
-        //public void CreateMappings(IProfileExpression configuration)
-        //{
-        //    configuration.CreateMap<Landmark, EditLandmarkInputModel>()
-        //        .ForMember(x => x.LandmarkImages, opt =>
-        //            opt.MapFrom(x =>
-        //            x.LandmarkImages));
-        //}
     }
 }

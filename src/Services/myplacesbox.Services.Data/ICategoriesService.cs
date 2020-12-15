@@ -4,7 +4,10 @@ using System.Text;
 
 namespace MyPlacesBox.Services.Data
 {
-    public interface ICategoriesService : IPlaceDetailsService
+    public interface ICategoriesService 
     {
+        IEnumerable<KeyValuePair<string, string>> GetAllHikeCategotiesAsKeyValuePairs();
+
+        IEnumerable<KeyValuePair<string, string>> GetAllLandmarkCategotiesAsKeyValuePairs();
     }
 }

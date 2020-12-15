@@ -10,8 +10,8 @@ using MyPlacesBox.Data;
 namespace MyPlacesBox.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201211193957_AddHashetToLandmarksAndUser")]
-    partial class AddHashetToLandmarksAndUser
+    [Migration("20201215201535_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -478,12 +478,46 @@ namespace MyPlacesBox.Data.Migrations
                     b.ToTable("HikeStartPoints");
                 });
 
+            modelBuilder.Entity("MyPlacesBox.Data.Models.HikeVote", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("HikeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<byte>("Value")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HikeId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("HikeVote");
+                });
+
             modelBuilder.Entity("MyPlacesBox.Data.Models.Landmark", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -868,6 +902,23 @@ namespace MyPlacesBox.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MyPlacesBox.Data.Models.HikeVote", b =>
+                {
+                    b.HasOne("MyPlacesBox.Data.Models.Hike", "Hike")
+                        .WithMany("HikeVotes")
+                        .HasForeignKey("HikeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("MyPlacesBox.Data.Models.ApplicationUser", "User")
+                        .WithMany("HikeVotes")
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Hike");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MyPlacesBox.Data.Models.Landmark", b =>
                 {
                     b.HasOne("MyPlacesBox.Data.Models.Category", "Category")
@@ -947,6 +998,8 @@ namespace MyPlacesBox.Data.Migrations
                 {
                     b.Navigation("Claims");
 
+                    b.Navigation("HikeVotes");
+
                     b.Navigation("LandmarkVotes");
 
                     b.Navigation("Logins");
@@ -964,6 +1017,8 @@ namespace MyPlacesBox.Data.Migrations
             modelBuilder.Entity("MyPlacesBox.Data.Models.Hike", b =>
                 {
                     b.Navigation("HikeImages");
+
+                    b.Navigation("HikeVotes");
                 });
 
             modelBuilder.Entity("MyPlacesBox.Data.Models.HikeEndPoint", b =>

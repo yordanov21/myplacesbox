@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
+
     using AutoMapper;
     using MyPlacesBox.Data.Common.Repositories;
     using MyPlacesBox.Data.Models;
@@ -66,6 +66,5 @@
                     x.LandmarkImages.FirstOrDefault().RemoteImageUrl :
                     "/images/landmarks/" + x.LandmarkImages.FirstOrDefault().Id + "." + x.LandmarkImages.FirstOrDefault().Extension));
         }
-
     }
 }

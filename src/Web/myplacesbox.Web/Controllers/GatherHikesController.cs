@@ -22,7 +22,7 @@
         public async Task<IActionResult> Add()
         {
             await this.hikesScraperService.PopulateDbWithHikesAsync();
-            return this.View();
+            return this.Redirect("/");
         }
     }
 }

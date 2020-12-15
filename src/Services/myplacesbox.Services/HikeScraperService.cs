@@ -92,8 +92,6 @@
                     hike.HikeEndPointLatitude,
                     hike.HikeEndPointLongitude);
 
-              //  var images = await this.GetOrCreateImageAsync(hike.HikeImages);
-
                 var landmarkExists = this.hikesRepository.AllAsNoTracking().Any(x => x.Name == hike.Name);
 
                 if (landmarkExists)
@@ -118,7 +116,6 @@
                     Difficulty = hike.Difficulty,
                     Description = hike.Description,
                     Stars = stars,
-                //    HikeImages = images,
                 };
 
                 var imagesCollection = new List<HikeImage>();
@@ -139,7 +136,6 @@
                         };
 
                         await this.imagesRepository.AddAsync(imageUrl);
-                        //  await this.imagesRepository.SaveChangesAsync();
                         imagesCollection.Add(imageUrl);
                     }
                 }
@@ -205,39 +201,13 @@
             return endPoint.Id;
         }
 
-        //private async Task<ICollection<HikeImage>> GetOrCreateImageAsync(ICollection<HikeImage> images)
-        //{
-        //    var imagesCollection = new List<HikeImage>();
-
-        //    foreach (var image in images)
-        //    {
-        //        var imageUrl = this.imagesRepository
-        //            .AllAsNoTracking()
-        //            .FirstOrDefault(x => x.UrlPath == image.UrlPath);
-
-        //        if (imageUrl == null)
-        //        {
-        //            imageUrl = new HikeImage
-        //            {
-        //                UrlPath = image.UrlPath,
-        //            };
-
-        //            await this.imagesRepository.AddAsync(imageUrl);
-        //            await this.imagesRepository.SaveChangesAsync();
-        //            imagesCollection.Add(imageUrl);
-        //        }
-        //    }
-
-        //    return imagesCollection;
-        //}
-
         private async Task<int> GetOrCreateMountainAsync(string mountainName)
         {
             if (mountainName == "—")
             {
                 var mountain = this.mountainRepositiry
                 .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == mountainName);
+                .FirstOrDefault(x => x.Name == "none");
 
                 if (mountain == null)
                 {
@@ -279,7 +249,7 @@
             {
                 var town = this.townRepositiry
                      .AllAsNoTracking()
-                     .FirstOrDefault(x => x.Name == townName);
+                     .FirstOrDefault(x => x.Name == "none");
 
                 if (town == null)
                 {
@@ -445,11 +415,12 @@
             hike.Description = allDescription;
 
             // Get image
-            var imagesUrl = document.QuerySelectorAll(".gallery-small > div.gallery-small-images > a > img");
+          //  var imagesUrl = document.QuerySelectorAll(".gallery-small > div.gallery-small-images > a > img");
+            var imagesUrl = document.QuerySelectorAll(".gallery-small > div.gallery-small-images > a");
 
             foreach (var imageUrl in imagesUrl)
             {
-                var curentImageUrl = imageUrl.GetAttribute("src");
+                var curentImageUrl = imageUrl.GetAttribute("href");
                 HikeImage image = new HikeImage
                 {
                     RemoteImageUrl = curentImageUrl,

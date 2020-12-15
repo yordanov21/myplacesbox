@@ -4,11 +4,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using MyPlacesBox.Common;
-    using MyPlacesBox.Data.Models;
-
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;
+    using MyPlacesBox.Common;
+    using MyPlacesBox.Data.Models;
 
     internal class RolesSeeder : ISeeder
     {

@@ -97,9 +97,10 @@
                     UserId = userId,
                     Extension = extension,
                 };
-                hike.HikeImages.Add(dbImage);
-
                 var physicalPath = $"{imagePath}/landmarks/{dbImage.Id}.{extension}";
+                string localImgUrl = physicalPath.Split("wwwroot")[1];
+                dbImage.RemoteImageUrl = localImgUrl;
+                hike.HikeImages.Add(dbImage);
                 using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
                 await image.CopyToAsync(fileStream);
             }
@@ -153,57 +154,23 @@
 
         public async Task UpdateAsync(int id, EditHikekInputModel input)
         {
-            ;
-            //var startPoint = this.hikeStartPointsRepository.All()
-            //      .FirstOrDefault(x => x.Name == input.HikeStartPoint.Name);
-
-            //if (startPoint == null)
-            //{
-            //    startPoint = new HikeStartPoint
-            //    {
-            //        Name = input.HikeStartPoint.Name,
-            //        Altitude = input.HikeStartPoint.Altitude,
-            //        Latitude = input.HikeStartPoint.Longitute,
-            //        Longitute = input.HikeStartPoint.Longitute,
-            //    };
-
-            //    await this.hikeStartPointsRepository.AddAsync(startPoint);
-            //    await this.hikeStartPointsRepository.SaveChangesAsync();
-            //}
-
-            //var endPoint = this.hikeEndPointsRepository.All()
-            //    .FirstOrDefault(x => x.Name == input.HikeEndPoint.Name);
-
-            //if (endPoint == null)
-            //{
-            //    endPoint = new HikeEndPoint
-            //    {
-            //        Name = input.HikeEndPoint.Name,
-            //        Altitude = input.HikeEndPoint.Altitude,
-            //        Latitude = input.HikeEndPoint.Latitude,
-            //        Longitute = input.HikeEndPoint.Longitute,
-            //    };
-
-            //    await this.hikeEndPointsRepository.AddAsync(endPoint);
-            //    await this.hikeEndPointsRepository.SaveChangesAsync();
-            //}
-
             var hike = this.hikesRepository.All().FirstOrDefault(x => x.Id == id);
-      
-                hike.Name = input.Name;
-            //    Length = input.Length,
-            //   Duration = TimeSpan.FromMinutes(input.Duration),
+
+            hike.Name = input.Name;
+            hike.Length = input.Length;
+            hike.Duration = TimeSpan.FromMinutes(input.Duration);
             hike.Description = input.Description;
-                //   Marking = input.Marking,
-                hike.Difficulty = input.Difficulty;
-                hike.Stars = input.Stars;
-                hike.CategoryId = input.CategoryId;
-                hike.RegionId = input.RegionId;
-                hike.MountainId = input.RegionId;
-             //   HikeStartPointId = startPoint.Id,
-            //    HikeEndPointId = endPoint.Id,
-             //   Denivelation = startPoint.Altitude - endPoint.Altitude,
-            
+            hike.Marking = input.Marking;
+            hike.Difficulty = input.Difficulty;
+            hike.Stars = input.Stars;
+            hike.CategoryId = input.CategoryId;
+            hike.RegionId = input.RegionId;
+            hike.MountainId = input.RegionId;
+            hike.HikeStartPointId = input.HikeStartPointId;
+            hike.HikeEndPointId = input.HikeEndPointId;
+            hike.HikeEndPoint = input.HikeEndPoint;
+            hike.HikeStartPoint = input.HikeStartPoint;
+            hike.Denivelation = input.HikeStartPoint.Altitude - input.HikeEndPoint.Altitude;
 
             await this.hikesRepository.SaveChangesAsync();
         }

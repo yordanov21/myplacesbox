@@ -97,7 +97,7 @@
                     Latitude = landmark.Latitude,
                     Longitute = landmark.Longitute,
                     Websate = landmark.Websate,
-                    // Address = landmark.Address //TODO add adress in DB landmark table
+                    Address = landmark.Address,
                     PhoneNumber = landmark.PhoneNumber,
                     WorkTime = landmark.WorkTime,
                     DayOff = landmark.DayOff,
@@ -105,7 +105,6 @@
                     Difficulty = landmark.Difficulty,
                     Description = landmark.Description,
                     Stars = stars,
-                 //   LandmarkImages = images,
                 };
 
                 var imagesCollection = new List<LandmarkImage>();
@@ -126,7 +125,6 @@
                         };
 
                         await this.imagesRepository.AddAsync(imageUrl);
-                      //  await this.imagesRepository.SaveChangesAsync();
                         imagesCollection.Add(imageUrl);
                     }
                 }
@@ -171,7 +169,7 @@
             {
                 var mountain = this.mountainRepositiry
                 .AllAsNoTracking()
-                .FirstOrDefault(x => x.Name == mountainName);
+                .FirstOrDefault(x => x.Name == "none");
 
                 if (mountain == null)
                 {
@@ -213,7 +211,7 @@
             {
                 var town = this.townRepositiry
                      .AllAsNoTracking()
-                     .FirstOrDefault(x => x.Name == townName);
+                     .FirstOrDefault(x => x.Name == "none");
 
                 if (town == null)
                 {
@@ -283,7 +281,7 @@
                 category = new Category()
                 {
                     Name = categoryName,
-                    Type = "Hike",
+                    Type = "Landmark",
                 };
 
                 await this.categoryRepository.AddAsync(category);

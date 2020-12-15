@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using MyPlacesBox.Web.ViewModels.Images;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace MyPlacesBox.Web.ViewModels.Landmarks
+﻿namespace MyPlacesBox.Web.ViewModels.Landmarks
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
+    using Microsoft.AspNetCore.Http;
+
     public class CreateLandmarkInputModel
     {
         [Required]
@@ -20,6 +19,9 @@ namespace MyPlacesBox.Web.ViewModels.Landmarks
 
         [MinLength(5)]
         public string Websate { get; set; }
+
+        [MinLength(5)]
+        public string Address { get; set; }
 
         [MinLength(7)]
         public string PhoneNumber { get; set; }
@@ -52,8 +54,6 @@ namespace MyPlacesBox.Web.ViewModels.Landmarks
 
         public IEnumerable<IFormFile> LandmarkImages { get; set; }
 
-      //  public virtual IEnumerable<LandmarkImageInputModel> LandmarkImages { get; set; }
-
         public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> RegionsItems { get; set; }
@@ -61,6 +61,5 @@ namespace MyPlacesBox.Web.ViewModels.Landmarks
         public IEnumerable<KeyValuePair<string, string>> TownsItems { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> MountainsItems { get; set; }
-
     }
 }

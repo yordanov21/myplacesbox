@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyPlacesBox.Web.ViewModels.Landmarks
+﻿namespace MyPlacesBox.Web.ViewModels.Landmarks
 {
+    using System.Collections.Generic;
+
     public class LandmarksListInputModel : PagingViewModel
     {
         public IEnumerable<LandmarkInListInputModel> Landmarks { get; set; }
-
     }
 }

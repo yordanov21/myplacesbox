@@ -23,7 +23,7 @@
         public async Task<IActionResult> Add()
         {
             await this.landmarksScraperService.PopulateDbWithLandmarksAsync();
-            return this.View();
+            return this.Redirect("/");
         }
     }
 }

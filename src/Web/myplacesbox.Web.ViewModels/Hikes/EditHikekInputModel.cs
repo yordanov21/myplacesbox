@@ -37,14 +37,13 @@
         [Range(1, 5)]
         public int Stars { get; set; }
 
-        // TODO: not mapped
-        //  public int HikeStartPointId { get; set; }
+        public int HikeStartPointId { get; set; }
 
-        // public virtual HikeStartPoint HikeStartPoint { get; set; }
+        public virtual HikeStartPoint HikeStartPoint { get; set; }
 
-        // public int HikeEndPointId { get; set; }
+        public int HikeEndPointId { get; set; }
 
-        // public virtual HikeEndPoint HikeEndPoint { get; set; }
+        public virtual HikeEndPoint HikeEndPoint { get; set; }
         public string UserId { get; set; }
 
         [Display(Name = "Category")]

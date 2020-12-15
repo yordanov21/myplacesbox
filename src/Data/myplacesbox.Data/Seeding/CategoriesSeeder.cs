@@ -30,8 +30,6 @@
             await dbContext.Categories.AddAsync(new Category { Name = "Others", Type = "Landmark" });
 
             await dbContext.SaveChangesAsync();
-            
-            // not finished
         }
     }
 }

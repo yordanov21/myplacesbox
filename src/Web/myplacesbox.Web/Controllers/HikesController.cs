@@ -47,7 +47,7 @@
         public IActionResult Edit(int id)
         {
             var inputModel = this.hikesService.GetById<EditHikekInputModel>(id);
-            inputModel.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+            inputModel.CategoriesItems = this.categoriesService.GetAllHikeCategotiesAsKeyValuePairs();
             inputModel.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
             inputModel.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
 
@@ -58,14 +58,14 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(int id, EditHikekInputModel input)
         {
-            // TODO: coment for edit form  ModelState is not valid
-            // if (!this.ModelState.IsValid)
-            // {
-            //    input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
-            //    input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
-            //    input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
-            //    return this.View(input);
-            // }
+            if (!this.ModelState.IsValid)
+            {
+                input.CategoriesItems = this.categoriesService.GetAllHikeCategotiesAsKeyValuePairs();
+                input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
+                input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
+                return this.View(input);
+            }
+
             await this.hikesService.UpdateAsync(id, input);
             return this.RedirectToAction(nameof(this.ById), new { id });
         }
@@ -75,7 +75,7 @@
         {
             var viewModel = new CreateHikeInputModel
             {
-                CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs(),
+                CategoriesItems = this.categoriesService.GetAllHikeCategotiesAsKeyValuePairs(),
                 RegionsItems = this.regionsService.GetAllAsKeyValuePairs(),
                 MountainsItems = this.mountainsService.GetAllAsKeyValuePairs(),
 
@@ -90,7 +90,7 @@
         {
             if (!this.ModelState.IsValid)
             {
-                input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+                input.CategoriesItems = this.categoriesService.GetAllHikeCategotiesAsKeyValuePairs();
                 input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
                 input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
                 return this.View(input);
@@ -105,7 +105,7 @@
             {
                 this.ModelState.AddModelError(string.Empty, ex.Message);
 
-                input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
+                input.CategoriesItems = this.categoriesService.GetAllHikeCategotiesAsKeyValuePairs();
                 input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
                 input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
 

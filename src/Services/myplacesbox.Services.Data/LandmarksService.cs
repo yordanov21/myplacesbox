@@ -35,7 +35,7 @@
                 Latitude = input.Latitude,
                 Longitute = input.Longitute,
                 Websate = input.Websate,
-                // TODO Add adress after is iplement in the models and DB
+                Address = input.Address,
                 PhoneNumber = input.PhoneNumber,
                 WorkTime = input.WorkTime,
                 DayOff = input.DayOff,
@@ -45,8 +45,7 @@
                 UserId = userId,
             };
 
-            //   landmark.Town.IsTown = true;
-
+            // landmark.Town.IsTown = true;
             Directory.CreateDirectory($"{imagePath}/landmarks/");
             foreach (var image in input.LandmarkImages)
             {
@@ -62,9 +61,13 @@
                     UserId = userId,
                     Extension = extension,
                 };
-                landmark.LandmarkImages.Add(dbImage);
 
                 var physicalPath = $"{imagePath}/landmarks/{dbImage.Id}.{extension}";
+
+                string localImgUrl = physicalPath.Split("wwwroot")[1];
+                dbImage.RemoteImageUrl = localImgUrl;
+                landmark.LandmarkImages.Add(dbImage);
+
                 using Stream fileStream = new FileStream(physicalPath, FileMode.Create);
                 await image.CopyToAsync(fileStream);
             }
