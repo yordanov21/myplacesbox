@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MyPlacesBox.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-namespace MyPlacesBox.Web.Controllers
+﻿namespace MyPlacesBox.Web.Controllers
 {
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using MyPlacesBox.Services;
+
     public class GatherHikesController : BaseController
     {
         private readonly IHikeScraperService hikesScraperService;
@@ -22,7 +21,6 @@ namespace MyPlacesBox.Web.Controllers
 
         public async Task<IActionResult> Add()
         {
-            ;
             await this.hikesScraperService.PopulateDbWithHikesAsync();
             return this.View();
         }

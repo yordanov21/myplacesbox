@@ -3,11 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+
     using Microsoft.AspNetCore.Http;
-    using MyPlacesBox.Data.Models;
+
     using MyPlacesBox.Web.ViewModels.HikeEndPoints;
     using MyPlacesBox.Web.ViewModels.HikeStartPoints;
-    using MyPlacesBox.Web.ViewModels.Images;
 
     public class CreateHikeInputModel
     {
@@ -55,8 +55,8 @@
 
         public IEnumerable<IFormFile> HikeImages { get; set; }
 
-     //   public virtual IEnumerable<HikeImageInputModel> HikeImages { get; set; }
-
+        // TODO: Images for hikes not created.
+        // public virtual IEnumerable<HikeImageInputModel> HikeImages { get; set; }
         public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> RegionsItems { get; set; }

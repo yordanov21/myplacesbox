@@ -6,22 +6,23 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using MyPlacesBox.Data;
+    using MyPlacesBox.Data.Common.Repositories;
     using MyPlacesBox.Data.Models;
 
     [Area("Administration")]
     public class RegionsController : AdministrationController
     {
-        private readonly ApplicationDbContext db;
+        private readonly IDeletableEntityRepository<Region> dataRepository;
 
-        public RegionsController(ApplicationDbContext context)
+        public RegionsController(IDeletableEntityRepository<Region> dataRepository)
         {
-            this.db = context;
+            this.dataRepository = dataRepository;
         }
 
         // GET: Administration/Regions
         public async Task<IActionResult> Index()
         {
-            return this.View(await this.db.Regions.ToListAsync());
+            return this.View(await this.dataRepository.All().ToListAsync());
         }
 
         // GET: Administration/Regions/Details/5
@@ -32,7 +33,7 @@
                 return this.NotFound();
             }
 
-            var region = await this.db.Regions
+            var region = await this.dataRepository.All()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (region == null)
             {
@@ -57,8 +58,8 @@
         {
             if (this.ModelState.IsValid)
             {
-                this.db.Add(region);
-                await this.db.SaveChangesAsync();
+                await this.dataRepository.AddAsync(region);
+                await this.dataRepository.SaveChangesAsync();
                 return this.RedirectToAction(nameof(this.Index));
             }
 
@@ -73,7 +74,7 @@
                 return this.NotFound();
             }
 
-            var region = await this.db.Regions.FindAsync(id);
+            var region = this.dataRepository.All().FirstOrDefault( x=>x.Id == id);
             if (region == null)
             {
                 return this.NotFound();
@@ -98,8 +99,8 @@
             {
                 try
                 {
-                    this.db.Update(region);
-                    await this.db.SaveChangesAsync();
+                    this.dataRepository.Update(region);
+                    await this.dataRepository.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -127,7 +128,7 @@
                 return this.NotFound();
             }
 
-            var region = await this.db.Regions
+            var region = await this.dataRepository.All()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (region == null)
             {
@@ -143,15 +144,15 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var region = await db.Regions.FindAsync(id);
-            this.db.Regions.Remove(region);
-            await this.db.SaveChangesAsync();
+            var region = this.dataRepository.All().FirstOrDefault(x => x.Id == id);
+            this.dataRepository.Delete(region);
+            await this.dataRepository.SaveChangesAsync();
             return this.RedirectToAction(nameof(this.Index));
         }
 
         private bool RegionExists(int id)
         {
-            return this.db.Regions.Any(e => e.Id == id);
+            return this.dataRepository.All().Any(e => e.Id == id);
         }
     }
 }

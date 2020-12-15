@@ -1950,21 +1950,20 @@ footer {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-around;
-    align-items: center;
+    align-items: flex-start;
 }
+
 .homelandmarkstext {
-   
     color: black;
 }
 
-.homelandmarkstext:hover {
-    color: aliceblue;
-}
+    .homelandmarkstext:hover {
+        color: aliceblue;
+    }
 
-.homelandmarks{
-    border:solid;
+.homelandmarks {
+    border: solid;
     border-radius: 5px;
-    
 }
 
     .homelandmarks:hover {
@@ -1975,3 +1974,23 @@ footer {
         background-color: moccasin;
         /* opacity: 0.95; */
     }
+
+
+/* Set the size of the div element that contains the map */
+#map {
+    height: 400px;
+    /* The height is 400 pixels */
+    width: 100%;
+    /* The width is the width of the web page */
+}
+
+
+
+.main {
+   
+}
+
+.container {
+    padding: 0px;
+    margin: 20px;
+}

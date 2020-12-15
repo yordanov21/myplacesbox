@@ -50,6 +50,7 @@
             services.AddControllersWithViews(
                 options =>
                     {
+                        // Prevent CSRF
                         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
                     }).AddRazorRuntimeCompilation();
             services.AddRazorPages();

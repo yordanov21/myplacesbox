@@ -100,81 +100,44 @@
                                         <span>@Model.SingleHikeView.MountainName</span>
                                     }
                                 </li>
-                                @*<li>
-                                    <strong>Coordinates:</strong>
-                                    @if (Model.SingleHikeView.Latitude != null && Model.SingleHikeView.Longitute != null)
-                                    {
-                                        <span itemprop="geo" ; itemscope="itemscope" itemtype="" http: //schema.org/GeoCoordinates""> @Model.SingleLandmarkView.Longitute, @Model.SingleLandmarkView.Latitude</span>
-                                    }
-                                    else
-                                    {
-                                        <span itemprop="geo" ; itemscope="itemscope" itemtype=""> - </span>
-                                    }
+                                <li>
+                                    <strong>Start Point:</strong>
+                                    <span>
+                                        @Model.SingleHikeView.HikeStartPointName
+                                        <small>
+                                            <em itemprop="geo" ; itemscope="itemscope" itemtype="" http: //schema.org/GeoCoordinates""> @Model.SingleHikeView.HikeStartPoint.Longitute, @Model.SingleHikeView.HikeStartPoint.Latitude</em>
+                                        </small>
+                                    </span>
 
                                 </li>
                                 <li>
-                                    <strong>Website:</strong>
-                                    @if (Model.SingleHikeView.Websate != null)
-                                    {
-                                        <span href="@Model.SingleHikeView.Websate" target="_blank" rel="nofollow" class="list-item-website">@Model.SingleLandmarkView.Websate</span>
-                                    }
-                                    else
-                                    {
-                                        <span>—</span>
-                                    }
+                                    <strong>End Point:</strong>
+                                    <span>
+                                        @Model.SingleHikeView.HikeEndPointName
+                                        <small>
+                                            <em itemprop="geo" ; itemscope="itemscope" itemtype="" http: //schema.org/GeoCoordinates"">@Model.SingleHikeView.HikeEndPoint.Longitute, @Model.SingleHikeView.HikeEndPoint.Latitude</em>
+                                        </small>
+                                    </span>
+                                </li>
+                                <li>
+                                    <strong>Denivelation:</strong>
+                                    <span>@Model.SingleHikeView.Denivelation</span>
 
                                 </li>
                                 <li>
-                                    <strong>Адрес:</strong>
-                                    <span itemprop="streetAddress">—</span>
+                                    <strong>Lenght:</strong>
+                                    <span>@Model.SingleHikeView.Length</span>
                                 </li>
                                 <li>
-                                    <strong>Phone:</strong>
-                                    <span itemprop="telephone">+359 936 53 022</span>
+                                    <strong>Duration:</strong>
+                                    <span>@Model.SingleHikeView.Duration</span>
                                 </li>
                                 <li>
-                                    <strong>Work time:</strong>
-                                    @if (Model.SingleHikeView.WorkTime != null)
-                                    {
-                                        <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo""><em class="working-hours">@Model.SingleLandmarkView.WorkTime</em></span>
-                                    }
-                                    else
-                                    {
-                                        <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo""><em class="working-hours"> - </em></span>
-                                    }
-
+                                    <strong>Marking:</strong>
+                                    <span>
+                                        <em class="rating" data-score="6" data-hints='["Екстремно","Много трудно","Трудно","Средно","Лесно","Много лесно","С автомобил"]'>@Model.SingleHikeView.Marking</em>
+                                    </span>
                                 </li>
-                                <li>
-                                    <strong>Days OFF:</strong>
-                                    @if (Model.SingleLandmarkView.DayOff != null)
-                                    {
-                                        <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo"">
-                                            <p>@Model.SingleLandmarkView.DayOff</p>
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span itemprop="openingHoursSpecification" itemscope="itemscope" itemtype="" http: //schema.org/OpeningHoursSpecification&quo"">
-                                            <em> - </em>
-                                        </span>
-                                    }
-                                </li>
-                                <li>
-                                    <strong>Entrance Fee</strong>
-                                    @if (Model.SingleLandmarkView.EntranceFee != 0)
-                                    {
-                                        <span>
-                                            <em>@Model.SingleLandmarkView.EntranceFee</em>
-                                        </span>
-                                    }
-                                    else
-                                    {
-                                        <span>
-                                            <em> - </em>
-                                        </span>
-                                    }
-
-                                </li>*@
                                 <li>
                                     <strong>Difficulty:</strong>
                                     <span>
@@ -204,17 +167,17 @@
                                         }
                                     }
                                 </ol>
-                                <div class="carousel-inner">
+                                <div class="carousel-inner" style="height: 431px;">
                                     @{bool isActive = false;}
                                     @foreach (var item in Model.SingleHikeView.HikeImages)
                                     {
                                         if (isActive == false)
                                         {
-                                            <div class="carousel-item active">
-                                                <img class="d-block w-100" src="@item.RemoteImageUrl" alt="First slide">
+                                            <div class="carousel-item active" style="height: 431px;">
+                                                <img class="d-block w-100" src="@item.RemoteImageUrl" alt="First slide" style="object-fit: cover;">
                                                 <div class="carousel-caption d-none d-md-block">
-                                                    <h5>My Caption Title (1st Image)</h5>
-                                                    <p>The whole caption will only show up if the screen is at least medium size.</p>
+                                                    <h5>@Model.SingleHikeView.Name</h5>
+                                                    <p>See the pictures from @Model.SingleHikeView.Name.</p>
                                                 </div>
                                             </div>
                                             isActive = true;
@@ -266,50 +229,11 @@
                         {
                             <p>@item</p>
                         }
-
-                        @*<adsense data-ad-slot="5137058607" type="horizontal"></adsense>*@
-
-
-
-
-
-                        <div class="">
-                            <ul class="row ">
-                                <li>
-                                    <a href="#"><i class="fab fa-facebook-f icon"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fab fa-twitter icon"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fab fa-instagram icon"></i></a>
-                                </li>
-                                <li>
-                                    <a href="#"><i class="fab fa-google-plus-g icon"></i></a>
-                                </li>
-                            </ul>
-                        </div>
-
-                        @*<div>
-                                <h1>My First Google Map</h1>
-
-                                <div id="googleMap" style="width:100%;height:400px;"></div>
-                            </div>*@
-
-
-                        @*<div id="map">
-                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d47752.72784629606!2d@(Model.Latitude)!3d@(Model.Longitute)!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14ac598ad0d361bb%3A0x400a01269bf5a80!2sSmolyan!5e0!3m2!1sen!2sbg!4v1588191727950!5m2!1sen!2sbg"
-                                        width="100%" height="200px" frameborder="0" style="border:0;" allowfullscreen=""
-                                        aria-hidden="false" tabindex="0"></iframe>
-                            </div>
-                            <div class="map-bottom">
-                                <general-map v-if="landmarks.length" :markers-data="landmarks"></general-map>
-                            </div>*@
                     </article>
                 </section>
 
                 <div>
-                    <h3>My Google Maps Demo</h3>
+                    <h3>My Google Maps Logation</h3>
                     <!--The div element for the map -->
                     <div id="map"></div>
                 </div>
@@ -321,67 +245,54 @@
                         </h3>
                     </header>
 
-                    <section class="articles-container clearfix">
+                    <section class="articles-container clearfix placeslist">
                         @{
-                            var landmarkArount = Model.HikesListInput.Hikes.Where(x => x.RegionName == Model.SingleHikeView.RegionName);
-                            int countlandmarks = 0;
-                        }
+                            var hikesArount = Model.HikesListInput.Hikes.Where(x => x.RegionName == Model.SingleHikeView.RegionName);
+                            int counthikes = 0;
 
-                        @foreach (var item in landmarkArount)
-                        {
 
-                            if (Model.SingleHikeView.Id != item.Id)
+                            @foreach (var item in hikesArount)
                             {
-                                <a class="article" asp-action="ById" asp-route-id="@item.Id">
-                                    <span class="article-image">
-                                        <img src="@item.ImageUrl" />
-                                        <small class="icon icon-historical" title=""></small>
-                                    </span>
 
-                                    <span class="article-title">@item.Name </span>
-                                </a>
+                                if (Model.SingleHikeView.Id != item.Id)
+                                {
+                                    <a class="article" asp-action="ById" asp-route-id="@item.Id">
+                                        <span class="article-image">
+                                            <img src="@item.ImageUrl" />
+                                            <small class="icon icon-historical" title=""></small>
+                                        </span>
+
+                                        <span class="article-title">@item.Name </span>
+                                    </a>
+
+                                    ++counthikes;
+                                    if (counthikes == 4)
+                                    {
+                                        break;
+                                    }
+                                }
                             }
-                        }
-                        @*<a class="article" href="https://tripsjournal.com/zabelezhitelnost/belogradchishka-krepost-kaleto">
-                                <span class="article-image">
-                                    <img src="https://tripsjournal.com/wp-content/uploads/cache/2015/05/belogradchishka-krepost/431430801.jpg" />
-                                    <small class="icon icon-historical" title=""></small>
-                                </span>
-
-                                <span class="article-title">Белоградчишка крепост &#8222;Калето&#8220;</span>
-                            </a>*@
-
+                        }                     
                     </section>
                 </section>
-
             </section>
         </landmark>
-
-
     </div>
 </section>
-
 
 <script defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRhXjWy7NSz9HrW0zRTZ65RReKgRpdZ-Y&callback=initMap">
 </script>
-<style type="text/css">
-    /* Set the size of the div element that contains the map */
-    #map {
-        height: 400px;
-        /* The height is 400 pixels */
-        width: 100%;
-        /* The width is the width of the web page */
-    }
-</style>
+
 <script>
         // Initialize and add the map
         function initMap() {
             // The location of Uluru
             const uluru = { lat: @Model.SingleHikeView.HikeStartPoint.Latitude, lng: @Model.SingleHikeView.HikeStartPoint.Longitute };
+            const uluru2 = { lat: @Model.SingleHikeView.HikeEndPoint.Latitude, lng: @Model.SingleHikeView.HikeEndPoint.Longitute };
             // The map, centered at Uluru
             const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 15,
+                zoom: 11,
                 center: uluru,
             });
             // The marker, positioned at Uluru
@@ -389,9 +300,14 @@
                 position: uluru,
                 map: map,
             });
+            const marker2 = new google.maps.Marker({
+                position: uluru2,
+                map: map,
+            });
         }
 </script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBRhXjWy7NSz9HrW0zRTZ65RReKgRpdZ-Y&callback=initMap&libraries=&v=weekly"
+        defer></script>
 <form method="post" id="antiForgeryForm"></form>
 @section Scripts {
     <script>

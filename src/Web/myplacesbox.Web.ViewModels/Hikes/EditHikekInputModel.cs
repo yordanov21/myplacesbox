@@ -3,12 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
+
     using AutoMapper;
     using MyPlacesBox.Data.Models;
     using MyPlacesBox.Services.Mapping;
-    using MyPlacesBox.Web.ViewModels.HikeEndPoints;
-    using MyPlacesBox.Web.ViewModels.HikeStartPoints;
 
     public class EditHikekInputModel : IMapFrom<Hike>, IHaveCustomMappings
     {
@@ -39,14 +37,14 @@
         [Range(1, 5)]
         public int Stars { get; set; }
 
-      //  public int HikeStartPointId { get; set; }
+        // TODO: not mapped
+        //  public int HikeStartPointId { get; set; }
 
-     //   public virtual HikeStartPoint HikeStartPoint { get; set; }
+        // public virtual HikeStartPoint HikeStartPoint { get; set; }
 
-    //    public int HikeEndPointId { get; set; }
+        // public int HikeEndPointId { get; set; }
 
-     //   public virtual HikeEndPoint HikeEndPoint { get; set; }
-
+        // public virtual HikeEndPoint HikeEndPoint { get; set; }
         public string UserId { get; set; }
 
         [Display(Name = "Category")]
@@ -56,10 +54,10 @@
 
         public int MountainId { get; set; }
 
-      //  public IEnumerable<IFormFile> HikeImages { get; set; }
+        // TODO: not mapped
+        // public IEnumerable<IFormFile> HikeImages { get; set; }
 
-        //   public virtual IEnumerable<HikeImageInputModel> HikeImages { get; set; }
-
+        // public virtual IEnumerable<HikeImageInputModel> HikeImages { get; set; }
         public IEnumerable<KeyValuePair<string, string>> CategoriesItems { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> RegionsItems { get; set; }
@@ -71,14 +69,16 @@
             configuration.CreateMap<Hike, EditHikekInputModel>()
                 .ForMember(x => x.Duration, opt =>
                     opt.MapFrom(x => (int)x.Duration.TotalMinutes));
-                 //.ForMember(x => x.HikeStartPoint, opt =>
-                 //   opt.MapFrom(x => x.HikeStartPoint))
-                 //.ForMember(x => x.HikeEndPoint, opt =>
-                 //    opt.MapFrom(x => x.HikeEndPoint))
-                 //  .ForMember(x => x.HikeStartPointId, opt =>
-                 //   opt.MapFrom(x => x.HikeStartPointId))
-                 //.ForMember(x => x.HikeEndPointId, opt =>
-                 //    opt.MapFrom(x => x.HikeEndPointId));
+
+            // TODO: not mapped
+            // .ForMember(x => x.HikeStartPoint, opt =>
+            //   opt.MapFrom(x => x.HikeStartPoint))
+            // .ForMember(x => x.HikeEndPoint, opt =>
+            //    opt.MapFrom(x => x.HikeEndPoint))
+            //  .ForMember(x => x.HikeStartPointId, opt =>
+            //   opt.MapFrom(x => x.HikeStartPointId))
+            // .ForMember(x => x.HikeEndPointId, opt =>
+            //    opt.MapFrom(x => x.HikeEndPointId));
         }
     }
 }

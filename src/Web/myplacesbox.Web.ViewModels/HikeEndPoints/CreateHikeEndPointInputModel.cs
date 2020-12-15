@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-
-namespace MyPlacesBox.Web.ViewModels.HikeEndPoints
+﻿namespace MyPlacesBox.Web.ViewModels.HikeEndPoints
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+
     public class CreateHikeEndPointInputModel
     {
         [Required]
@@ -19,6 +17,5 @@ namespace MyPlacesBox.Web.ViewModels.HikeEndPoints
         public double? Latitude { get; set; }
 
         public double? Longitute { get; set; }
-
     }
 }

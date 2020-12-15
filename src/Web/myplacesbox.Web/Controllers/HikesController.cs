@@ -58,16 +58,14 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(int id, EditHikekInputModel input)
         {
-            ;
-
-            //if (!this.ModelState.IsValid)
-            //{
+            // TODO: coment for edit form  ModelState is not valid
+            // if (!this.ModelState.IsValid)
+            // {
             //    input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
             //    input.RegionsItems = this.regionsService.GetAllAsKeyValuePairs();
             //    input.MountainsItems = this.mountainsService.GetAllAsKeyValuePairs();
             //    return this.View(input);
-            //}
-
+            // }
             await this.hikesService.UpdateAsync(id, input);
             return this.RedirectToAction(nameof(this.ById), new { id });
         }
@@ -80,6 +78,7 @@
                 CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs(),
                 RegionsItems = this.regionsService.GetAllAsKeyValuePairs(),
                 MountainsItems = this.mountainsService.GetAllAsKeyValuePairs(),
+
                 // HikeStartPoint = new HikeStartPointsService,
             };
             return this.View(viewModel);
@@ -132,7 +131,6 @@
 
         public IActionResult ById(int id)
         {
-
             var hike = this.hikesService.GetById<SingleHikeViewModel>(id);
 
             var hikes = new HikesListInputModel

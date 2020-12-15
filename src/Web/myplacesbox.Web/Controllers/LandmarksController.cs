@@ -1,10 +1,6 @@
 ﻿namespace MyPlacesBox.Web.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Security.Claims;
-    using System.Text;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Authorization;
@@ -60,7 +56,6 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> Edit(int id, EditLandmarkInputModel input)
         {
-            ;
             if (!this.ModelState.IsValid)
             {
                 input.CategoriesItems = this.categoriesService.GetAllAsKeyValuePairs();
@@ -73,7 +68,6 @@
             await this.landmarksService.UpdateAsync(id, input);
             return this.RedirectToAction(nameof(this.ById), new { id });
         }
-
 
         [Authorize]
         public IActionResult Create()
@@ -103,11 +97,10 @@
             }
 
             // Get userId by cookie
-            //var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            // var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             // Get userId by UserManager
             var user = await this.userManager.GetUserAsync(this.User);
-     
             try
             {
                 await this.landmarksService.CreateAsync(input, user.Id, $"{this.hostEnvironment.WebRootPath}/images");
@@ -142,7 +135,6 @@
 
         public IActionResult ById(int id)
         {
-
             var landmark = this.landmarksService.GetById<SingleLandmarkViewModel>(id);
 
             var landmarks = new LandmarksListInputModel
@@ -170,9 +162,9 @@
             return this.RedirectToAction(nameof(this.All));
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> SendToEmail(int id)
-        //{
+        // [HttpPost]
+        // public async Task<IActionResult> SendToEmail(int id)
+        // {
         //    var recipe = this.landmarksService.GetById<LandmarkInListViewModel>(id);
         //    var html = new StringBuilder();
         //    html.AppendLine($"<h1>{recipe.Name}</h1>");
@@ -180,6 +172,6 @@
         //    html.AppendLine($"<img src=\"{recipe.ImageUrl}\" />");
         //    await this.emailSender.SendEmailAsync("recepti@recepti.com", "MoiteRecepti", "gerig14198@questza.com", recipe.Name, html.ToString());
         //    return this.RedirectToAction(nameof(this.ById), new { id });
-        //}
+        // }
     }
 }

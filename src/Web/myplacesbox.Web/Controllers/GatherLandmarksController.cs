@@ -1,13 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MyPlacesBox.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MyPlacesBox.Web.Controllers
+﻿namespace MyPlacesBox.Web.Controllers
 {
-    //TODO: Move in administarion area (only admin can access the controller)
+    using System.Threading.Tasks;
+
+    using Microsoft.AspNetCore.Mvc;
+    using MyPlacesBox.Services;
+
+    // TODO: Move in administarion area (only admin can access the controller)
     public class GatherLandmarksController : BaseController
     {
         private readonly ILandmarksScraperService landmarksScraperService;

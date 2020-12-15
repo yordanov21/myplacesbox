@@ -1,19 +1,12 @@
 ﻿namespace MyPlacesBox.Web.Controllers
 {
     using System.Diagnostics;
-    using System.Linq;
 
-    using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
-    using MyPlacesBox.Data;
-    using MyPlacesBox.Data.Common.Repositories;
-    using MyPlacesBox.Data.Models;
     using MyPlacesBox.Services.Data;
     using MyPlacesBox.Web.ViewModels;
     using MyPlacesBox.Web.ViewModels.Home;
 
-    // 1.with ApplicationDbContext
-    // 1.with Repository
     public class HomeController : BaseController
     {
         private readonly IGetCountsService countsService;

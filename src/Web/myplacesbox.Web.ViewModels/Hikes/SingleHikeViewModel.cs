@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using MyPlacesBox.Data.Models;
-using MyPlacesBox.Services.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MyPlacesBox.Web.ViewModels.Hikes
+﻿namespace MyPlacesBox.Web.ViewModels.Hikes
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using AutoMapper;
+    using MyPlacesBox.Data.Models;
+    using MyPlacesBox.Services.Mapping;
+
     public class SingleHikeViewModel : IMapFrom<Hike>, IHaveCustomMappings
     {
         public int Id { get; set; }
@@ -35,6 +35,8 @@ namespace MyPlacesBox.Web.ViewModels.Hikes
         public virtual HikeStartPoint HikeStartPoint { get; set; }
 
         public string HikeEndPointName { get; set; }
+
+        public virtual HikeEndPoint HikeEndPoint { get; set; }
 
         public string CategoryName { get; set; }
 

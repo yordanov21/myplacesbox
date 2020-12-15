@@ -30,7 +30,7 @@
         {
             configuration.CreateMap<Hike, HikeInListInputModel>()
                 .ForMember(x => x.ImageUrl, opt =>
-                    opt.MapFrom(x => 
+                    opt.MapFrom(x =>
                     x.HikeImages.FirstOrDefault().RemoteImageUrl != null ?
                     x.HikeImages.FirstOrDefault().RemoteImageUrl :
                     "/images/landmarks/" + x.HikeImages.FirstOrDefault().Id + "." + x.HikeImages.FirstOrDefault().Extension));

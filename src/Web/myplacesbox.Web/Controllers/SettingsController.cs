@@ -3,12 +3,11 @@
     using System;
     using System.Threading.Tasks;
 
+    using Microsoft.AspNetCore.Mvc;
     using MyPlacesBox.Data.Common.Repositories;
     using MyPlacesBox.Data.Models;
     using MyPlacesBox.Services.Data;
     using MyPlacesBox.Web.ViewModels.Settings;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class SettingsController : BaseController
     {

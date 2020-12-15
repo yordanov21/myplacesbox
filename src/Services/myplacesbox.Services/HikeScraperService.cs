@@ -446,6 +446,7 @@
 
             // Get image
             var imagesUrl = document.QuerySelectorAll(".gallery-small > div.gallery-small-images > a > img");
+
             foreach (var imageUrl in imagesUrl)
             {
                 var curentImageUrl = imageUrl.GetAttribute("src");

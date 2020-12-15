@@ -5,6 +5,5 @@
     public class HikesListInputModel : PagingViewModel
     {
         public IEnumerable<HikeInListInputModel> Hikes { get; set; }
-
     }
 }

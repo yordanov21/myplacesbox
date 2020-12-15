@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyPlacesBox.Web.ViewModels.Hikes
+﻿namespace MyPlacesBox.Web.ViewModels.Hikes
 {
     public class MainHikeViewModel
     {
