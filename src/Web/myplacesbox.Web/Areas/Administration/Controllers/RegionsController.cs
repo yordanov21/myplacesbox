@@ -67,14 +67,14 @@
         }
 
         // GET: Administration/Regions/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return this.NotFound();
             }
 
-            var region = this.dataRepository.All().FirstOrDefault( x=>x.Id == id);
+            var region = this.dataRepository.All().FirstOrDefault(x => x.Id == id);
             if (region == null)
             {
                 return this.NotFound();

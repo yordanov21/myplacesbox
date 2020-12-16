@@ -1843,6 +1843,9 @@ footer {
     color: rgba(0, 0, 0, 0.39);
     font-size: 20px;
     min-height: 250px;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 0;
 }
 
     footer ul:nth-child(1) {
@@ -1994,3 +1997,12 @@ footer {
     padding: 0px;
     margin: 20px;
 }
+
+.nav-pills li.nav-item a.nav-link{
+    color:gray;
+}
+
+    .nav-pills li.nav-item a.nav-link:hover {
+        color: whitesmoke;
+        background-color: moccasin;
+    }

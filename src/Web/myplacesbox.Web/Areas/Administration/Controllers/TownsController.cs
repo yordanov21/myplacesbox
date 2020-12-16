@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using MyPlacesBox.Data;
-using MyPlacesBox.Data.Models;
-
-namespace MyPlacesBox.Web.Areas.Administration.Controllers
+﻿namespace MyPlacesBox.Web.Areas.Administration.Controllers
 {
-    [Area("Administration")]
-    public class TownsController : Controller
-    {
-        private readonly ApplicationDbContext _context;
+    using System.Linq;
+    using System.Threading.Tasks;
 
-        public TownsController(ApplicationDbContext context)
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using MyPlacesBox.Data;
+    using MyPlacesBox.Data.Common.Repositories;
+    using MyPlacesBox.Data.Models;
+
+    public class TownsController : AdministrationController
+    {
+        private readonly IDeletableEntityRepository<Town> dataRepository;
+
+        public TownsController(IDeletableEntityRepository<Town> dataRepository)
         {
-            _context = context;
+            this.dataRepository = dataRepository;
         }
 
         // GET: Administration/Towns
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Towns.ToListAsync());
+            return this.View(await this.dataRepository.All().ToListAsync());
         }
 
         // GET: Administration/Towns/Details/5
@@ -31,23 +29,23 @@ namespace MyPlacesBox.Web.Areas.Administration.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            var town = await _context.Towns
+            var town = await this.dataRepository.All()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (town == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            return View(town);
+            return this.View(town);
         }
 
         // GET: Administration/Towns/Create
         public IActionResult Create()
         {
-            return View();
+            return this.View();
         }
 
         // POST: Administration/Towns/Create
@@ -57,29 +55,31 @@ namespace MyPlacesBox.Web.Areas.Administration.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Name,IsTown,IsDeleted,DeletedOn,Id,CreatedOn,ModifiedOn")] Town town)
         {
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
-                _context.Add(town);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                await this.dataRepository.AddAsync(town);
+                await this.dataRepository.SaveChangesAsync();
+                return this.RedirectToAction(nameof(this.Index));
             }
-            return View(town);
+
+            return this.View(town);
         }
 
         // GET: Administration/Towns/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            var town = await _context.Towns.FindAsync(id);
+            var town = this.dataRepository.All().FirstOrDefault(x => x.Id == id);
             if (town == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
-            return View(town);
+
+            return this.View(town);
         }
 
         // POST: Administration/Towns/Edit/5
@@ -91,30 +91,32 @@ namespace MyPlacesBox.Web.Areas.Administration.Controllers
         {
             if (id != town.Id)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (this.ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(town);
-                    await _context.SaveChangesAsync();
+                    this.dataRepository.Update(town);
+                    await this.dataRepository.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TownExists(town.Id))
+                    if (!this.TownExists(town.Id))
                     {
-                        return NotFound();
+                        return this.NotFound();
                     }
                     else
                     {
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                return this.RedirectToAction(nameof(this.Index));
             }
-            return View(town);
+
+            return this.View(town);
         }
 
         // GET: Administration/Towns/Delete/5
@@ -122,33 +124,34 @@ namespace MyPlacesBox.Web.Areas.Administration.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            var town = await _context.Towns
+            var town = await this.dataRepository.All()
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (town == null)
             {
-                return NotFound();
+                return this.NotFound();
             }
 
-            return View(town);
+            return this.View(town);
         }
 
         // POST: Administration/Towns/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var town = await _context.Towns.FindAsync(id);
-            _context.Towns.Remove(town);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var town = this.dataRepository.All().FirstOrDefault(x => x.Id == id);
+            this.dataRepository.Delete(town);
+            await this.dataRepository.SaveChangesAsync();
+            return this.RedirectToAction(nameof(this.Index));
         }
 
         private bool TownExists(int id)
         {
-            return _context.Towns.Any(e => e.Id == id);
+            return this.dataRepository.All().Any(e => e.Id == id);
         }
     }
 }

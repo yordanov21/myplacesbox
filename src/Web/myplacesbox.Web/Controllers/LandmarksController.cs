@@ -103,7 +103,6 @@
             var user = await this.userManager.GetUserAsync(this.User);
             try
             {
-                ;
                 await this.landmarksService.CreateAsync(input, user.Id, $"{this.hostEnvironment.WebRootPath}/images");
             }
             catch (Exception ex)

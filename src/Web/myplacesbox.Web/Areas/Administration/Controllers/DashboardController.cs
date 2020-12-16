@@ -1,9 +1,8 @@
 ﻿namespace MyPlacesBox.Web.Areas.Administration.Controllers
 {
+    using Microsoft.AspNetCore.Mvc;
     using MyPlacesBox.Services.Data;
     using MyPlacesBox.Web.ViewModels.Administration.Dashboard;
-
-    using Microsoft.AspNetCore.Mvc;
 
     public class DashboardController : AdministrationController
     {

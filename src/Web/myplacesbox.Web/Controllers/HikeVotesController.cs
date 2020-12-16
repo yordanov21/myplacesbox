@@ -8,6 +8,8 @@
     using MyPlacesBox.Services.Data;
     using MyPlacesBox.Web.ViewModels.Votes;
 
+    [ApiController]
+    [Route("api/[controller]")]
     public class HikeVotesController : BaseController
     {
         private readonly IHikeVotesService votesService;

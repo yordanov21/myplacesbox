@@ -97,7 +97,7 @@
                     UserId = userId,
                     Extension = extension,
                 };
-                var physicalPath = $"{imagePath}/landmarks/{dbImage.Id}.{extension}";
+                var physicalPath = $"{imagePath}/hikes/{dbImage.Id}.{extension}";
                 string localImgUrl = physicalPath.Split("wwwroot")[1];
                 dbImage.RemoteImageUrl = localImgUrl;
                 hike.HikeImages.Add(dbImage);

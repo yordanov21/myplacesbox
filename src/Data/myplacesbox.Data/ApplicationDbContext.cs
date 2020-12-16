@@ -47,6 +47,8 @@
 
         public DbSet<LandmarkVote> LandmarkVotes { get; set; }
 
+        public DbSet<HikeVote> HikeVotes { get; set; }
+
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)

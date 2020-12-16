@@ -4,9 +4,8 @@ namespace MyPlacesBox.Data.Models
     using System;
     using System.Collections.Generic;
 
-    using MyPlacesBox.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+    using MyPlacesBox.Data.Common.Models;
 
     public class ApplicationUser : IdentityUser, IAuditInfo, IDeletableEntity
     {
@@ -37,6 +36,9 @@ namespace MyPlacesBox.Data.Models
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
 
         public virtual ICollection<LandmarkVote> LandmarkVotes { get; set; }
+
         public virtual ICollection<HikeVote> HikeVotes { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
     }
 }

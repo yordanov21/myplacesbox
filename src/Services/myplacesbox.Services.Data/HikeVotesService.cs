@@ -1,13 +1,14 @@
-﻿using MyPlacesBox.Data.Common.Repositories;
-using MyPlacesBox.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyPlacesBox.Services.Data
+﻿namespace MyPlacesBox.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using MyPlacesBox.Data.Common.Repositories;
+    using MyPlacesBox.Data.Models;
+
     public class HikeVotesService : IHikeVotesService
     {
         private readonly IRepository<HikeVote> votesRepository;
