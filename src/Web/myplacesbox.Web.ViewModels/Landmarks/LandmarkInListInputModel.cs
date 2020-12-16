@@ -24,8 +24,6 @@
 
         public string RegionName { get; set; }
 
-        public int Stars { get; set; }
-
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<Landmark, LandmarkInListInputModel>()

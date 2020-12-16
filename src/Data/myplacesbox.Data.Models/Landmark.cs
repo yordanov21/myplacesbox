@@ -33,8 +33,6 @@
 
         public string Description { get; set; }
 
-        public int Stars { get; set; }
-
         public int Difficulty { get; set; }
 
         public string UserId { get; set; }

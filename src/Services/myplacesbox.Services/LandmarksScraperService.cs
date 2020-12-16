@@ -85,8 +85,6 @@
                     continue;
                 }
 
-                Random rnd = new Random();
-                int stars = rnd.Next(1, 7);  // creates a number star between 1 and 6
                 var newLandmark = new Landmark()
                 {
                     Name = landmark.Name,
@@ -104,7 +102,6 @@
                     EntranceFee = landmark.EntranceFee,
                     Difficulty = landmark.Difficulty,
                     Description = landmark.Description,
-                    Stars = stars,
                 };
 
                 var imagesCollection = new List<LandmarkImage>();

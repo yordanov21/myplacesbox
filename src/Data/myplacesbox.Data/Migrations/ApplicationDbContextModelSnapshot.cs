@@ -333,9 +333,6 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("RegionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Stars")
-                        .HasColumnType("int");
-
                     b.Property<int?>("TownId")
                         .HasColumnType("int");
 
@@ -563,9 +560,6 @@ namespace MyPlacesBox.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RegionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Stars")
                         .HasColumnType("int");
 
                     b.Property<int>("TownId")

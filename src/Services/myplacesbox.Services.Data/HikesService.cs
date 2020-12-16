@@ -72,7 +72,6 @@
                 Description = input.Description,
                 Marking = input.Marking,
                 Difficulty = input.Difficulty,
-                Stars = input.Stars,
                 CategoryId = input.CategoryId,
                 RegionId = input.RegionId,
                 MountainId = input.RegionId,
@@ -162,7 +161,6 @@
             hike.Description = input.Description;
             hike.Marking = input.Marking;
             hike.Difficulty = input.Difficulty;
-            hike.Stars = input.Stars;
             hike.CategoryId = input.CategoryId;
             hike.RegionId = input.RegionId;
             hike.MountainId = input.RegionId;

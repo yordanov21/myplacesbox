@@ -33,9 +33,6 @@
         [MinLength(100)]
         public string Description { get; set; }
 
-        [Range(1, 5)]
-        public int Stars { get; set; }
-
         public int HikeStartPointId { get; set; }
 
         public virtual CreateHikeStartPointInputModel HikeStartPoint { get; set; }

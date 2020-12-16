@@ -39,9 +39,6 @@
         public string Description { get; set; }
 
         [Range(1, 6)]
-        public int Stars { get; set; }
-
-        [Range(1, 6)]
         public int Difficulty { get; set; }
 
         public int CategoryId { get; set; }

@@ -28,8 +28,6 @@
 
         public string Description { get; set; }
 
-        public int Stars { get; set; }
-
         public string HikeStartPointName { get; set; }
 
         public virtual HikeStartPoint HikeStartPoint { get; set; }

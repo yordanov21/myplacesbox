@@ -99,8 +99,6 @@
                     continue;
                 }
 
-                Random rnd = new Random();
-                int stars = rnd.Next(1, 7);  // creates a number star between 1 and 6
                 var newHike = new Hike()
                 {
                     Name = hike.Name,
@@ -115,7 +113,6 @@
                     Marking = hike.Marking,
                     Difficulty = hike.Difficulty,
                     Description = hike.Description,
-                    Stars = stars,
                 };
 
                 var imagesCollection = new List<HikeImage>();

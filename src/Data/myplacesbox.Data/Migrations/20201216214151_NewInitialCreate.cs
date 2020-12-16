@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyPlacesBox.Data.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class NewInitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,6 +34,7 @@ namespace MyPlacesBox.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     DeletedOn = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -301,7 +302,6 @@ namespace MyPlacesBox.Data.Migrations
                     Marking = table.Column<int>(type: "int", nullable: true),
                     Difficulty = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Stars = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     HikeStartPointId = table.Column<int>(type: "int", nullable: false),
                     HikeEndPointId = table.Column<int>(type: "int", nullable: false),
@@ -377,7 +377,6 @@ namespace MyPlacesBox.Data.Migrations
                     DayOff = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     EntranceFee = table.Column<double>(type: "float", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Stars = table.Column<int>(type: "int", nullable: false),
                     Difficulty = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
@@ -456,7 +455,7 @@ namespace MyPlacesBox.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "HikeVote",
+                name: "HikeVotes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -469,15 +468,15 @@ namespace MyPlacesBox.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_HikeVote", x => x.Id);
+                    table.PrimaryKey("PK_HikeVotes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_HikeVote_AspNetUsers_UserId",
+                        name: "FK_HikeVotes_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_HikeVote_Hikes_HikeId",
+                        name: "FK_HikeVotes_Hikes_HikeId",
                         column: x => x.HikeId,
                         principalTable: "Hikes",
                         principalColumn: "Id",
@@ -662,13 +661,13 @@ namespace MyPlacesBox.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HikeVote_HikeId",
-                table: "HikeVote",
+                name: "IX_HikeVotes_HikeId",
+                table: "HikeVotes",
                 column: "HikeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_HikeVote_UserId",
-                table: "HikeVote",
+                name: "IX_HikeVotes_UserId",
+                table: "HikeVotes",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -763,7 +762,7 @@ namespace MyPlacesBox.Data.Migrations
                 name: "HikeImages");
 
             migrationBuilder.DropTable(
-                name: "HikeVote");
+                name: "HikeVotes");
 
             migrationBuilder.DropTable(
                 name: "LandmarkImages");

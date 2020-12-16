@@ -41,7 +41,6 @@
                 DayOff = input.DayOff,
                 EntranceFee = input.EntranceFee,
                 Difficulty = input.Difficulty,
-                Stars = input.Stars,
                 UserId = userId,
             };
 
@@ -135,7 +134,6 @@
             landmark.DayOff = input.DayOff;
             landmark.EntranceFee = input.EntranceFee;
             landmark.Difficulty = input.Difficulty;
-            landmark.Stars = input.Stars;
 
             await this.landmarksRepository.SaveChangesAsync();
         }

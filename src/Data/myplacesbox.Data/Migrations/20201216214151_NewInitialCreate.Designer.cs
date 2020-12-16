@@ -10,8 +10,8 @@ using MyPlacesBox.Data;
 namespace MyPlacesBox.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201216182912_AddVoteForHikes")]
-    partial class AddVoteForHikes
+    [Migration("20201216214151_NewInitialCreate")]
+    partial class NewInitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -335,9 +335,6 @@ namespace MyPlacesBox.Data.Migrations
                     b.Property<int>("RegionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Stars")
-                        .HasColumnType("int");
-
                     b.Property<int?>("TownId")
                         .HasColumnType("int");
 
@@ -565,9 +562,6 @@ namespace MyPlacesBox.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RegionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Stars")
                         .HasColumnType("int");
 
                     b.Property<int>("TownId")
