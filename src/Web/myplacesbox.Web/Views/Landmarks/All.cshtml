@@ -8,23 +8,26 @@
 <div class="alert">
     @foreach (var landmark in this.Model.Landmarks)
     {
-        <div class="media">
-            <img src="@landmark.ImageUrl" width="150" class="mr-3 img-responsive" alt="...">
-            <div class="media-body">
-                <h5 class="mt-0"><a asp-action="ById" asp-route-id="@landmark.Id">@landmark.Name</a></h5>
-                <p>@(landmark.Description.Length<400? landmark.Description:landmark.Description.Substring(0, 400))...</p>
-                <ul class="list-item-meta">
-                    <li>@landmark.CategoryName</li>
-                    <li>
-                        <small class="glyphicon glyphicon-star" aria-hidden="true">@landmark.RegionName</small>
-                    </li>          
-                </ul>
+        <a asp-action="ById" asp-route-id="@landmark.Id">
+            <div class="media">
+                <img src="@landmark.ImageUrl" width="150" class="all-image mr-3 img-responsive" alt="..." style="object-fit: cover;  height:150px; max-width:100%;">
+                <div class="media-body">
+                    <h5 class="mt-0"><a asp-action="ById" asp-route-id="@landmark.Id">@landmark.Name</a></h5>
+                    <p>@(landmark.Description.Length<400? landmark.Description:landmark.Description.Substring(0, 400))...</p>
+                    <ul class="list-item-meta">
+                        <li>@landmark.CategoryName</li>
+                        <li>
+                            <small class="glyphicon glyphicon-star" aria-hidden="true">@landmark.RegionName</small>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </a>
     }
+
 </div>
 
 <div>
     <hr />
-    <partial name="_PagingPartial" model="@Model"/>    
+    <partial name="_PagingPartial" model="@Model" />
 </div>

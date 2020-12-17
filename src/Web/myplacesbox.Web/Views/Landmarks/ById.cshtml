@@ -43,11 +43,11 @@
                         </li>
                         <li class="single-meta">
                             <ul class="item-rating">
-                                <li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
+                                <li class="star" data-vote="1"><i class="fas fa-star text-warning"></i></li>
+                                <li class="star" data-vote="2"><i class="fas fa-star text-warning"></i></li>
+                                <li class="star" data-vote="3"><i class="fas fa-star text-warning"></i></li>
+                                <li class="star" data-vote="4"><i class="fas fa-star text-warning"></i></li>
+                                <li class="star" data-vote="5"><i class="fas fa-star text-warning"></i></li>
                                 <li><span id="averageVoteValue">@Model.SingleLandmarkView.AverageVote.ToString("0.0")</span><span> / 5</span> </li>
                             </ul>
                         </li>
@@ -93,7 +93,7 @@
                                     <strong>Town:</strong>
                                     @if (Model.SingleLandmarkView.TownName == null || Model.SingleLandmarkView.TownName == "none")
                                     {
-                                        <span itemprop="location">none</span>
+                                        <span itemprop="location">—</span>
                                     }
                                     else
                                     {
@@ -105,7 +105,7 @@
                                     <strong>Mountain:</strong>
                                     @if (Model.SingleLandmarkView.MountainName == null || Model.SingleLandmarkView.MountainName == "none")
                                     {
-                                        <span>none</span>
+                                        <span>—</span>
                                     }
                                     else
                                     {
@@ -120,29 +120,41 @@
                                     }
                                     else
                                     {
-                                        <span itemprop="geo" ; itemscope="itemscope" itemtype=""> - </span>
+                                        <span itemprop="geo" ; itemscope="itemscope" itemtype="">—</span>
                                     }
 
                                 </li>
                                 <li>
                                     <strong>Website:</strong>
-                                    @if (Model.SingleLandmarkView.Websate != null)
+                                    @if (Model.SingleLandmarkView.Websate == null || Model.SingleLandmarkView.Websate == "—")
                                     {
-                                        <span href="@Model.SingleLandmarkView.Websate" target="_blank" rel="nofollow" class="list-item-website">@Model.SingleLandmarkView.Websate</span>
+                                        <span>—</span>
                                     }
                                     else
                                     {
-                                        <span>—</span>
+                                        <span target="_blank" rel="nofollow" class="list-item-website">
+                                            <a href="@Model.SingleLandmarkView.Websate">@Model.SingleLandmarkView.Websate</a>
+                                        </span>
                                     }
 
                                 </li>
                                 <li>
                                     <strong>Адрес:</strong>
-                                    <span itemprop="streetAddress">—</span>
+                                    @if (Model.SingleLandmarkView.Address == null || Model.SingleLandmarkView.Address == "—")
+                                    {
+                                        <span itemprop="streetAddress">—</span>
+                                    }
+                                    else
+                                    {
+                                        <span itemprop="streetAddress">
+                                            @Model.SingleLandmarkView.Address
+                                        </span>
+                                    }
+
                                 </li>
                                 <li>
                                     <strong>Phone:</strong>
-                                    <span itemprop="telephone">+359 936 53 022</span>
+                                    <span itemprop="telephone">@Model.SingleLandmarkView.PhoneNumber</span>
                                 </li>
                                 <li>
                                     <strong>Work time:</strong>
@@ -190,7 +202,16 @@
                                 <li>
                                     <strong>Difficulty:</strong>
                                     <span>
-                                        <em class="rating" data-score="6" data-hints='["Екстремно","Много трудно","Трудно","Средно","Лесно","Много лесно","С автомобил"]'>@Model.SingleLandmarkView.Difficulty</em>
+                                        <ul class="item-rating d-flex justify-content-between flex-sm-row">
+                                            @for (int i = 0; i < Model.SingleLandmarkView.Difficulty; i++)
+                                            {
+                                                <li class="star-fill" data-vote="1"><i class="fas fa-hiking text-danger"></i></li>
+                                            }
+                                            @for (int i = Model.SingleLandmarkView.Difficulty; i < 6; i++)
+                                            {
+                                                <li class="star-fill" data-vote="1"><i class="fas fa-hiking text-warning"></i></li>
+                                            }
+                                        </ul>
                                     </span>
                                 </li>
                             </ul>
@@ -227,7 +248,7 @@
                                         }
                                         else
                                         {
-                                            <div class="carousel-item"  style="height: 431px;">
+                                            <div class="carousel-item" style="height: 431px;">
                                                 <img class="d-block w-100" src="@item.RemoteImageUrl" alt="@item.Id slide">
                                             </div>
                                         }

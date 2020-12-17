@@ -43,11 +43,11 @@
                         </li>
                         <li class="single-meta">
                             <ul class="item-rating">
-                                <li class="star-fill" data-vote="1"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="2"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="3"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="4"><i class="fas fa-star"></i></li>
-                                <li class="star-fill" data-vote="5"><i class="fas fa-star"></i></li>
+                                <li class="" data-vote="1"><i class="fas fa-star text-warning"></i></li>
+                                <li class="star-fill" data-vote="2" style="marker:unset"><i class="fas fa-star text-warning"></i></li>
+                                <li class="star-fill" data-vote="3" style="marker:unset"><i class="fas fa-star text-warning"></i></li>
+                                <li class="star-fill" data-vote="4" style="marker:unset"><i class="fas fa-star text-warning"></i></li>
+                                <li class="star-fill" data-vote="5" style="marker:unset"><i class="fas fa-star text-warning"></i></li>
                                 <li><span id="averageVoteValue">@Model.SingleHikeView.AverageVote.ToString("0.0")</span><span> / 5</span> </li>
                             </ul>
                         </li>
@@ -135,13 +135,32 @@
                                 <li>
                                     <strong>Marking:</strong>
                                     <span>
-                                        <em class="rating" data-score="6" data-hints='["Екстремно","Много трудно","Трудно","Средно","Лесно","Много лесно","С автомобил"]'>@Model.SingleHikeView.Marking</em>
+                                        <ul class="item-rating d-flex justify-content-between flex-sm-row">
+                                            @for (int i = 0; i < Model.SingleHikeView.Marking; i++)
+                                            {
+                                                <li class="star-fill" data-vote="1"><i class="fas fa-road text-success"></i></li>
+                                            }
+                                            @for (int i = (int)Model.SingleHikeView.Marking; i < 6; i++)
+                                            {
+                                                <li class="star-fill" data-vote="1"><i class="fas fa-road text-secondary"></i></li>
+                                            }
+                                        </ul>
+                                        
                                     </span>
                                 </li>
                                 <li>
                                     <strong>Difficulty:</strong>
                                     <span>
-                                        <em class="rating" data-score="6" data-hints='["Екстремно","Много трудно","Трудно","Средно","Лесно","Много лесно","С автомобил"]'>@Model.SingleHikeView.Difficulty</em>
+                                        <ul class="item-rating d-flex justify-content-between flex-sm-row">
+                                            @for (int i = 0; i < Model.SingleHikeView.Difficulty; i++)
+                                            {
+                                                <li class="star-fill" data-vote="1"><i class="fas fa-hiking text-danger"></i></li>
+                                            }
+                                            @for (int i = Model.SingleHikeView.Difficulty; i < 6; i++)
+                                            {
+                                                <li class="star-fill" data-vote="1"><i class="fas fa-hiking text-warning"></i></li>
+                                            }
+                                        </ul>
                                     </span>
                                 </li>
                             </ul>

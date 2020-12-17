@@ -1807,12 +1807,13 @@ pre.wp-block-verse {
 
 html {
     position: relative;
-    min-height: 100%
+    min-height: 100%;
+    background-color: #FAFAFA;
 }
 
 body {
     margin-bottom: 60px;
-    background-color: #DEDFD9;
+    background-color: #FAFAFA;
 }
 
 /*footer {
@@ -1958,23 +1959,27 @@ footer {
 
 .homelandmarkstext {
     color: black;
+   
 }
 
     .homelandmarkstext:hover {
-        color: aliceblue;
+        /*color: aliceblue;*/
     }
 
 .homelandmarks {
     border: solid;
     border-radius: 5px;
+    box-shadow: 5px;
+    border-radius: 50px;
+    border:2px solid black;
 }
 
-    .homelandmarks:hover {
+    .homelandmarks:hover , .all-image{
         /* Animation */
         transition: transform .5s;
         /* (105% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
         transform: scale(1.05);
-        background-color: moccasin;
+        background-color: #E5E5E5;
         /* opacity: 0.95; */
     }
 
