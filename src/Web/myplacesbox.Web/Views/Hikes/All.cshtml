@@ -12,7 +12,7 @@
             <div class="media" style="transition: .5s; transform: scale(1.05); ">
                 <img src="@hike.ImageUrl" width="150" class="all-image mr-3 img-responsive" alt="..." style="object-fit: cover;  height:150px; max-width:100%; ">
                 <div class="media-body">
-                    <h5 class="mt-0"><a asp-action="ById" asp-route-id="@hike.Id" >@hike.Name</a></h5>
+                    <h5 class="mt-0 text-decoration-none"><a asp-action="ById" asp-route-id="@hike.Id" >@hike.Name</a></h5>
                     <p>@(hike.Description.Length<400? hike.Description: hike.Description.Substring(0, 400))...</p>
                     <ul class="list-item-meta">
                         <li>@hike.CategoryName</li>

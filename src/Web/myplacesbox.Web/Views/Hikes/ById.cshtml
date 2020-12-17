@@ -121,16 +121,16 @@
                                 </li>
                                 <li>
                                     <strong>Denivelation:</strong>
-                                    <span>@Model.SingleHikeView.Denivelation</span>
+                                    <span>@Model.SingleHikeView.Denivelation m</span>
 
                                 </li>
                                 <li>
                                     <strong>Lenght:</strong>
-                                    <span>@Model.SingleHikeView.Length</span>
+                                    <span>@Model.SingleHikeView.Length km</span>
                                 </li>
                                 <li>
                                     <strong>Duration:</strong>
-                                    <span>@Model.SingleHikeView.Duration</span>
+                                    <span>@Model.SingleHikeView.Duration h</span>
                                 </li>
                                 <li>
                                     <strong>Marking:</strong>
@@ -145,7 +145,7 @@
                                                 <li class="star-fill" data-vote="1"><i class="fas fa-road text-secondary"></i></li>
                                             }
                                         </ul>
-                                        
+
                                     </span>
                                 </li>
                                 <li>
@@ -227,8 +227,9 @@
                                     <h5 class="widget-title">Сигурен ли си в планината?</h5>
                                     <div class="textwidget">
                                         <p>
-                                            <a class="no-popup" href="https://www.parana.bg/bg/insurance_bulgaria" target="_blank" rel="noopener noreferrer"><img class="alignnone size-medium wp-image-11872" src="https://tripsjournal.com/wp-content/uploads/2019/07/udobnata-planinska-zastrahovka-trips-journal-300x147.png" alt="" width="300" height="147" /></a><br />
-                                            <a style="font-size: 18px; font-weight: bold;" href="https://www.parana.bg/bg/insurance_bulgaria" target="_blank" rel="noopener noreferrer">Купи тук!</a>
+                                            <a class="no-popup" href="https://www.linkedin.com/in/yordan-yordanov-139906148/" alt="" width="300" height="147" />
+                                            <img src="https://optimizedwebbulgaria.com/wp-content/uploads/2020/10/website-design.jpg" alt="Alternate Text" /></a><br />
+                                            <a style="font-size: 18px; font-weight: bold;" href="https://www.linkedin.com/in/yordan-yordanov-139906148/" target="_blank" rel="noopener noreferrer">Learn more!</a>
                                         </p>
                                     </div>
                                 </li>
@@ -254,7 +255,7 @@
                 <section class="articles" id="nearby-places">
                     <header class="articles-head">
                         <h3 class="h1">
-                            <a href="https://tripsjournal.com/zabelezhitelnost/belogradchishkite-skali/mesta-nablizo">Интересни места наоколо, които да посетите</a>
+                            >Интересни места наоколо, които да посетите:
                         </h3>
                     </header>
 
@@ -285,7 +286,7 @@
                                     }
                                 }
                             }
-                        }                     
+                        }
                     </section>
                 </section>
             </section>
@@ -312,6 +313,7 @@
             const marker = new google.maps.Marker({
                 position: uluru,
                 map: map,
+                title: "Hello World!",
             });
             const marker2 = new google.maps.Marker({
                 position: uluru2,
