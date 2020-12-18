@@ -10,106 +10,70 @@
 
     public class CategoriesServiceTest
     {
-        [Fact]
-        public void GetCategoriesCountShouldReturnCorectResult()
-        {
-            var categoriesList = new List<Category>();
-            Category categoryInput = new Category
-            {
-                Name = "Category",
-                Type = "Hike",
-            };
-            Category categoryInput2 = new Category
-            {
-                Name = "Category2",
-                Type = "Hike",
-            };
-            Category categoryInput3 = new Category
-            {
-                Name = "Category3",
-                Type = "Landmark",
-            };
-            categoriesList.Add(categoryInput);
-            categoriesList.Add(categoryInput2);
-            categoriesList.Add(categoryInput3);
-
-            var mockRepo = new Mock<IDeletableEntityRepository<Category>>();
-            mockRepo.Setup(x => x.All()).Returns(categoriesList.AsQueryable);
-        //    mockRepo.Setup(x=>x.)
-          //  mockRepo.Setup(x => x.AddAsync(It.IsAny<Category>())).Callback(
-          //      (Category category) => categoriesList.Add(category));
-       
-
-            var service = new CategoriesService(mockRepo.Object);
-         //   service.GetAllHikeCategotiesAsKeyValuePairs
-            var result1 = service.GetAllHikeCategotiesAsKeyValuePairs();
-            var result2 = service.GetAllLandmarkCategotiesAsKeyValuePairs();
-            ;
-            Assert.Equal(2, result1.Count());
-            Assert.Equal(1, result2.Count());
-
-        }
-
         // Hike tests
         [Fact]
         public void GetAllHikeCategotiesAsKeyValuePairsTest()
         {
             var categoriesList = new List<Category>();
             var mockRepo = new Mock<IDeletableEntityRepository<Category>>();
-            mockRepo.Setup(x => x.All()).Returns(categoriesList.AsQueryable());
-            mockRepo.Setup(x => x.AddAsync(It.IsAny<Category>())).Callback(
-                (Category category) => categoriesList.Add(category));
-
+            mockRepo.Setup(x => x.AllAsNoTracking()).Returns(categoriesList.AsQueryable());
+            mockRepo.Setup(x => x.AddAsync(It.IsAny<Category>()));
+            var service = new CategoriesService(mockRepo.Object);
             Category categoryInput = new Category
             {
                 Id = 1,
-                Name = "Category",
+                Name = "hike-Category",
                 Type = "Hike",
             };
             Category categoryInput2 = new Category
             {
                 Id = 2,
-                Name = "Category2",
-                Type = "Hike",
+                Name = "landmark-Category",
+                Type = "Landmark",
             };
             categoriesList.Add(categoryInput);
             categoriesList.Add(categoryInput2);
 
-            var service = new CategoriesService(mockRepo.Object);
-            service.GetAllHikeCategotiesAsKeyValuePairs();
+            var expected = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("1", "hike-Category"),
+            };
 
-            Assert.Equal(2, categoriesList.Count);
-            Assert.Equal(1, categoriesList[0].Id);
-            Assert.Equal("Category", categoriesList[0].Name);
+            var actual = service.GetAllHikeCategotiesAsKeyValuePairs();
+            Assert.Equal(expected, actual);
         }
 
-        // landmark tests
+        // Landmark tests
         [Fact]
-        public void GetAllLandmarkCategotiesAsKeyValuePairsTest()
+        public void GetAllHLandmarkCategotiesAsKeyValuePairsTest()
         {
             var categoriesList = new List<Category>();
+            var mockRepo = new Mock<IDeletableEntityRepository<Category>>();
+            mockRepo.Setup(x => x.AllAsNoTracking()).Returns(categoriesList.AsQueryable());
+            mockRepo.Setup(x => x.AddAsync(It.IsAny<Category>()));
+            var service = new CategoriesService(mockRepo.Object);
             Category categoryInput = new Category
             {
                 Id = 1,
-                Name = "Category",
+                Name = "hike-Category",
+                Type = "Hike",
             };
             Category categoryInput2 = new Category
             {
                 Id = 2,
-                Name = "Category2",
+                Name = "landmark-Category",
+                Type = "Landmark",
             };
             categoriesList.Add(categoryInput);
             categoriesList.Add(categoryInput2);
 
-            var mockRepo = new Mock<IDeletableEntityRepository<Category>>();
-            mockRepo.Setup(x => x.All()).Returns(categoriesList.AsQueryable());
-            mockRepo.Setup(x => x.AddAsync(It.IsAny<Category>())).Callback(
-                (Category category) => categoriesList.Add(category));
+            var expected = new List<KeyValuePair<string, string>>()
+            {
+                new KeyValuePair<string, string>("2", "landmark-Category"),
+            };
 
-            var service = new CategoriesService(mockRepo.Object);
-            var result = service.GetAllLandmarkCategotiesAsKeyValuePairs().ToList().Count;
-
-            Assert.Equal(0, result);
+            var actual = service.GetAllLandmarkCategotiesAsKeyValuePairs();
+            Assert.Equal(expected, actual);
         }
     }
 }

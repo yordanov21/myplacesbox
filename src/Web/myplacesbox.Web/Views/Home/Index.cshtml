@@ -20,7 +20,7 @@
 
     <div class="stories w-100">
         <article class="nature">
-            <a href="#/articles/mountains">
+            <a href="https://www.youtube.com/watch?v=bNrmLTdAavQ">
                 <section class="mointain destination" id="article_mountain">
                     <h2>Climb the Mointains of Bulgaria</h2>
                     <p>
@@ -36,7 +36,7 @@
                     </p>
                 </section>
             </a>
-            <a href="#/articles/sea">
+            <a href="https://www.youtube.com/watch?v=47DEco6qO-s&t=154s">
                 <section class="sea destination" id="article_sea">
                     <h2>Еnjoy the Black Sea coast</h2>
                     <p>
@@ -54,7 +54,7 @@
             </a>
         </article>
         <article class="ather">
-            <a href="#/articles/cities">
+            <a href="https://www.youtube.com/watch?v=YK0hbGdBQr4">
                 <section class="city destination" id="article_city">
                     <h2>Visit the Cities of Bulgaria</h2>
                     <p>
@@ -67,7 +67,7 @@
                     </p>
                 </section>
             </a>
-            <a href="#/articles/legacy">
+            <a href="https://www.youtube.com/watch?v=KuAVEpDbKWg">
                 <section class="legacy destination" id="article_legacy">
                     <h2>Expore the Legacy of Bulgaria</h2>
                     <p>
@@ -110,7 +110,7 @@
                 <div class="placeslist row">
                     @foreach (var hike in this.Model.RandomHikes)
                     {
-                        <a asp-controller="Landmarks" asp-action="ById" asp-route-id="@hike.Id" class="homelandmarks card col-md-3" style="width: 100%; text-decoration: none; padding: 0px; margin: 10px">
+                        <a asp-controller="Hikes" asp-action="ById" asp-route-id="@hike.Id" class="homelandmarks card col-md-3" style="width: 100%; text-decoration: none; padding: 0px; margin: 10px">
                             <img class="card-img-top" src="@hike.ImageUrl" alt="@hike.Name" style="height: 175px;">
                             <div class="card-body" style="padding: 0px;">
                                 <h5 class="homelandmarkstext card-title">@hike.Name</h5>
