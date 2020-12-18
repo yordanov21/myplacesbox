@@ -10,6 +10,46 @@
 
     public class CategoriesServiceTest
     {
+        [Fact]
+        public void GetCategoriesCountShouldReturnCorectResult()
+        {
+            var categoriesList = new List<Category>();
+            Category categoryInput = new Category
+            {
+                Name = "Category",
+                Type = "Hike",
+            };
+            Category categoryInput2 = new Category
+            {
+                Name = "Category2",
+                Type = "Hike",
+            };
+            Category categoryInput3 = new Category
+            {
+                Name = "Category3",
+                Type = "Landmark",
+            };
+            categoriesList.Add(categoryInput);
+            categoriesList.Add(categoryInput2);
+            categoriesList.Add(categoryInput3);
+
+            var mockRepo = new Mock<IDeletableEntityRepository<Category>>();
+            mockRepo.Setup(x => x.All()).Returns(categoriesList.AsQueryable);
+        //    mockRepo.Setup(x=>x.)
+          //  mockRepo.Setup(x => x.AddAsync(It.IsAny<Category>())).Callback(
+          //      (Category category) => categoriesList.Add(category));
+       
+
+            var service = new CategoriesService(mockRepo.Object);
+         //   service.GetAllHikeCategotiesAsKeyValuePairs
+            var result1 = service.GetAllHikeCategotiesAsKeyValuePairs();
+            var result2 = service.GetAllLandmarkCategotiesAsKeyValuePairs();
+            ;
+            Assert.Equal(2, result1.Count());
+            Assert.Equal(1, result2.Count());
+
+        }
+
         // Hike tests
         [Fact]
         public void GetAllHikeCategotiesAsKeyValuePairsTest()

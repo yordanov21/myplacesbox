@@ -1,6 +1,7 @@
 ﻿namespace MyPlacesBox.Web.Tests
 {
     using System.Net;
+    using System.Net.Http;
     using System.Threading.Tasks;
 
     using Microsoft.AspNetCore.Mvc.Testing;
@@ -32,6 +33,22 @@
             var client = this.server.CreateClient(new WebApplicationFactoryClientOptions { AllowAutoRedirect = false });
             var response = await client.GetAsync("Identity/Account/Manage");
             Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
+        }
+
+        [Fact]
+        public async Task HomePageShouldContainMyPlacesBoxHeading()
+        {
+            var webApplicationFactory = new WebApplicationFactory<Startup>();
+            HttpClient client = webApplicationFactory.CreateClient();
+
+            var response = await client.GetAsync("/");
+
+            response.EnsureSuccessStatusCode();
+            var html = await response.Content.ReadAsStringAsync();
+
+            Assert.Contains("Welcome to MyPlacesBox!", html);
+
+
         }
     }
 }
