@@ -1,4 +1,8 @@
 ﻿@using MyPlacesBox.Common
+@{
+    Random rnd = new Random();
+    int num = rnd.Next(1, 11);
+}
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,7 +67,7 @@
                     @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
                     {
                         <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3">
-                            <div  class="container">
+                            <div class="container">
                                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                                     <ul class="navbar-nav flex-grow-1">
                                         <li class="nav-item">
@@ -162,3 +166,4 @@
     </div>
 </body>
 </html>
+

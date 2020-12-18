@@ -1,9 +1,13 @@
 ﻿@model MyPlacesBox.Web.ViewModels.Hikes.HikesListInputModel
 @{
-    this.ViewData["Title"] = "All Hikes, page " + Model.PageNumber;
+    this.ViewData["Title"] = "All Hikes";
 }
 
-<h1>@this.ViewData["Title"]</h1>
+<div class="d-flex justify-content-between">
+    <h1>@this.ViewData["Title"]</h1>
+    <h3 style="margin-right:20px;">page @Model.PageNumber</h3>
+</div>
+
 <hr />
 <div class="alert">
     @foreach (var hike in this.Model.Hikes)

@@ -1767,7 +1767,7 @@ pre.wp-block-verse {
 .bg-img {
     /* The image used */
     background-image: url("https://source.unsplash.com/BtbjCFUvBXs/1920x1080");
-    min-height: 380px;
+/*  //  min-height: 180px;*/
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;

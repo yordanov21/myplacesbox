@@ -3,9 +3,13 @@
 @{
     this.ViewData["Title"] = "Home Page";
 }
-
+@{ 
+    Random rnd = new Random();
+    int num = rnd.Next(1, 11);
+}
 <div class="text-center">
     <h1 class="display-4">Welcome to @GlobalConstants.SystemName!</h1>
+    <img id="imageid" class="w-100" src="/images/articles/random_img/img_@(num).jpg">
     <div>
         <div>
             <p>Enjoy our places:</p>
@@ -123,3 +127,12 @@
         </div>
     </div>
 </div>
+
+<script>
+            function randomImg() {
+                var randomNumber = Math.floor(Math.random() * 10) + 1;
+                var imgName = "img_" + randomNumber+".jpg";
+                document.getElementById("imageid").src = "/images/articles/random_img/" + imgName;
+                console.log(document.getElementById("imageid").src);
+            }
+</script>

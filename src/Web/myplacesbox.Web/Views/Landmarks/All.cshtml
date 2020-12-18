@@ -1,9 +1,12 @@
 ﻿@model MyPlacesBox.Web.ViewModels.Landmarks.LandmarksListInputModel
 @{
-    this.ViewData["Title"] = "All Landmarks, page " + Model.PageNumber;
+    this.ViewData["Title"] = "All Landmarks";
 }
 
-<h1>@this.ViewData["Title"]</h1>
+<div class="d-flex justify-content-between">
+    <h1>@this.ViewData["Title"]</h1>
+    <h3 style="margin-right:20px;">page @Model.PageNumber</h3>
+</div>
 <hr />
 <div class="alert">
     @foreach (var landmark in this.Model.Landmarks)

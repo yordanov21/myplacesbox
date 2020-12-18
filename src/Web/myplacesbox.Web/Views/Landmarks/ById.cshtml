@@ -64,11 +64,11 @@
                         }
                         @if (this.User.Identity.IsAuthenticated)
                         {
-                            <li class="single-meta">
+                            @*<li class="single-meta">
                                 <form method="post" asp-action="SendToEmail" asp-route-id="@Model.SingleLandmarkView.Id">
                                     <button class="btn btn-warning">Send to my email</button>
                                 </form>
-                            </li>
+                            </li>*@
                             <li class="single-meta">
                                 <button class="btn btn-warning" onclick="window.print()">Print</button>
                             </li>
@@ -298,7 +298,7 @@
                 </section>
 
                 <div>
-                    <h3>My Google Maps Logation</h3>
+                    <h3>Google Maps Logation of @Model.SingleLandmarkView.Name</h3>
                     <!--The div element for the map -->
                     <div id="map"></div>
                 </div>
