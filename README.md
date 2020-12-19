@@ -1,7 +1,11 @@
 # myplacesbox
 ASP.NET Core application for the course C# Web - ASP.NET Core October 2020 @SoftUni
 
-This site is made for educational purposes and the entire code is Open source in GitHub : yordanov21
+This app is made for educational purposes and the entire code is Open source in GitHub : yordanov21
+The site presents popular landmarks and hikes in Bulgaria.
+You can see all places generated in the app and create new landmarks and hikes. Also describe them to help 
+other adventurers to expore the amazing places of Bulgaria.
+
 
 Technologies Used This website is designed and runs using the main technologies below:
 🔨 Built With:
@@ -40,5 +44,5 @@ Moq
 
 Database :
 
-![alt text](http://url/to/img.png)
+![alt text](https://github.com/yordanov21/myplacesbox/blob/main/src/Web/myplacesbox.Web/wwwroot/readme/database.png)
 
