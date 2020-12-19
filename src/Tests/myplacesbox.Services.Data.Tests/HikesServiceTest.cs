@@ -58,7 +58,5 @@
 
             Assert.Equal(0, service.GetCount());
         }
-
-  
     }
 }

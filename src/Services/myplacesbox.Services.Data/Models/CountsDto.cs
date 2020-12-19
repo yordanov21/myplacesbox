@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyPlacesBox.Services.Data.Models
+﻿namespace MyPlacesBox.Services.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public class CountsDto
     {
         public int LandmarksCount { get; set; }
@@ -13,6 +13,7 @@ namespace MyPlacesBox.Services.Data.Models
         public int CategoriesCount { get; set; }
 
         public int LandmarkImagesCount { get; set; }
+
         public int HikeImagesCount { get; set; }
 
         public int RegionsCount { get; set; }

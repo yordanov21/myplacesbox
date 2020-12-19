@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyPlacesBox.Services.Data
+﻿namespace MyPlacesBox.Services.Data
 {
-    public interface ICategoriesService 
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    public interface ICategoriesService
     {
         IEnumerable<KeyValuePair<string, string>> GetAllHikeCategotiesAsKeyValuePairs();
 

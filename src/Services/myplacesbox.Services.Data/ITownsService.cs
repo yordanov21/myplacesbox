@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MyPlacesBox.Services.Data
+﻿namespace MyPlacesBox.Services.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public interface ITownsService : IPlaceDetailsService
     {
     }

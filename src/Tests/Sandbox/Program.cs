@@ -5,6 +5,11 @@
     using System.IO;
     using System.Threading.Tasks;
 
+    using CommandLine;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Logging;
     using MyPlacesBox.Data;
     using MyPlacesBox.Data.Common;
     using MyPlacesBox.Data.Common.Repositories;
@@ -13,13 +18,6 @@
     using MyPlacesBox.Data.Seeding;
     using MyPlacesBox.Services.Data;
     using MyPlacesBox.Services.Messaging;
-
-    using CommandLine;
-
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
 
     public static class Program
     {
